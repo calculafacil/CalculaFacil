@@ -406,7 +406,7 @@
         return;
       }
 
-      const maxFaltasPermitidas = Math.floor(total * (1 - (minPorcentaje / 100)));
+      const maxFaltasPermitidas = Math.floor((total * (100 - minPorcentaje)) / 100);
       const faltasRestantes = maxFaltasPermitidas - faltas;
 
       this.pintarGrafico(raiz, ((total - faltas) / total) * 100, minPorcentaje);
