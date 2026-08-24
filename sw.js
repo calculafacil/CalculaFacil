@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v14';
+const VERSION = 'v15';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -27,6 +27,8 @@ const PRECACHE = [
   'iva/',
   'sueldo-neto/',
   'interes-compuesto/',
+  'interes-simple/',
+  'cuota-prestamo/',
   'porcentajes/',
   'privacidad/',
   'sobre-mi/'

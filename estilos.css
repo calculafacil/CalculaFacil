@@ -1417,3 +1417,53 @@ svg.icono {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================
+   TABLA DE AMORTIZACION - Cuota Prestamo
+   ========================================================== */
+.tabla-amortizacion-envoltorio {
+  max-height: 340px;
+  overflow-y: auto;
+  margin-top: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--borde-buscador);
+}
+
+.tabla-amortizacion {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.tabla-amortizacion th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-control-secundario);
+  color: var(--texto-pagina);
+  padding: 8px 10px;
+  text-align: right;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tabla-amortizacion th:first-child {
+  text-align: left;
+}
+
+.tabla-amortizacion td {
+  padding: 7px 10px;
+  text-align: right;
+  color: var(--texto-carcasa);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.tabla-amortizacion td:first-child {
+  text-align: left;
+  font-weight: bold;
+}
+
+.tabla-amortizacion tbody tr:nth-child(even) {
+  background: rgba(148, 163, 184, 0.12);
+}

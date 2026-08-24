@@ -531,7 +531,9 @@ window.CF = (function () {
     { id: 'descuentos',         nombre: 'Descuentos',          grupo: 'dinero' },
     { id: 'iva',                nombre: 'IVA',                 grupo: 'dinero' },
     { id: 'sueldo-neto',        nombre: 'Sueldo Neto',         grupo: 'dinero' },
-    { id: 'interes-compuesto',  nombre: 'Interés Compuesto',   grupo: 'dinero' }
+    { id: 'interes-compuesto',  nombre: 'Interés Compuesto',   grupo: 'dinero' },
+    { id: 'interes-simple',     nombre: 'Interés Simple',      grupo: 'dinero' },
+    { id: 'cuota-prestamo',     nombre: 'Cuota Préstamo',      grupo: 'dinero' }
   ]);
 
   const ETIQUETA_GRUPO = {

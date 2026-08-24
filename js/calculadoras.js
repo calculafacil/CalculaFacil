@@ -1037,6 +1037,388 @@
     }
   });
 
+  // ==========================================================
+  // INTERÉS SIMPLE (con comparativa vs compuesto)
+  // ==========================================================
+  CF.registrar({
+    id: 'interes-simple',
+    historialClave: 'historial_interes_simple',
+
+    calcular(raiz) {
+      const capital = parseFloat(raiz.querySelector('#capitalSimple')?.value);
+      const tasa = parseFloat(raiz.querySelector('#tasaSimple')?.value);
+      const anios = parseFloat(raiz.querySelector('#plazoSimple')?.value);
+      const resDiv = raiz.querySelector('#resultadoSimple');
+
+      CF.prepararLCD(resDiv);
+
+      if (!isNaN(capital) && capital < 0) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El capital no puede ser negativo');
+        return;
+      }
+      if (!isNaN(tasa) && (tasa < 0 || tasa > 100)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El interés debe estar entre 0% y 100%');
+        return;
+      }
+      if (!isNaN(anios) && (anios < 1 || anios > 100)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El plazo debe estar entre 1 y 100 años');
+        return;
+      }
+      if (isNaN(capital) || isNaN(tasa) || isNaN(anios)) {
+        if (resDiv) resDiv.innerText = 'Introduce capital, interés y plazo';
+        return;
+      }
+
+      const interes = capital * (tasa / 100) * anios;
+      const total = capital + interes;
+
+      CF.pintarResultLCD(resDiv, CF.formatearEuros(total),
+        `Interés generado: +${CF.formatearEuros(interes)} · ${CF.formatearNumero(tasa)}% anual x ${CF.formatearNumero(anios)} años`);
+
+      // Serie anual para el gráfico comparativo
+      const serieAnios = [];
+      const serieSimple = [];
+      const serieCompuesto = [];
+      for (let a = 0; a <= anios; a++) {
+        serieAnios.push(a);
+        serieSimple.push(capital + capital * (tasa / 100) * a);
+        serieCompuesto.push(capital * Math.pow(1 + tasa / 100, a));
+      }
+      this.pintarGrafico(raiz, { anios: serieAnios, simple: serieSimple, compuesto: serieCompuesto });
+
+      CF.historialGuardar(
+        this.historialClave,
+        `${CF.formatearEuros(capital)} al ${tasa}% simple x ${anios} años = ${CF.formatearEuros(total)} (+${CF.formatearEuros(interes)})`,
+        raiz
+      );
+    },
+
+    iniciar(raiz) {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.get('demo')) return;
+      const c = raiz.querySelector('#capitalSimple');
+      const t = raiz.querySelector('#tasaSimple');
+      const p = raiz.querySelector('#plazoSimple');
+      if (c) c.value = '1000';
+      if (t) t.value = '5';
+      if (p) p.value = '3';
+      this.calcular(raiz);
+    },
+
+    pintarGrafico(raiz, serie) {
+      const caja = raiz.querySelector('#graficoSimple');
+      const canvas = raiz.querySelector('#canvasSimple');
+      const mensaje = raiz.querySelector('#graficoVacioSimple');
+      if (!caja || !canvas || !canvas.getContext) return;
+
+      this._serieActual = serie;
+
+      if (!serie) {
+        caja.style.display = '';
+        canvas.style.display = 'none';
+        if (mensaje) mensaje.style.display = '';
+        return;
+      }
+      caja.style.display = '';
+      canvas.style.display = 'block';
+      if (mensaje) mensaje.style.display = 'none';
+
+      if (!this._resizeListo) {
+        this._resizeListo = true;
+        let temporizadorRedibujar = null;
+        window.addEventListener('resize', () => {
+          clearTimeout(temporizadorRedibujar);
+          temporizadorRedibujar = setTimeout(() => {
+            const raizViva = document.querySelector('[data-calculadora="interes-simple"]');
+            if (raizViva && this._serieActual) this.pintarGrafico(raizViva, this._serieActual);
+          }, 200);
+        });
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+      const anchoCss = Math.max(caja.clientWidth - 24, 120);
+      const altoCss = anchoCss > 700 ? 380 : 320;
+      canvas.width = Math.round(anchoCss * dpr);
+      canvas.height = Math.round(altoCss * dpr);
+      canvas.style.width = anchoCss + 'px';
+      canvas.style.height = altoCss + 'px';
+
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, anchoCss, altoCss);
+
+      const padIzq = 58;
+      const padDer = 14;
+      const padSup = 16;
+      const padInf = 30;
+      const wGraf = anchoCss - padIzq - padDer;
+      const hGraf = altoCss - padSup - padInf;
+
+      const maxAnios = serie.anios[serie.anios.length - 1];
+      const maxValor = Math.max.apply(null, serie.compuesto) * 1.05 || 1;
+
+      const xDe = anio => padIzq + (anio / maxAnios) * wGraf;
+      const yDe = valor => padSup + hGraf - (valor / maxValor) * hGraf;
+
+      ctx.font = 'bold 12px "Courier New", monospace';
+      ctx.lineWidth = 1;
+      for (let k = 0; k <= 4; k++) {
+        const v = (maxValor / 4) * k;
+        const y = yDe(v);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+        ctx.beginPath();
+        ctx.moveTo(padIzq, y);
+        ctx.lineTo(padIzq + wGraf, y);
+        ctx.stroke();
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(formatearEje(v), padIzq - 6, y);
+      }
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const pasoMarca = Math.max(1, Math.round(maxAnios / 5));
+      for (let anio = 0; anio <= maxAnios; anio += pasoMarca) {
+        ctx.fillText(anio === 0 ? 'hoy' : anio + 'a', xDe(anio), padSup + hGraf + 8);
+      }
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.simple.map(yDe), padSup + hGraf,
+        'rgba(56, 189, 248, 0.15)', '#38bdf8');
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.compuesto.map(yDe), padSup + hGraf,
+        'rgba(16, 185, 129, 0.22)', '#10b981');
+    },
+
+    limpiar(raiz) {
+      ['capitalSimple', 'tasaSimple', 'plazoSimple'].forEach(id => {
+        const input = raiz.querySelector('#' + id);
+        if (input) input.value = '';
+      });
+      const res = raiz.querySelector('#resultadoSimple');
+      CF.limpiarMarcasError(raiz);
+      CF.prepararLCD(res);
+      if (res) res.innerText = 'Introduce los datos';
+      this.pintarGrafico(raiz, null);
+    }
+  });
+
+  // ==========================================================
+  // CUOTA DE PRÉSTAMO / HIPOTECA (sistema francés)
+  // ==========================================================
+  CF.registrar({
+    id: 'cuota-prestamo',
+    historialClave: 'historial_prestamo',
+
+    calcular(raiz) {
+      const importe = parseFloat(raiz.querySelector('#importePrestamo')?.value);
+      const tin = parseFloat(raiz.querySelector('#interesPrestamo')?.value);
+      const anios = parseFloat(raiz.querySelector('#plazoPrestamo')?.value);
+      const resDiv = raiz.querySelector('#resultadoPrestamo');
+
+      CF.prepararLCD(resDiv);
+
+      if (!isNaN(importe) && importe <= 0) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El importe debe ser mayor que 0');
+        return;
+      }
+      if (!isNaN(tin) && (tin < 0 || tin > 100)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El interés debe estar entre 0% y 100%');
+        return;
+      }
+      if (!isNaN(anios) && (anios < 1 || anios > 75)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El plazo debe estar entre 1 y 75 años');
+        return;
+      }
+      if (isNaN(importe) || isNaN(tin) || isNaN(anios)) {
+        if (resDiv) resDiv.innerText = 'Introduce importe, interés y plazo';
+        return;
+      }
+
+      const meses = Math.round(anios * 12);
+      const i = tin / 100 / 12;
+      const cuota = i === 0 ? importe / meses : importe * i / (1 - Math.pow(1 + i, -meses));
+
+      let pendiente = importe;
+      let interesesAcum = 0;
+      let interesAnual = 0;
+      let amortizadoAnual = 0;
+      const filasAnuales = [];
+
+      for (let m = 1; m <= meses; m++) {
+        const interesMes = pendiente * i;
+        const amortizadoMes = cuota - interesMes;
+        pendiente -= amortizadoMes;
+        interesAnual += interesMes;
+        amortizadoAnual += amortizadoMes;
+        interesesAcum += interesMes;
+        if (m % 12 === 0 || m === meses) {
+          filasAnuales.push({
+            anio: Math.ceil(m / 12),
+            interesAnual,
+            amortizadoAnual,
+            pendiente: Math.max(pendiente, 0),
+            interesesAcum
+          });
+          interesAnual = 0;
+          amortizadoAnual = 0;
+        }
+      }
+
+      const totalPagado = cuota * meses;
+      const totalIntereses = totalPagado - importe;
+
+      CF.pintarResultLCD(resDiv, CF.formatearEuros(cuota),
+        `${meses} cuotas · Total intereses: ${CF.formatearEuros(totalIntereses)} · Total pagado: ${CF.formatearEuros(totalPagado)}`);
+
+      this.pintarTabla(raiz, filasAnuales);
+
+      const serieAnios = [0];
+      const seriePendiente = [importe];
+      const serieIntereses = [0];
+      filasAnuales.forEach(fila => {
+        serieAnios.push(fila.anio);
+        seriePendiente.push(fila.pendiente);
+        serieIntereses.push(fila.interesesAcum);
+      });
+      this.pintarGrafico(raiz, { anios: serieAnios, pendiente: seriePendiente, intereses: serieIntereses });
+
+      CF.historialGuardar(
+        this.historialClave,
+        `${CF.formatearEuros(importe)} al ${tin}% x ${anios} años -> cuota ${CF.formatearEuros(cuota)}`,
+        raiz
+      );
+    },
+
+    pintarTabla(raiz, filas) {
+      const caja = raiz.querySelector('#cajaTablaAmort');
+      const vacio = raiz.querySelector('#tablaVaciaPrestamo');
+      const cuerpo = raiz.querySelector('#cuerpoTablaAmort');
+      if (!caja || !cuerpo) return;
+      const hayFilas = !!filas && filas.length > 0;
+      caja.hidden = !hayFilas;
+      if (vacio) vacio.style.display = hayFilas ? 'none' : '';
+      if (hayFilas) {
+        cuerpo.innerHTML = filas.map(fila =>
+          '<tr><td>' + fila.anio + '</td>' +
+          '<td>' + CF.formatearEuros(fila.interesAnual) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.amortizadoAnual) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.pendiente) + '</td></tr>'
+        ).join('');
+      }
+    },
+
+    iniciar(raiz) {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.get('demo')) return;
+      const im = raiz.querySelector('#importePrestamo');
+      const ti = raiz.querySelector('#interesPrestamo');
+      const pl = raiz.querySelector('#plazoPrestamo');
+      if (im) im.value = '150000';
+      if (ti) ti.value = '3.5';
+      if (pl) pl.value = '30';
+      this.calcular(raiz);
+    },
+
+    pintarGrafico(raiz, serie) {
+      const caja = raiz.querySelector('#graficoPrestamo');
+      const canvas = raiz.querySelector('#canvasPrestamo');
+      const mensaje = raiz.querySelector('#graficoVacioPrestamo');
+      if (!caja || !canvas || !canvas.getContext) return;
+
+      this._serieActual = serie;
+
+      if (!serie) {
+        caja.style.display = '';
+        canvas.style.display = 'none';
+        if (mensaje) mensaje.style.display = '';
+        return;
+      }
+      caja.style.display = '';
+      canvas.style.display = 'block';
+      if (mensaje) mensaje.style.display = 'none';
+
+      if (!this._resizeListo) {
+        this._resizeListo = true;
+        let temporizadorRedibujar = null;
+        window.addEventListener('resize', () => {
+          clearTimeout(temporizadorRedibujar);
+          temporizadorRedibujar = setTimeout(() => {
+            const raizViva = document.querySelector('[data-calculadora="cuota-prestamo"]');
+            if (raizViva && this._serieActual) this.pintarGrafico(raizViva, this._serieActual);
+          }, 200);
+        });
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+      const anchoCss = Math.max(caja.clientWidth - 24, 120);
+      const altoCss = anchoCss > 700 ? 380 : 320;
+      canvas.width = Math.round(anchoCss * dpr);
+      canvas.height = Math.round(altoCss * dpr);
+      canvas.style.width = anchoCss + 'px';
+      canvas.style.height = altoCss + 'px';
+
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, anchoCss, altoCss);
+
+      const padIzq = 58;
+      const padDer = 14;
+      const padSup = 16;
+      const padInf = 30;
+      const wGraf = anchoCss - padIzq - padDer;
+      const hGraf = altoCss - padSup - padInf;
+
+      const maxAnios = serie.anios[serie.anios.length - 1];
+      const maxValor = Math.max.apply(null, serie.pendiente.concat(serie.intereses)) * 1.05 || 1;
+
+      const xDe = anio => padIzq + (anio / maxAnios) * wGraf;
+      const yDe = valor => padSup + hGraf - (valor / maxValor) * hGraf;
+
+      ctx.font = 'bold 12px "Courier New", monospace';
+      ctx.lineWidth = 1;
+      for (let k = 0; k <= 4; k++) {
+        const v = (maxValor / 4) * k;
+        const y = yDe(v);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+        ctx.beginPath();
+        ctx.moveTo(padIzq, y);
+        ctx.lineTo(padIzq + wGraf, y);
+        ctx.stroke();
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(formatearEje(v), padIzq - 6, y);
+      }
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const pasoMarca = Math.max(1, Math.round(maxAnios / 5));
+      for (let anio = 0; anio <= maxAnios; anio += pasoMarca) {
+        ctx.fillText(anio === 0 ? 'hoy' : anio + 'a', xDe(anio), padSup + hGraf + 8);
+      }
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.pendiente.map(yDe), padSup + hGraf,
+        'rgba(56, 189, 248, 0.15)', '#38bdf8');
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.intereses.map(yDe), padSup + hGraf,
+        'rgba(16, 185, 129, 0.22)', '#10b981');
+    },
+
+    limpiar(raiz) {
+      ['importePrestamo', 'interesPrestamo', 'plazoPrestamo'].forEach(id => {
+        const input = raiz.querySelector('#' + id);
+        if (input) input.value = '';
+      });
+      const res = raiz.querySelector('#resultadoPrestamo');
+      CF.limpiarMarcasError(raiz);
+      CF.prepararLCD(res);
+      if (res) res.innerText = 'Introduce los datos';
+      this.pintarGrafico(raiz, null);
+      this.pintarTabla(raiz, []);
+    }
+  });
+
 })();
 
 // ==========================================================
