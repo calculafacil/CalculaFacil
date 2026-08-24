@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v13';
+const VERSION = 'v14';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [

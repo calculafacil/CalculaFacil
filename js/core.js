@@ -342,6 +342,8 @@ window.CF = (function () {
 
   // ARRANQUE: CONECTA CADA CALCULADORA PRESENTE EN LA PÁGINA
   function arranque() {
+    construirPlantillas();
+
     cargarTemaGuardado();
 
     observarCambiosLCD();
@@ -507,6 +509,138 @@ window.CF = (function () {
 
       actualizar();
     });
+  }
+
+  // ==========================================================
+  // PLANTILLAS COMPARTIDAS
+  // La cabecera, las pestañas, la sección de relacionadas y el
+  // footer son iguales en todas las páginas, así que se generan
+  // aquí una sola vez. Para añadir una calculadora nueva solo hay
+  // que registrarla en la lista CALCULADORAS de aquí abajo y el
+  // menú de pestañas, el footer y las relacionadas se actualizan
+  // solos en toda la web.
+  // ==========================================================
+
+  const CALCULADORAS = Object.freeze([
+    { id: 'nota-necesaria',     nombre: 'Nota Necesaria',      grupo: 'estudios' },
+    { id: 'media-ponderada',    nombre: 'Media Ponderada',     grupo: 'estudios' },
+    { id: 'admision-ebau-pau',  nombre: 'Admisión EBAU / PAU', grupo: 'estudios' },
+    { id: 'nota-de-corte',      nombre: 'Nota de Corte',       grupo: 'estudios' },
+    { id: 'asistencias-faltas', nombre: 'Asistencia y Faltas', grupo: 'estudios' },
+    { id: 'porcentajes',        nombre: 'Porcentajes',         grupo: 'estudios' },
+    { id: 'descuentos',         nombre: 'Descuentos',          grupo: 'dinero' },
+    { id: 'iva',                nombre: 'IVA',                 grupo: 'dinero' },
+    { id: 'sueldo-neto',        nombre: 'Sueldo Neto',         grupo: 'dinero' },
+    { id: 'interes-compuesto',  nombre: 'Interés Compuesto',   grupo: 'dinero' }
+  ]);
+
+  const ETIQUETA_GRUPO = {
+    estudios: 'Calculadoras académicas',
+    dinero: 'Calculadoras financieras'
+  };
+
+  const ICONO_TEMA = '<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>';
+
+  function detectarPaginaActual() {
+    const segmentos = window.location.pathname.split('/').filter(Boolean);
+    let ultimo = segmentos[segmentos.length - 1] || '';
+    if (!ultimo || /\.html?$/i.test(ultimo)) ultimo = segmentos[segmentos.length - 2] || '';
+    return ultimo;
+  }
+
+  // CABECERA: cada página declara su título único con
+  // <header class="banner-principal" data-titulo="..."></header>
+  // y aquí se completa con logo, eslogan y selector de tema.
+  function construirCabecera(prefijo) {
+    const cabecera = document.querySelector('header.banner-principal[data-titulo]');
+    if (!cabecera) return;
+    const titulo = cabecera.getAttribute('data-titulo') || '';
+    cabecera.innerHTML =
+      '<div class="contenido-banner">' +
+        '<div class="banner-marca">' +
+          '<a href="' + prefijo + '" class="banner-enlace">' +
+            '<img src="' + prefijo + 'logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">' +
+            '<div class="banner-texto">' +
+              '<h1 id="titulo-header"></h1>' +
+              '<p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>' +
+            '</div>' +
+          '</a>' +
+        '</div>' +
+        '<div class="selector-tema-container">' +
+          '<label for="selectTema" class="etiqueta-tema">' + ICONO_TEMA + 'Estilo:</label>' +
+          '<select id="selectTema" aria-label="Seleccionar tema de carcasa">' +
+            '<option value="classic">Gris Clásico</option>' +
+            '<option value="cyberpunk">Cyberpunk (Neón)</option>' +
+            '<option value="retro">Beige Retro 80s</option>' +
+          '</select>' +
+        '</div>' +
+      '</div>';
+    const h1 = cabecera.querySelector('h1');
+    if (h1) h1.textContent = titulo;
+  }
+
+  // PESTAÑAS: <div class="pestanas-envoltorio" data-pestanas="estudios|dinero">
+  function construirPestanas(prefijo, paginaActual) {
+    document.querySelectorAll('[data-pestanas]').forEach(envoltorio => {
+      const grupo = envoltorio.getAttribute('data-pestanas');
+      const delGrupo = CALCULADORAS.filter(c => c.grupo === grupo);
+      if (!delGrupo.length) return;
+      const pestanas = delGrupo.map(c =>
+        c.id === paginaActual
+          ? '<span class="tab-btn activa" aria-current="page">' + c.nombre + '</span>'
+          : '<a class="tab-btn" href="' + prefijo + c.id + '/">' + c.nombre + '</a>'
+      ).join('');
+      envoltorio.innerHTML =
+        '<nav class="pestanas" aria-label="' + (ETIQUETA_GRUPO[grupo] || '') + '">' + pestanas + '</nav>' +
+        '<button type="button" class="flecha-tab flecha-izq" data-flecha="-180" aria-label="Desplazar pestañas hacia la izquierda" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>' +
+        '<button type="button" class="flecha-tab flecha-der" data-flecha="180" aria-label="Desplazar pestañas hacia la derecha" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>';
+    });
+  }
+
+  // RELACIONADAS: todas las calculadoras menos la actual
+  function construirRelacionadas(prefijo, paginaActual) {
+    document.querySelectorAll('.relacionadas-lista[data-relacionadas]').forEach(lista => {
+      lista.innerHTML = CALCULADORAS
+        .filter(c => c.id !== paginaActual)
+        .map(c => '<a class="tab-btn" href="' + prefijo + c.id + '/">' + c.nombre + '</a>')
+        .join('');
+    });
+  }
+
+  // FOOTER: se rellena solo si la página lo dejó vacío, así una
+  // página puede traer un footer propio distinto si algún día hace falta.
+  function construirFooter(prefijo) {
+    const footer = document.querySelector('footer.footer-sitio');
+    if (!footer || footer.innerHTML.trim() !== '') return;
+    const columna = grupo =>
+      '<nav class="footer-nav" aria-label="' + ETIQUETA_GRUPO[grupo] + '">' +
+        '<p class="footer-titulo">' + (grupo === 'estudios' ? 'Para tus estudios' : 'Para tu dinero') + '</p>' +
+        CALCULADORAS.filter(c => c.grupo === grupo)
+          .map(c => '<a href="' + prefijo + c.id + '/">' + c.nombre + '</a>').join('') +
+      '</nav>';
+    footer.innerHTML =
+      '<div class="footer-caja">' +
+        '<div class="footer-columnas">' +
+          '<div class="footer-marca">' +
+            '<img src="' + prefijo + 'logo.svg" alt="Logo CalculaFácil" width="42" height="42">' +
+            '<div><p class="footer-nombre">CalculaFácil</p>' +
+            '<p class="footer-eslogan">Tu calculadora online gratuita para exámenes, notas y finanzas.</p></div>' +
+          '</div>' +
+          columna('estudios') +
+          columna('dinero') +
+        '</div>' +
+        '<p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. ' +
+        '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a></p>' +
+      '</div>';
+  }
+
+  function construirPlantillas() {
+    const prefijo = document.getElementById('pantalla-menu') ? './' : '../';
+    const paginaActual = detectarPaginaActual();
+    construirCabecera(prefijo);
+    construirPestanas(prefijo, paginaActual);
+    construirRelacionadas(prefijo, paginaActual);
+    construirFooter(prefijo);
   }
 
   // ==========================================================
