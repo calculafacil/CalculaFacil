@@ -643,6 +643,16 @@ window.CF = (function () {
     construirPestanas(prefijo, paginaActual);
     construirRelacionadas(prefijo, paginaActual);
     construirFooter(prefijo);
+    actualizarContadores();
+  }
+
+  // Rellena contadores dinamicos (p.ej. "X calculadoras" en Sobre mí)
+  // con el numero real de la lista CALCULADORAS, para que nunca se
+  // quede obsoleto al añadir calculadoras nuevas.
+  function actualizarContadores() {
+    document.querySelectorAll('[data-total-calculadoras]').forEach(el => {
+      el.textContent = CALCULADORAS.length;
+    });
   }
 
   // ==========================================================
