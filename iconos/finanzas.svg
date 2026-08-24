@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Saco de dinero -->
+  <path d="M24 20 C14 27 9 35 9 43 c0 8.5 10.3 13 23 13 s23 -4.5 23 -13 c0 -8 -5 -16 -15 -23 Z" fill="#10b981"/>
+  <!-- Cuerda del saco -->
+  <rect x="23.5" y="10" width="17" height="11" rx="4" fill="#047857"/>
+  <!-- Brillo -->
+  <ellipse cx="19" cy="36" rx="4" ry="7" fill="#34d399" opacity="0.7" transform="rotate(-15 19 36)"/>
+  <!-- Símbolo del euro -->
+  <text x="32" y="50" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="bold" fill="#ecfdf5" text-anchor="middle">&#8364;</text>
+</svg>

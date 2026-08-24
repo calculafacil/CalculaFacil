@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada (404) 🧮 | CalculaFácil</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="La página que buscas no existe. Vuelve al menú de calculadoras gratuitas de CalculaFácil.">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+
+  <link rel="stylesheet" href="estilos.css">
+  <script src="./js/core.js" defer></script>
+</head>
+<body data-tema="classic">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- BANNER PRINCIPAL -->
+  <header class="banner-principal">
+    <div class="contenido-banner">
+      <div class="banner-marca">
+        <a href="./" class="banner-enlace" data-root-link>
+          <img src="logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
+          <div class="banner-texto">
+            <h1 id="titulo-header">CalculaFácil - Herramientas Académicas y Finanzas</h1>
+            <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="contenedor-app">
+    <main class="pantalla activa">
+      <div class="carcasa-calculadora ambiente-compras">
+        <div class="marca-calc">CALCULAFÁCIL <span>MÓDULO ERROR</span></div>
+
+        <div class="descripcion-retro">
+          <h3>&gt; ERROR_404.PAGINA_NO_ENCONTRADA</h3>
+          <p>La dirección que buscas no existe o ha cambiado. Vuelve al menú principal y elige tu calculadora.</p>
+        </div>
+
+        <div class="pantalla-lcd">
+          <span class="etiqueta-lcd">CODIGO DE ERROR</span>
+          <div class="texto-lcd texto-error">404 - NO ENCONTRADO</div>
+        </div>
+
+        <div class="teclado-tactil">
+          <a class="btn-3d btn-calcular" data-root-link href="./">VOLVER AL MENÚ</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // GitHub Pages sirve este 404 desde cualquier ruta inexistente:
+    // recalcula los enlaces internos para apuntar siempre a la raíz del proyecto.
+    (function () {
+      var segmentos = window.location.pathname.split('/').filter(Boolean);
+      var raiz = '/' + (segmentos[0] || '') + '/';
+      document.querySelectorAll('a[data-root-link]').forEach(function (enlace) {
+        enlace.setAttribute('href', raiz);
+      });
+    })();
+  </script>
+</body>
+</html>

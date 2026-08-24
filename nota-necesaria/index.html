@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO BÁSICO PARA GOOGLE -->
+  <title>Calculadora de Nota Necesaria para Examen Final 🎓 | CalculaFácil</title>
+  <meta name="description" content="Calcula la nota exacta que necesitas sacar en tu examen final para aprobar o llegar a tu objetivo con porcentajes y pesos.">
+  <meta name="keywords" content="calculadora nota necesaria, qué nota necesito para aprobar, calcular nota examen final, nota mínima examen">
+  <link rel="canonical" href="https://calculafacil.github.io/CalculaFacil/nota-necesaria/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="apple-touch-icon" href="../iconos/icon-192.png">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="../logo.svg">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Calculadora de Nota Necesaria para Examen Final 🎓 | CalculaFácil">
+  <meta property="og:description" content="Calcula la nota exacta que necesitas sacar en tu examen final para aprobar o llegar a tu objetivo con porcentajes y pesos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calculafacil.github.io/CalculaFacil/nota-necesaria/">
+  <meta property="og:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculadora de Nota Necesaria para Examen Final 🎓 | CalculaFácil">
+  <meta name="twitter:description" content="Calcula la nota exacta que necesitas sacar en tu examen final para aprobar o llegar a tu objetivo con porcentajes y pesos.">
+  <meta name="twitter:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+
+  <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CalculaFácil - Calculadora de Nota Necesaria en Exámenes",
+    "url": "https://calculafacil.github.io/CalculaFacil/nota-necesaria/",
+    "description": "Calculadora online gratuita para saber qué nota mínima necesitas en el examen final según tus notas previas y sus porcentajes de peso.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../estilos.css">
+  <script defer src="../js/core.js"></script>
+  <script defer src="../js/calculadoras.js"></script>
+</head>
+<body data-tema="classic">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- BANNER PRINCIPAL -->
+  <header class="banner-principal">
+    <div class="contenido-banner">
+      <div class="banner-marca">
+        <a href="../" class="banner-enlace">
+          <img src="../logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
+          <div class="banner-texto">
+            <h1 id="titulo-header">Calculadora de Nota Necesaria para Examen Final</h1>
+            <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- SELECTOR DE TEMA -->
+      <div class="selector-tema-container">
+        <label for="selectTema" class="etiqueta-tema">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>
+          Estilo:
+        </label>
+        <select id="selectTema" aria-label="Seleccionar tema de carcasa">
+          <option value="classic">Gris Clásico</option>
+          <option value="cyberpunk">Cyberpunk (Neón)</option>
+          <option value="retro">Beige Retro 80s</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="contenedor-app">
+    <main class="pantalla activa">
+      <a class="btn-volver" href="../" aria-label="Volver al menú"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>Volver al Menú</a>
+
+      <div class="carcasa-calculadora ambiente-estudiantes">
+        <div class="marca-calc">CALCULAFÁCIL <span>ACADEMIC HUB</span></div>
+        <div class="descripcion-retro">
+          <h3>&gt; CALCULAR_NOTA_NECESARIA</h3>
+          <p>Descubre al instante qué calificación mínima debes sacar en el examen final para aprobar o alcanzar tu nota promedio deseada.</p>
+        </div>
+
+        <!-- NAVEGACIÓN ENTRE CALCULADORAS -->
+        <div class="pestanas-envoltorio">
+        <nav class="pestanas" aria-label="Calculadoras académicas">
+          <span class="tab-btn activa" aria-current="page">Nota Necesaria</span>
+          <a class="tab-btn" href="../media-ponderada/">Media Ponderada</a>
+          <a class="tab-btn" href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+          <a class="tab-btn" href="../nota-de-corte/">Nota de Corte</a>
+          <a class="tab-btn" href="../asistencias-faltas/">Asistencia y Faltas</a>
+          <a class="tab-btn" href="../porcentajes/">Porcentajes</a>
+        </nav>
+          <button type="button" class="flecha-tab flecha-izq" data-flecha="-180" aria-label="Desplazar pestañas hacia la izquierda" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button type="button" class="flecha-tab flecha-der" data-flecha="180" aria-label="Desplazar pestañas hacia la derecha" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <!-- CALCULADORA DE NOTA NECESARIA -->
+        <section data-calculadora="nota-necesaria">
+          <h2 class="titulo-tab">¿Qué nota necesito en el examen final para aprobar?</h2>
+          <p class="instruccion-tab">Añade tus notas previas conseguidas y sus porcentajes de valor (%):</p>
+
+          <div id="contenedor-examenes-previos">
+            <div class="fila-dinamica">
+              <input type="number" inputmode="decimal" class="ex-nota" placeholder="Nota (0-10)" step="0.1" min="0" max="10" aria-label="Nota anterior">
+              <input type="number" inputmode="decimal" class="ex-peso" placeholder="Peso %" min="0" max="100" aria-label="Peso de la nota">
+              <button type="button" class="btn-eliminar-fila" data-action="eliminar-fila" aria-label="Eliminar fila"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+          </div>
+
+          <button class="btn-secundario" type="button" data-action="agregar-fila"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Añadir otro examen previo</button>
+
+          <div class="campo margen-superior">
+            <label for="pesoPendiente">Peso del examen final pendiente (%):</label>
+            <input type="number" inputmode="decimal" id="pesoPendiente" placeholder="Ej: 40" min="0" max="100">
+          </div>
+
+          <div class="contenedor-progreso-pesos">
+            <div class="info-progreso">
+              <span>Suma de pesos:</span>
+              <span id="textoPorcentajeNecesaria">0% / 100%</span>
+            </div>
+            <div class="barra-progreso-bg">
+              <div id="barraProgresoNecesaria" class="barra-progreso-fill"></div>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="notaObjetivoMultiples">Nota final objetivo que deseas sacar (ej: 5 para aprobar):</label>
+            <input type="number" inputmode="decimal" id="notaObjetivoMultiples" placeholder="Ej: 5.0" step="0.1" min="0" max="10">
+          </div>
+
+          <div class="pantalla-lcd">
+            <span class="etiqueta-lcd">NOTA MÍNIMA NECESARIA EN EXAMEN FINAL</span>
+            <div id="resultadoNotaMultiples" class="texto-lcd">Necesitas: 0.00</div>
+          </div>
+
+          <button type="button" class="btn-copiar" data-action="copiar" data-copy-target="resultadoNotaMultiples"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar resultado</button>
+
+          <p class="aviso-historial">El resultado se actualiza mientras escribes. Pulsa CALCULAR para guardarlo en tu historial.</p>
+          <div class="teclado-tactil">
+            <button class="btn-3d btn-calcular" type="button" data-action="calcular">CALCULAR</button>
+            <button class="btn-3d btn-limpiar" type="button" data-action="limpiar">BORRAR</button>
+          </div>
+
+          <div class="caja-historial">
+            <span class="titulo-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>HISTORIAL - NOTA NECESARIA</span>
+            <ul class="lista-historial" data-historial-clave="historial_necesaria">
+              <li>No hay operaciones recientes</li>
+            </ul>
+            <div class="fila-compartir">
+              <a class="btn-secundario" data-share-whatsapp href="#" target="_blank" rel="noopener" aria-label="Compartir esta calculadora por WhatsApp"><svg class="icono" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>Compartir por WhatsApp</a>
+              <button class="btn-secundario" type="button" data-share-nativo aria-label="Compartir esta calculadora con otras apps"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button>
+            </div>
+            <button class="btn-secundario" type="button" data-action="vaciar-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14"/></svg>Vaciar historial</button>
+          </div>
+        </section>
+
+        <!-- BLOQUE SEO ENRIQUECIDO - NOTA NECESARIA -->
+        <section class="seo-info-box">
+          <h3>Cómo saber qué nota necesitas en el examen final</h3>
+          <p>La <strong>calculadora de nota necesaria</strong> te dice la calificación mínima que debes obtener en la prueba final para lograr tu objetivo, teniendo en cuenta todo lo que ya tienes evaluado.</p>
+          <ul>
+            <li><strong>Planifica tu estudio:</strong> conocer la nota exacta que necesitas te permite repartir el esfuerzo de forma realista.</li>
+            <li><strong>Válida para cualquier asignatura:</strong> suma exámenes parciales, trabajos y prácticas con su peso real.</li>
+            <li><strong>Resultados sin trampas:</strong> si el objetivo es inalcanzable te avisa, y si ya tienes la nota asegurada también.</li>
+          </ul>
+        </section>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="faq-seccion">
+          <h3><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Preguntas frecuentes sobre la nota necesaria</h3>
+          <details class="faq-item">
+            <summary>¿Cómo se calcula la nota necesaria en el examen final?</summary>
+            <p>La fórmula es: Nota necesaria = (Nota objetivo - suma de tus notas actuales ponderadas) ÷ peso del examen final. Por ejemplo, si llevas un 6.5 con un 60% del curso ya evaluado y quieres un 5 total, necesitas un (5 - 3.9) ÷ 0.4 = 2.75 en el examen final.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué nota debo sacar para aprobar con un 5?</summary>
+            <p>Introduce 5 como nota objetivo y añade tus exámenes previos con sus porcentajes. La calculadora mostrará al instante la calificación mínima exacta que necesitas en el examen final para aprobar la asignatura.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Y si me sale una nota imposible o mayor que 10?</summary>
+            <p>Si el resultado supera el 10, ya no es posible alcanzar ese objetivo con el peso pendiente: revisa los pesos introducidos o ajusta tu objetivo. Si el resultado es 0 o negativo, tienes la nota asegurada aunque no aciertes nada en el examen.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuántos exámenes previos puedo añadir?</summary>
+            <p>Todos los que necesites: añade una fila por cada examen ya realizado con su nota y su peso sobre la nota final. La calculadora suma todo lo ya evaluado y calcula qué te hace falta en el examen que queda pendiente.</p>
+          </details>
+        </section>
+
+
+        <!-- CALCULADORAS RELACIONADAS -->
+        <section class="relacionadas-seccion">
+          <h3>
+<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+Otras calculadoras que te pueden servir</h3>
+          <div class="relacionadas-lista">
+            <a class="tab-btn" href="../media-ponderada/">Media Ponderada</a>
+            <a class="tab-btn" href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+            <a class="tab-btn" href="../nota-de-corte/">Nota de Corte</a>
+            <a class="tab-btn" href="../asistencias-faltas/">Asistencia y Faltas</a>
+            <a class="tab-btn" href="../descuentos/">Descuentos</a>
+            <a class="tab-btn" href="../iva/">IVA</a>
+            <a class="tab-btn" href="../sueldo-neto/">Sueldo Neto</a>
+            <a class="tab-btn" href="../interes-compuesto/">Interés Compuesto</a>
+            <a class="tab-btn" href="../porcentajes/">Porcentajes</a>
+          </div>
+        </section>
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cómo se calcula la nota necesaria en el examen final?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La fórmula es: Nota necesaria = (Nota objetivo - suma de tus notas actuales ponderadas) ÷ peso del examen final. Por ejemplo, si llevas un 6.5 con un 60% del curso ya evaluado y quieres un 5 total, necesitas un (5 - 3.9) ÷ 0.4 = 2.75 en el examen final."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué nota debo sacar para aprobar con un 5?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Introduce 5 como nota objetivo y añade tus exámenes previos con sus porcentajes. La calculadora mostrará al instante la calificación mínima exacta que necesitas en el examen final para aprobar la asignatura."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Y si me sale una nota imposible o mayor que 10?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Si el resultado supera el 10, ya no es posible alcanzar ese objetivo con el peso pendiente: revisa los pesos introducidos o ajusta tu objetivo. Si el resultado es 0 o negativo, tienes la nota asegurada aunque no aciertes nada en el examen."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuántos exámenes previos puedo añadir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Todos los que necesites: añade una fila por cada examen ya realizado con su nota y su peso sobre la nota final. La calculadora suma todo lo ya evaluado y calcula qué te hace falta en el examen que queda pendiente."
+              }
+            }
+          ]
+        }
+        </script>
+      </div>
+    </main>
+  </div>
+  <!-- FOOTER -->
+  <footer class="footer-sitio">
+    <div class="footer-caja">
+      <div class="footer-columnas">
+        <div class="footer-marca">
+          <img src="../logo.svg" alt="Logo CalculaFácil" width="42" height="42">
+          <div>
+            <p class="footer-nombre">CalculaFácil</p>
+            <p class="footer-eslogan">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Calculadoras académicas">
+          <p class="footer-titulo">Para tus estudios</p>
+          <a href="../nota-necesaria/">Nota Necesaria</a>
+          <a href="../media-ponderada/">Media Ponderada</a>
+          <a href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+          <a href="../nota-de-corte/">Nota de Corte</a>
+          <a href="../asistencias-faltas/">Asistencia y Faltas</a>
+          <a href="../porcentajes/">Porcentajes</a>
+        </nav>
+        <nav class="footer-nav" aria-label="Calculadoras financieras">
+          <p class="footer-titulo">Para tu dinero</p>
+          <a href="../descuentos/">Descuentos</a>
+          <a href="../iva/">IVA</a>
+          <a href="../sueldo-neto/">Sueldo Neto</a>
+          <a href="../interes-compuesto/">Interés Compuesto</a>
+        </nav>
+      </div>
+      <p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. <a href="../privacidad/">Privacidad</a> · <a href="../sobre-mi/">Sobre mí</a></p>
+    </div>
+  </footer>
+</body>
+</html>

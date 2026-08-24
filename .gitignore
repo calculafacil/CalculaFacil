@@ -1,0 +1,15 @@
+# Sistema operativo (Windows/Mac)
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Archivos temporales de Office/OneDrive
+~$*
+
+# Editores de código
+.vscode/
+.idea/
+
+# Dependencias y logs (si añades herramientas Node más adelante)
+node_modules/
+*.log

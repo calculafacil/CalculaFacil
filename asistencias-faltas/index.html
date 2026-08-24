@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO BÁSICO PARA GOOGLE -->
+  <title>Calculadora de Faltas de Asistencia Permisibles 🏫 | CalculaFácil</title>
+  <meta name="description" content="Controla el número máximo de faltas de asistencia que te puedes permitir antes de perder la evaluación continua.">
+  <meta name="keywords" content="calculadora faltas de asistencia, cuántas faltas puedo tener, porcentaje asistencia mínima, evaluación continua">
+  <link rel="canonical" href="https://calculafacil.github.io/CalculaFacil/asistencias-faltas/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="apple-touch-icon" href="../iconos/icon-192.png">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="../logo.svg">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Calculadora de Faltas de Asistencia Permisibles 🏫 | CalculaFácil">
+  <meta property="og:description" content="Controla el número máximo de faltas de asistencia que te puedes permitir antes de perder la evaluación continua.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calculafacil.github.io/CalculaFacil/asistencias-faltas/">
+  <meta property="og:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculadora de Faltas de Asistencia Permisibles 🏫 | CalculaFácil">
+  <meta name="twitter:description" content="Controla el número máximo de faltas de asistencia que te puedes permitir antes de perder la evaluación continua.">
+  <meta name="twitter:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+
+  <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CalculaFácil - Calculadora de Faltas de Asistencia",
+    "url": "https://calculafacil.github.io/CalculaFacil/asistencias-faltas/",
+    "description": "Calculadora online gratuita para saber cuántas clases o horas puedes faltar sin perder la evaluación continua según el porcentaje mínimo de asistencia.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../estilos.css">
+  <script defer src="../js/core.js"></script>
+  <script defer src="../js/calculadoras.js"></script>
+</head>
+<body data-tema="classic">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- BANNER PRINCIPAL -->
+  <header class="banner-principal">
+    <div class="contenido-banner">
+      <div class="banner-marca">
+        <a href="../" class="banner-enlace">
+          <img src="../logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
+          <div class="banner-texto">
+            <h1 id="titulo-header">Calculadora de Faltas de Asistencia Permisibles</h1>
+            <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- SELECTOR DE TEMA -->
+      <div class="selector-tema-container">
+        <label for="selectTema" class="etiqueta-tema">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>
+          Estilo:
+        </label>
+        <select id="selectTema" aria-label="Seleccionar tema de carcasa">
+          <option value="classic">Gris Clásico</option>
+          <option value="cyberpunk">Cyberpunk (Neón)</option>
+          <option value="retro">Beige Retro 80s</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="contenedor-app">
+    <main class="pantalla activa">
+      <a class="btn-volver" href="../" aria-label="Volver al menú"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>Volver al Menú</a>
+
+      <div class="carcasa-calculadora ambiente-estudiantes">
+        <div class="marca-calc">CALCULAFÁCIL <span>CONTROL DE ASISTENCIA</span></div>
+        <div class="descripcion-retro">
+          <h3>&gt; LÍMITE_FALTAS</h3>
+          <p>Descubre cuántas clases o horas puedes faltar sin perder el derecho a la evaluación continua en tu colegio o universidad.</p>
+        </div>
+
+        <!-- NAVEGACIÓN ENTRE CALCULADORAS -->
+        <div class="pestanas-envoltorio">
+        <nav class="pestanas" aria-label="Calculadoras académicas">
+          <a class="tab-btn" href="../nota-necesaria/">Nota Necesaria</a>
+          <a class="tab-btn" href="../media-ponderada/">Media Ponderada</a>
+          <a class="tab-btn" href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+          <a class="tab-btn" href="../nota-de-corte/">Nota de Corte</a>
+          <span class="tab-btn activa" aria-current="page">Asistencia y Faltas</span>
+          <a class="tab-btn" href="../porcentajes/">Porcentajes</a>
+        </nav>
+          <button type="button" class="flecha-tab flecha-izq" data-flecha="-180" aria-label="Desplazar pestañas hacia la izquierda" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button type="button" class="flecha-tab flecha-der" data-flecha="180" aria-label="Desplazar pestañas hacia la derecha" hidden><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+
+        <!-- CALCULADORA DE ASISTENCIA Y FALTAS -->
+        <section data-calculadora="asistencias-faltas">
+          <p class="instruccion-tab">Calcula cuántas clases puedes faltar sin perder la evaluación continua:</p>
+
+          <div class="campo">
+            <label for="totalClases">Total de clases/horas de la asignatura:</label>
+            <input type="number" inputmode="numeric" id="totalClases" placeholder="Ej: 60" min="1">
+          </div>
+
+          <div class="campo">
+            <label for="porcentajeMinimo">Asistencia mínima obligatoria (%):</label>
+            <input type="number" inputmode="decimal" id="porcentajeMinimo" placeholder="Ej: 80" value="80" min="0" max="100">
+          </div>
+
+          <div class="campo">
+            <label for="faltasActuales">Faltas acumuladas hasta hoy:</label>
+            <input type="number" inputmode="numeric" id="faltasActuales" placeholder="Ej: 2" value="0" min="0">
+          </div>
+
+          <div class="pantalla-lcd">
+            <span class="etiqueta-lcd">MARGEN DE FALTAS PERMITIDAS</span>
+            <div id="resultadoAsistencia" class="texto-lcd">Te quedan: 0 faltas</div>
+          </div>
+
+          <button type="button" class="btn-copiar" data-action="copiar" data-copy-target="resultadoAsistencia"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar resultado</button>
+
+          <!-- GRÁFICO DE ASISTENCIA -->
+          <div class="grafico-caja" id="graficoAsistencia">
+            <canvas id="canvasAsistencia" style="display:none" aria-label="Anillo con tu porcentaje de asistencia y el mínimo exigido" role="img"></canvas>
+            <p class="grafico-vacio">Introduce tus clases para ver el anillo</p>
+          </div>
+
+          <p class="aviso-historial">El resultado se actualiza mientras escribes. Pulsa CALCULAR para guardarlo en tu historial.</p>
+          <div class="teclado-tactil">
+            <button class="btn-3d btn-calcular" type="button" data-action="calcular">CALCULAR</button>
+            <button class="btn-3d btn-limpiar" type="button" data-action="limpiar">BORRAR</button>
+          </div>
+
+          <div class="caja-historial">
+            <span class="titulo-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>HISTORIAL - ASISTENCIA</span>
+            <ul class="lista-historial" data-historial-clave="historial_asistencia">
+              <li>No hay operaciones recientes</li>
+            </ul>
+            <div class="fila-compartir">
+              <a class="btn-secundario" data-share-whatsapp href="#" target="_blank" rel="noopener" aria-label="Compartir esta calculadora por WhatsApp"><svg class="icono" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>Compartir por WhatsApp</a>
+              <button class="btn-secundario" type="button" data-share-nativo aria-label="Compartir esta calculadora con otras apps"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button>
+            </div>
+            <button class="btn-secundario" type="button" data-action="vaciar-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14"/></svg>Vaciar historial</button>
+          </div>
+        </section>
+
+        <!-- BLOQUE SEO ENRIQUECIDO - ASISTENCIA -->
+        <section class="seo-info-box">
+          <h3>Por qué controlar tus faltas de asistencia</h3>
+          <p>Muchos institutos y facultades exigen un <strong>porcentaje mínimo de asistencia</strong> (habitualmente entre el 75% y el 85%) para poder presentarte a la evaluación continua o al examen ordinario.</p>
+          <ul>
+            <li><strong>Anticípate:</strong> conoce tu margen real de ausencias antes de que sea demasiado tarde.</li>
+            <li><strong>Planifica citas y viajes:</strong> reparte tus faltas permitidas a lo largo del curso con criterio.</li>
+            <li><strong>Evita sorpresas:</strong> si has superado el límite, la calculadora te indica exactamente por cuántas faltas.</li>
+          </ul>
+        </section>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="faq-seccion">
+          <h3><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Preguntas frecuentes sobre las faltas de asistencia</h3>
+          <details class="faq-item">
+            <summary>¿Cómo se calcula el máximo de faltas permitidas?</summary>
+            <p>Se multiplica el total de clases por el porcentaje de ausencias tolerado. Por ejemplo, con 60 clases y una asistencia mínima del 80%, puedes faltar hasta al 20%: 60 × 0,20 = 12 faltas como máximo.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Las tardanzas cuentan como falta?</summary>
+            <p>Depende del reglamento de cada centro: algunos equiparan dos o tres retrasos a una falta completa, y otros los descuentan como fracción de hora. Consulta la normativa de tu asignatura para introducir el dato correcto.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Las faltas justificadas computan igual?</summary>
+            <p>En muchos centros las ausencias por motivos médicos o familiares debidamente justificadas no restan para la evaluación continua, pero no es una regla universal. Si en tu caso no computan, simplemente no las incluyas en "faltas acumuladas".</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué porcentaje mínimo de asistencia es habitual exigir?</summary>
+            <p>No existe un mínimo legal único: lo marca cada universidad, instituto o profesor en su guía docente, y lo habitual está entre el 70% y el 85%. Consulta tu programa de la asignatura e introduce ese mínimo exacto en la calculadora para obtener tu margen real de faltas.</p>
+          </details>
+        </section>
+
+
+        <!-- CALCULADORAS RELACIONADAS -->
+        <section class="relacionadas-seccion">
+          <h3>
+<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+Otras calculadoras que te pueden servir</h3>
+          <div class="relacionadas-lista">
+            <a class="tab-btn" href="../nota-necesaria/">Nota Necesaria</a>
+            <a class="tab-btn" href="../media-ponderada/">Media Ponderada</a>
+            <a class="tab-btn" href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+            <a class="tab-btn" href="../nota-de-corte/">Nota de Corte</a>
+            <a class="tab-btn" href="../descuentos/">Descuentos</a>
+            <a class="tab-btn" href="../iva/">IVA</a>
+            <a class="tab-btn" href="../sueldo-neto/">Sueldo Neto</a>
+            <a class="tab-btn" href="../interes-compuesto/">Interés Compuesto</a>
+            <a class="tab-btn" href="../porcentajes/">Porcentajes</a>
+          </div>
+        </section>
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cómo se calcula el máximo de faltas permitidas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Se multiplica el total de clases por el porcentaje de ausencias tolerado. Por ejemplo, con 60 clases y una asistencia mínima del 80%, puedes faltar hasta al 20%: 60 × 0,20 = 12 faltas como máximo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Las tardanzas cuentan como falta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Depende del reglamento de cada centro: algunos equiparan dos o tres retrasos a una falta completa, y otros los descuentan como fracción de hora. Consulta la normativa de tu asignatura."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Las faltas justificadas computan igual?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En muchos centros las ausencias por motivos médicos o familiares debidamente justificadas no restan para la evaluación continua, pero no es una regla universal. Consulta la normativa de tu centro."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué porcentaje mínimo de asistencia es habitual exigir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No existe un mínimo legal único: lo marca cada universidad, instituto o profesor en su guía docente, y lo habitual está entre el 70% y el 85%. Consulta tu programa de la asignatura e introduce ese mínimo exacto en la calculadora para obtener tu margen real de faltas."
+              }
+            }
+          ]
+        }
+        </script>
+      </div>
+    </main>
+  </div>
+  <!-- FOOTER -->
+  <footer class="footer-sitio">
+    <div class="footer-caja">
+      <div class="footer-columnas">
+        <div class="footer-marca">
+          <img src="../logo.svg" alt="Logo CalculaFácil" width="42" height="42">
+          <div>
+            <p class="footer-nombre">CalculaFácil</p>
+            <p class="footer-eslogan">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Calculadoras académicas">
+          <p class="footer-titulo">Para tus estudios</p>
+          <a href="../nota-necesaria/">Nota Necesaria</a>
+          <a href="../media-ponderada/">Media Ponderada</a>
+          <a href="../admision-ebau-pau/">Admisión EBAU / PAU</a>
+          <a href="../nota-de-corte/">Nota de Corte</a>
+          <a href="../asistencias-faltas/">Asistencia y Faltas</a>
+          <a href="../porcentajes/">Porcentajes</a>
+        </nav>
+        <nav class="footer-nav" aria-label="Calculadoras financieras">
+          <p class="footer-titulo">Para tu dinero</p>
+          <a href="../descuentos/">Descuentos</a>
+          <a href="../iva/">IVA</a>
+          <a href="../sueldo-neto/">Sueldo Neto</a>
+          <a href="../interes-compuesto/">Interés Compuesto</a>
+        </nav>
+      </div>
+      <p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. <a href="../privacidad/">Privacidad</a> · <a href="../sobre-mi/">Sobre mí</a></p>
+    </div>
+  </footer>
+</body>
+</html>

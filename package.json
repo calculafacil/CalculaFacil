@@ -1,0 +1,19 @@
+{
+  "name": "projecte-web-calculafacil",
+  "version": "1.0.0",
+  "description": "Web estática de calculadoras gratuitas académicas y financieras.",
+  "main": "js/core.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "calculadora",
+    "notas",
+    "ebau",
+    "iva",
+    "descuentos"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

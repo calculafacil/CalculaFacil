@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO BÁSICO PARA GOOGLE -->
+  <title id="meta-titulo">CalculaFácil 🧮 | Calculadoras Gratuitas de Notas, EBAU y Finanzas</title>
+  <meta name="description" id="meta-descripcion" content="Calcula la nota necesaria para aprobar tus exámenes, tu media ponderada, nota de admisión a la universidad (EBAU/PAU), faltas de asistencia y herramientas financieras.">
+  <meta name="keywords" content="calculadora nota necesaria, calcular nota examen final, nota admision ebau pau, calcular media ponderada, calculadora de notas, calcular IVA, calcular descuento">
+  <link rel="canonical" href="https://calculafacil.github.io/CalculaFacil/">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="apple-touch-icon" href="iconos/icon-192.png">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="CalculaFácil 🧮 | Calculadoras Gratuitas de Notas, EBAU y Finanzas">
+  <meta property="og:description" content="Averigua qué nota necesitas para aprobar, calcula tu nota de admisión a la universidad (EBAU/PAU), medias ponderadas, IVA, descuentos y sueldo neto en segundos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calculafacil.github.io/CalculaFacil/">
+  <meta property="og:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CalculaFácil 🧮 | Herramientas Académicas y Finanzas">
+  <meta name="twitter:description" content="Calcula la nota exacta que necesitas en tu examen final, tu nota de corte EBAU o gestiona tus finanzas de forma rápida y sencilla.">
+  <meta name="twitter:image" content="https://calculafacil.github.io/CalculaFacil/og-share.png">
+
+  <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CalculaFácil - Herramientas Académicas y Finanzas",
+    "url": "https://calculafacil.github.io/CalculaFacil/",
+    "description": "Herramienta online gratuita con calculadoras para estudiantes (nota necesaria, media ponderada, nota de admisión EBAU/PAU, asistencia) y utilidades financieras (IVA, descuentos, sueldo neto).",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="estilos.css">
+  <script src="./js/core.js" defer></script>
+  <script src="./js/calculadoras.js" defer></script>
+</head>
+<body data-tema="classic">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- BANNER PRINCIPAL -->
+  <header class="banner-principal">
+    <div class="contenido-banner">
+      <div class="banner-marca">
+        <a href="./" class="banner-enlace">
+          <img src="logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
+          <div class="banner-texto">
+            <h1 id="titulo-header">CalculaFácil - Herramientas Académicas y Finanzas</h1>
+            <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- SELECTOR DE TEMA -->
+      <div class="selector-tema-container">
+        <label for="selectTema" class="etiqueta-tema">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>
+          Estilo:
+        </label>
+        <select id="selectTema" aria-label="Seleccionar tema de carcasa">
+          <option value="classic">Gris Clásico</option>
+          <option value="cyberpunk">Cyberpunk (Neón)</option>
+          <option value="retro">Beige Retro 80s</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="contenedor-app">
+    <!-- PANTALLA 1: MENÚ PRINCIPAL -->
+    <main id="pantalla-menu" class="pantalla activa">
+      <h2>Calculadoras Gratuitas: Estudios y Finanzas</h2>
+      <p class="subtitulo-menu">Selecciona la herramienta que necesitas usar hoy:</p>
+
+      <!-- BUSCADOR RÁPIDO DE CALCULADORAS -->
+      <div class="buscador-contenedor">
+        <svg class="icono icono-buscador" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="buscadorCalculadoras" placeholder="Buscar calculadora (ej. nota necesaria, EBAU, medias, asistencia, IVA...)">
+      </div>
+
+      <div id="gridMenuCalculadoras">
+        <!-- SECCIÓN ACADÉMICA -->
+        <section class="seccion-categoria" data-categoria>
+          <h3 class="titulo-categoria">
+            <img src="iconos/academico.svg" alt="" width="26" height="26">
+            Para tus estudios
+            <span class="badge-num">6</span>
+          </h3>
+          <div class="grid-menu-chica">
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./nota-necesaria/" aria-label="Abrir calculadora de nota necesaria" data-keywords="examen final aprobar cuanto necesito test">
+              <span class="emoji-tarjeta" aria-hidden="true">🎯</span>
+              <h3>Nota Necesaria</h3>
+              <p>Qué nota te hace falta en el final para aprobar</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./media-ponderada/" aria-label="Abrir calculadora de media ponderada" data-keywords="media notas curso expediente pesos porcentajes">
+              <span class="emoji-tarjeta" aria-hidden="true">⚖️</span>
+              <h3>Media Ponderada</h3>
+              <p>Tu nota media con el peso de cada examen</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./admision-ebau-pau/" aria-label="Abrir calculadora de admisión EBAU PAU" data-keywords="selectividad pau universidad acceso bachillerato">
+              <span class="emoji-tarjeta" aria-hidden="true">🎓</span>
+              <h3>Admisión EBAU / PAU</h3>
+              <p>Tu nota de acceso a la universidad paso a paso</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./nota-de-corte/" aria-label="Abrir calculadora de nota de corte" data-keywords="universidad grado carrera entra margen puntos">
+              <span class="emoji-tarjeta" aria-hidden="true">✂️</span>
+              <h3>Nota de Corte</h3>
+              <p>¿Tu nota llega para el grado que quieres?</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./asistencias-faltas/" aria-label="Abrir calculadora de asistencia y faltas" data-keywords="faltas clases absentismo evaluacion porcentaje asistencia">
+              <span class="emoji-tarjeta" aria-hidden="true">📋</span>
+              <h3>Asistencia y Faltas</h3>
+              <p>Cuántas faltas puedes permitirte</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-estudiantes" href="./porcentajes/" aria-label="Abrir calculadora de porcentajes y regla de tres" data-keywords="porcentaje regla de tres tanto por ciento subir bajar aumento rebaja matematicas">
+              <span class="emoji-tarjeta" aria-hidden="true">➗</span>
+              <h3>Porcentajes</h3>
+              <p>%, regla de tres, subidas y bajadas</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- SECCIÓN FINANCIERA -->
+        <section class="seccion-categoria" data-categoria>
+          <h3 class="titulo-categoria">
+            <img src="iconos/finanzas.svg" alt="" width="26" height="26">
+            Para tu dinero
+            <span class="badge-num">4</span>
+          </h3>
+          <div class="grid-menu-chica">
+            <a class="mini-carcasa tarjeta-chica ambiente-compras" href="./descuentos/" aria-label="Abrir calculadora de descuentos" data-keywords="rebajas ofertas precio final rebaja porcentaje tienda">
+              <span class="emoji-tarjeta" aria-hidden="true">🏷️</span>
+              <h3>Descuentos</h3>
+              <p>El precio real tras cualquier rebaja</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-compras" href="./iva/" aria-label="Abrir calculadora de IVA" data-keywords="impuestos vat anadir desglosar facturas sin iva">
+              <span class="emoji-tarjeta" aria-hidden="true">🧾</span>
+              <h3>IVA</h3>
+              <p>Añade o desglosa el IVA al instante</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-compras" href="./sueldo-neto/" aria-label="Abrir calculadora de sueldo neto" data-keywords="nomina salario bruto neto irpf seguridad social pagas">
+              <span class="emoji-tarjeta" aria-hidden="true">💼</span>
+              <h3>Sueldo Neto</h3>
+              <p>De bruto a neto: cuánto llega a tu bolsillo</p>
+            </a>
+
+            <a class="mini-carcasa tarjeta-chica ambiente-compras" href="./interes-compuesto/" aria-label="Abrir calculadora de interés compuesto" data-keywords="ahorro inversion dinero banco rentabilidad fondos">
+              <span class="emoji-tarjeta" aria-hidden="true">📈</span>
+              <h3>Interés Compuesto</h3>
+              <p>Simula cómo crecen tus ahorros año a año</p>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <!-- FOOTER -->
+  <footer class="footer-sitio">
+    <div class="footer-caja">
+      <div class="footer-columnas">
+        <div class="footer-marca">
+          <img src="./logo.svg" alt="Logo CalculaFácil" width="42" height="42">
+          <div>
+            <p class="footer-nombre">CalculaFácil</p>
+            <p class="footer-eslogan">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Calculadoras académicas">
+          <p class="footer-titulo">Para tus estudios</p>
+          <a href="./nota-necesaria/">Nota Necesaria</a>
+          <a href="./media-ponderada/">Media Ponderada</a>
+          <a href="./admision-ebau-pau/">Admisión EBAU / PAU</a>
+          <a href="./nota-de-corte/">Nota de Corte</a>
+          <a href="./asistencias-faltas/">Asistencia y Faltas</a>
+          <a href="./porcentajes/">Porcentajes</a>
+        </nav>
+        <nav class="footer-nav" aria-label="Calculadoras financieras">
+          <p class="footer-titulo">Para tu dinero</p>
+          <a href="./descuentos/">Descuentos</a>
+          <a href="./iva/">IVA</a>
+          <a href="./sueldo-neto/">Sueldo Neto</a>
+          <a href="./interes-compuesto/">Interés Compuesto</a>
+        </nav>
+      </div>
+      <p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. <a href="privacidad/">Privacidad</a> · <a href="sobre-mi/">Sobre mí</a></p>
+    </div>
+  </footer>
+</body>
+</html>

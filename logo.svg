@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <style>
+    .terminal-bg { fill: #000000; }
+    .monitor-frame { fill: #0a1a0a; stroke: #1b4d1b; stroke-width: 8; rx: 20px; }
+    .scanlines { fill: none; stroke: rgba(51, 255, 51, 0.05); stroke-width: 2; }
+    .texto-logo { 
+      font-family: 'Courier New', Courier, monospace; 
+      font-weight: bold; 
+      fill: #33ff33; 
+      font-size: 140px;
+      letter-spacing: 5px;
+    }
+    .cursor { 
+      fill: #33ff33; 
+      animation: parpadear 1s infinite; 
+    }
+    .prompt {
+      font-family: 'Courier New', Courier, monospace;
+      fill: #1b4d1b;
+      font-size: 50px;
+      font-weight: bold;
+    }
+    @keyframes parpadear {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+  <rect width="500" height="500" class="terminal-bg" rx="30" />
+  <rect x="25" y="25" width="450" height="450" class="monitor-frame" />
+  <line x1="25" y1="100" x2="475" y2="100" class="scanlines" />
+  <line x1="25" y1="200" x2="475" y2="200" class="scanlines" />
+  <line x1="25" y1="300" x2="475" y2="300" class="scanlines" />
+  <line x1="25" y1="400" x2="475" y2="400" class="scanlines" />
+  <text x="65" y="280" class="prompt">&gt;</text>
+  <text x="115" y="280" class="texto-logo">CF</text>
+  <rect x="345" y="185" width="25" height="110" class="cursor" />
+</svg>
