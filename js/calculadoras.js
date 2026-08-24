@@ -605,6 +605,21 @@
 
       this.pintarGrafico(raiz, bruto, irpf, ss);
 
+      // Tabla desglose: de dónde sale el neto
+      const ssAnual = bruto * ss;
+      const irpfAnual = bruto * irpf;
+      const filasDesglose = [
+        { concepto: 'Sueldo bruto', anual: bruto, porPaga: bruto / pagas },
+        { concepto: 'Seguridad Social (6,35%)', anual: -ssAnual, porPaga: -(ssAnual / pagas) },
+        { concepto: 'IRPF (~' + CF.formatearNumero(irpf * 100, 1) + '%)', anual: -irpfAnual, porPaga: -(irpfAnual / pagas) },
+        { concepto: 'Neto en tu bolsillo', anual: netoAnual, porPaga: netoMensual }
+      ];
+      CF.pintarTablaGenerica(raiz, 'cajaTablaSueldo', 'tablaVaciaSueldo', 'cuerpoTablaSueldo', filasDesglose,
+        fila =>
+          '<tr><td>' + fila.concepto + '</td>' +
+          '<td>' + CF.formatearEuros(fila.anual) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.porPaga) + '</td></tr>');
+
       CF.pintarResultLCD(resDiv, `${CF.formatearEuros(netoMensual)} / mes`,
         `Neto anual: ${CF.formatearEuros(netoAnual)} · ${pagas} pagas · Deducciones: ~${CF.formatearNumero(deduccionTotal * 100, 1)}%`);
 
@@ -623,6 +638,7 @@
       CF.prepararLCD(res);
       if (res) res.innerText = '0.00 € / mes';
       CF.reiniciarGrafico(raiz.querySelector('#graficoSueldo'));
+      CF.pintarTablaGenerica(raiz, 'cajaTablaSueldo', 'tablaVaciaSueldo', 'cuerpoTablaSueldo', []);
     }
   });
 
@@ -752,6 +768,20 @@
       }
       this.pintarGrafico(raiz, { anios: serieAnios, aportado: serieAportado, totales: serieTotales });
 
+      // Tabla año a año: aportado, valor total y ganancia
+      const filasAnuales = serieAnios.map((anio, indice) => ({
+        anio,
+        aportado: serieAportado[indice],
+        total: serieTotales[indice],
+        ganancia: serieTotales[indice] - serieAportado[indice]
+      }));
+      CF.pintarTablaGenerica(raiz, 'cajaTablaInteres', 'tablaVaciaInteres', 'cuerpoTablaInteres', filasAnuales,
+        fila =>
+          '<tr><td>' + fila.anio + '</td>' +
+          '<td>' + CF.formatearEuros(fila.aportado) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.total) + '</td>' +
+          '<td>+' + CF.formatearEuros(fila.ganancia) + '</td></tr>');
+
       CF.historialGuardar(
         this.historialClave,
         `${CF.formatearEuros(capital)} + ${CF.formatearEuros(aportes)}/mes al ${rentabilidad}% x ${anios} años = ${CF.formatearEuros(total)}`,
@@ -879,6 +909,7 @@
       CF.prepararLCD(res);
       if (res) res.innerText = 'Introduce los datos';
       this.pintarGrafico(raiz, null);
+      CF.pintarTablaGenerica(raiz, 'cajaTablaInteres', 'tablaVaciaInteres', 'cuerpoTablaInteres', []);
     }
   });
 
@@ -1086,6 +1117,20 @@
       }
       this.pintarGrafico(raiz, { anios: serieAnios, simple: serieSimple, compuesto: serieCompuesto });
 
+      // Tabla año a año: interés fijo del año, acumulado y total
+      const tasaDecimal = tasa / 100;
+      const filasAnuales = serieAnios.map(anio => ({
+        anio,
+        interesAno: capital * tasaDecimal,
+        acumulado: capital * tasaDecimal * anio
+      }));
+      CF.pintarTablaGenerica(raiz, 'cajaTablaSimple', 'tablaVaciaSimple', 'cuerpoTablaSimple', filasAnuales,
+        fila =>
+          '<tr><td>' + fila.anio + '</td>' +
+          '<td>+' + CF.formatearEuros(fila.interesAno) + '</td>' +
+          '<td>+' + CF.formatearEuros(fila.acumulado) + '</td>' +
+          '<td>' + CF.formatearEuros(capital + fila.acumulado) + '</td></tr>');
+
       CF.historialGuardar(
         this.historialClave,
         `${CF.formatearEuros(capital)} al ${tasa}% simple x ${anios} años = ${CF.formatearEuros(total)} (+${CF.formatearEuros(interes)})`,
@@ -1200,6 +1245,7 @@
       CF.prepararLCD(res);
       if (res) res.innerText = 'Introduce los datos';
       this.pintarGrafico(raiz, null);
+      CF.pintarTablaGenerica(raiz, 'cajaTablaSimple', 'tablaVaciaSimple', 'cuerpoTablaSimple', []);
     }
   });
 
@@ -1291,21 +1337,12 @@
     },
 
     pintarTabla(raiz, filas) {
-      const caja = raiz.querySelector('#cajaTablaAmort');
-      const vacio = raiz.querySelector('#tablaVaciaPrestamo');
-      const cuerpo = raiz.querySelector('#cuerpoTablaAmort');
-      if (!caja || !cuerpo) return;
-      const hayFilas = !!filas && filas.length > 0;
-      caja.hidden = !hayFilas;
-      if (vacio) vacio.style.display = hayFilas ? 'none' : '';
-      if (hayFilas) {
-        cuerpo.innerHTML = filas.map(fila =>
+      CF.pintarTablaGenerica(raiz, 'cajaTablaAmort', 'tablaVaciaPrestamo', 'cuerpoTablaAmort', filas,
+        fila =>
           '<tr><td>' + fila.anio + '</td>' +
           '<td>' + CF.formatearEuros(fila.interesAnual) + '</td>' +
           '<td>' + CF.formatearEuros(fila.amortizadoAnual) + '</td>' +
-          '<td>' + CF.formatearEuros(fila.pendiente) + '</td></tr>'
-        ).join('');
-      }
+          '<td>' + CF.formatearEuros(fila.pendiente) + '</td></tr>');
     },
 
     iniciar(raiz) {

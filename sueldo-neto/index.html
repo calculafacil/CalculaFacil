@@ -115,6 +115,15 @@
             <p class="grafico-vacio">Introduce tu sueldo para ver el reparto</p>
           </div>
 
+          <!-- DESGLOSE DEL SUELDO -->
+          <p class="grafico-vacio" id="tablaVaciaSueldo">Introduce tu sueldo para ver el desglose</p>
+          <div class="tabla-amortizacion-envoltorio" id="cajaTablaSueldo" hidden>
+            <table class="tabla-amortizacion">
+              <thead><tr><th>Concepto</th><th>Anual</th><th>Por paga</th></tr></thead>
+              <tbody id="cuerpoTablaSueldo"></tbody>
+            </table>
+          </div>
+
           <p class="aviso-historial">El resultado se actualiza mientras escribes. Pulsa CALCULAR para guardarlo en tu historial.</p>
           <div class="teclado-tactil">
             <button class="btn-3d btn-calcular" type="button" data-action="calcular">CALCULAR</button>

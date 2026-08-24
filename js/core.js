@@ -632,7 +632,7 @@ window.CF = (function () {
           columna('dinero') +
         '</div>' +
         '<p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. ' +
-        '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a></p>' +
+        '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a> · <a href="' + prefijo + 'glosario/">Glosario</a></p>' +
       '</div>';
   }
 
@@ -710,6 +710,19 @@ window.CF = (function () {
     if (canvas) canvas.style.display = 'none';
     const vacio = caja.querySelector('.grafico-vacio');
     if (vacio) vacio.style.display = '';
+  }
+
+  // TABLA DE DATOS compartida: muestra/oculta la caja, rellena el tbody
+  // con las filas generadas por renderFila y gestiona el mensaje vacío.
+  function pintarTablaGenerica(raiz, idCaja, idVacio, idCuerpo, filas, renderFila) {
+    const caja = raiz.querySelector('#' + idCaja);
+    const cuerpo = raiz.querySelector('#' + idCuerpo);
+    if (!caja || !cuerpo) return;
+    const hayFilas = !!filas && filas.length > 0;
+    caja.hidden = !hayFilas;
+    const vacio = raiz.querySelector('#' + idVacio);
+    if (vacio) vacio.style.display = hayFilas ? 'none' : '';
+    cuerpo.innerHTML = hayFilas ? filas.map(renderFila).join('') : '';
   }
 
   function trazarRectRedondeado(ctx, x, y, w, h, r) {
@@ -874,7 +887,8 @@ window.CF = (function () {
     reiniciarGrafico,
     graficoAnillo,
     graficoBarras,
-    graficoApilada
+    graficoApilada,
+    pintarTablaGenerica
   };
 
 })();
