@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v17';
+const VERSION = 'v18';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -13,6 +13,7 @@ const PRECACHE = [
   'js/core.js',
   'js/calculadoras.js',
   'logo.svg',
+  'iconos/icon-48.png',
   'manifest.json',
   'iconos/academico.svg',
   'iconos/finanzas.svg',
