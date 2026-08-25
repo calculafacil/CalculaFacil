@@ -636,8 +636,18 @@ window.CF = (function () {
       '</div>';
   }
 
+  // Prefijo relativo segun profundidad de la pagina: cada HTML escribe su
+  // propio boton "Volver al Menú" con la ruta correcta (../ o ../../),
+  // asi que lo usamos como fuente de verdad. Funciona igual da igual donde
+  // se despliegue la web (subcarpeta de GitHub Pages o dominio propio).
+  function calcularPrefijoRelativo() {
+    const volver = document.querySelector('a.btn-volver[href]');
+    const href = volver ? volver.getAttribute('href') : '';
+    return href.indexOf('../') === 0 ? href : '../';
+  }
+
   function construirPlantillas() {
-    const prefijo = document.getElementById('pantalla-menu') ? './' : '../';
+    const prefijo = document.getElementById('pantalla-menu') ? './' : calcularPrefijoRelativo();
     const paginaActual = detectarPaginaActual();
     construirCabecera(prefijo);
     construirPestanas(prefijo, paginaActual);
