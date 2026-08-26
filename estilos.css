@@ -1505,3 +1505,72 @@ svg.icono {
   flex-shrink: 0;
   stroke: currentColor;
 }
+
+/* ==========================================
+   FÓRMULA EXPANDIBLE
+   ========================================== */
+
+.formula-expandible {
+  margin: 12px 0 16px;
+  border: 1px solid var(--borde-carcasa);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.formula-expandible summary {
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: var(--color-acento);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.formula-expandible summary::-webkit-details-marker {
+  display: none;
+}
+
+.formula-expandible summary::before {
+  content: '▸';
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.formula-expandible[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.formula-expandible summary:hover {
+  background: var(--color-acento-suave);
+}
+
+.formula-contenido {
+  padding: 10px 14px 14px;
+  font-family: "Courier New", monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--texto-carcasa);
+  border-top: 1px solid var(--borde-carcasa);
+  background: rgba(148, 163, 184, 0.06);
+}
+
+.formula-contenido code {
+  display: block;
+  margin: 4px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.formula-contenido small {
+  display: block;
+  margin-top: 8px;
+  font-family: inherit;
+  font-size: 0.72rem;
+  opacity: 0.75;
+  line-height: 1.5;
+}

@@ -462,6 +462,7 @@ window.CF = (function () {
       if (def.iniciar) def.iniciar(raiz);
 
       inyectarBotonEjemplo(raiz);
+      inyectarFormula(raiz);
 
       if (window.dataLayer) {
         window.dataLayer.push({ 'event': 'vista_calculadora', 'ruta': def.id });
@@ -510,6 +511,18 @@ window.CF = (function () {
     boton.dataset.action = 'cargar-ejemplo';
     boton.innerHTML = '<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Probar con este ejemplo';
     instruccion.insertAdjacentElement('afterend', boton);
+  }
+
+  function inyectarFormula(raiz) {
+    if (!raiz) return;
+    const def = REGISTRO[raiz.dataset.calculadora];
+    if (!def || !def.formula) return;
+    const lcd = raiz.querySelector('.pantalla-lcd');
+    if (!lcd) return;
+    const details = document.createElement('details');
+    details.className = 'formula-expandible';
+    details.innerHTML = '<summary>¿Cómo se calcula?</summary><div class="formula-contenido">' + def.formula + '</div>';
+    lcd.insertAdjacentElement('afterend', details);
   }
 
   // BARRA DE PESTAÑAS DESLIZABLE: muestra flechas y degradados en los

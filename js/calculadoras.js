@@ -12,6 +12,8 @@
     id: 'nota-necesaria',
     historialClave: 'historial_necesaria',
 
+    formula: '<code>Nota = (Objetivo − Σ(notas × pesos)) ÷ pesoPendiente</code><br><small>Si el resultado es ≤0, ya tienes el objetivo asegurado. Si es >10, es imposible.</small>',
+
     ejemplo(raiz) {
       const cont = raiz.querySelector('#contenedor-examenes-previos');
       if (!cont) return;
@@ -155,6 +157,8 @@
   CF.registrar({
     id: 'media-ponderada',
     historialClave: 'historial_ponderada',
+
+    formula: '<code>Media = Σ(nota × peso) ÷ Σ(pesos)</code><br><small>Cada asignatura aporta su nota multiplicada por su peso. Si los pesos no suman 100%, la media solo representa el curso evaluado hasta ahora.</small>',
 
     ejemplo(raiz) {
       const cont = raiz.querySelector('#contenedor-filas-ponderada');
@@ -312,6 +316,8 @@
     id: 'admision-ebau-pau',
     historialClave: 'historial_ebau',
 
+    formula: '<code>Acceso = Bachillerato × 0,6 + Fase General × 0,4</code><br><code>Admisión = Acceso + Σ (mejores 2 específicas × ponderación)</code><br><small>Solo puntúan las específicas con nota ≥ 5. Se suman las dos con mayor puntuación.</small>',
+
     ejemplo(raiz) {
       const cont = raiz.querySelector('#contenedor-especificas-ebau');
       if (!cont) return;
@@ -409,6 +415,8 @@
   CF.registrar({
     id: 'asistencias-faltas',
     historialClave: 'historial_asistencia',
+
+    formula: '<code>Máx faltas = ⌊Total × (100 − Mínimo) ÷ 100⌋</code><br><code>Restantes = Máx faltas − Faltas actuales</code><br><small>Si las faltas restantes son negativas, has superado el límite permitido.</small>',
 
     ejemplo(raiz) {
       const t = raiz.querySelector('#totalClases');
@@ -515,6 +523,8 @@
     id: 'descuentos',
     historialClave: 'historial_descuentos',
 
+    formula: '<code>Final = Original × (1 − Descuento ÷ 100)</code><br><code>Ahorro = Original − Final</code><br><small>Un 25% de descuento significa pagar el 75% del precio original.</small>',
+
     ejemplo(raiz) {
       const c = raiz.querySelector('#cantidad');
       const p = raiz.querySelector('#porcentaje');
@@ -573,6 +583,8 @@
   CF.registrar({
     id: 'iva',
     historialClave: 'historial_iva',
+
+    formula: '<code>Con IVA: Total = Base × (1 + Tipo ÷ 100)</code><br><code>Sin IVA: Base = Total ÷ (1 + Tipo ÷ 100)</code><br><small>El IVA en España es 21% general, 10% reducido y 4% superreducido.</small>',
 
     ejemplo(raiz) {
       const i = raiz.querySelector('#importeIva');
@@ -635,6 +647,8 @@
   CF.registrar({
     id: 'sueldo-neto',
     historialClave: 'historial_sueldo',
+
+    formula: '<code>Neto = Bruto × (1 − IRPF − Seguridad Social)</code><br><small>IRPF según tramos: 12% (hasta 12.450€), 15% (hasta 20.200€), 19% (hasta 35.200€), 24% (hasta 60.000€). Seguridad Social: 6,35% fijo.</small>',
 
     ejemplo(raiz) {
       const b = raiz.querySelector('#brutoAnual');
@@ -734,6 +748,8 @@
     id: 'nota-de-corte',
     historialClave: 'historial_corte',
 
+    formula: '<code>Diferencia = Tu nota − Nota de corte</code><br><small>Si la diferencia es ≥ 0, entras. Si es negativa, te faltan esos puntos.</small>',
+
     ejemplo(raiz) {
       const a = raiz.querySelector('#notaAdmisionCorte');
       const c = raiz.querySelector('#notaCorteGrado');
@@ -798,6 +814,8 @@
   CF.registrar({
     id: 'interes-compuesto',
     historialClave: 'historial_interes',
+
+    formula: '<code>FV = C × (1 + r/n)<sup>nt</sup> + A × [((1 + r/n)<sup>nt</sup> − 1) ÷ (r/n)]</code><br><small>C = capital inicial, A = aportación mensual, r = tasa anual, n = 12 (mensual), t = años. Los intereses se generan sobre el capital acumulado, no solo sobre el inicial.</small>',
 
     ejemplo(raiz) {
       const c = raiz.querySelector('#capitalInicial');
@@ -1031,6 +1049,8 @@
     id: 'porcentajes',
     historialClave: 'historial_porcentajes',
 
+    formula: '<code>Sacar: Resultado = Cantidad × Porcentaje ÷ 100</code><br><code>Qué es: % = Parte ÷ Total × 100</code><br><code>Variación: Δ% = (Nuevo − Antiguo) ÷ |Antiguo| × 100</code><br><code>Regla de tres directa: D = B × C ÷ A</code>',
+
     ejemplo(raiz) {
       const c = raiz.querySelector('#cantidadBase');
       const p = raiz.querySelector('#porcentajeSacar');
@@ -1184,6 +1204,8 @@
   CF.registrar({
     id: 'interes-simple',
     historialClave: 'historial_interes_simple',
+
+    formula: '<code>Total = C × (1 + r × t)</code><br><code>Interés = C × r × t</code><br><small>C = capital, r = tasa anual (decimal), t = años. A diferencia del compuesto, los intereses NO se reinvierten sobre sí mismos.</small>',
 
     ejemplo(raiz) {
       const c = raiz.querySelector('#capitalSimple');
@@ -1374,6 +1396,8 @@
   CF.registrar({
     id: 'cuota-prestamo',
     historialClave: 'historial_prestamo',
+
+    formula: '<code>Cuota = P × [r(1+r)<sup>n</sup>] ÷ [(1+r)<sup>n</sup> − 1]</code><br><small>P = principal, r = tipo de interés mensual, n = total de cuotas. Esta es la fórmula francesa usada por todos los bancos españoles.</small>',
 
     ejemplo(raiz) {
       const im = raiz.querySelector('#importePrestamo');
