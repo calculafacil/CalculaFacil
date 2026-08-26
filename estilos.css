@@ -1477,30 +1477,31 @@ svg.icono {
   align-items: center;
   gap: 6px;
   background: transparent;
-  color: var(--texto-pagina);
-  border: 1px dashed rgba(148, 163, 184, 0.4);
+  color: var(--color-acento);
+  border: 1px dashed var(--color-acento);
   padding: 7px 14px;
   border-radius: 8px;
   font-size: 0.78rem;
   font-family: inherit;
   cursor: pointer;
   margin: 8px 0 14px;
-  opacity: 0.7;
+  opacity: 0.85;
   transition: opacity 0.2s, border-color 0.2s, background 0.2s;
 }
 
 .btn-ejemplo:hover {
   opacity: 1;
-  border-color: rgba(148, 163, 184, 0.7);
-  background: rgba(148, 163, 184, 0.08);
+  background: var(--color-acento-suave);
 }
 
 .btn-ejemplo:active {
-  background: rgba(148, 163, 184, 0.15);
+  background: var(--color-acento-suave);
+  opacity: 0.7;
 }
 
 .btn-ejemplo .icono {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+  stroke: currentColor;
 }
