@@ -429,6 +429,9 @@ window.CF = (function () {
           case 'copiar':
             copiarResultado(raiz.querySelector('#' + boton.dataset.copyTarget), boton);
             break;
+          case 'cargar-ejemplo':
+            cargarEjemplo(raiz);
+            break;
         }
       });
 
@@ -458,6 +461,8 @@ window.CF = (function () {
 
       if (def.iniciar) def.iniciar(raiz);
 
+      inyectarBotonEjemplo(raiz);
+
       if (window.dataLayer) {
         window.dataLayer.push({ 'event': 'vista_calculadora', 'ruta': def.id });
       }
@@ -477,6 +482,35 @@ window.CF = (function () {
   }
 
   document.addEventListener('DOMContentLoaded', arranque);
+
+  // EJEMPLO PRECARGADO: rellena los campos con datos de ejemplo
+  // y dispara el cálculo. Cada calculadora define su propia función
+  // de ejemplo en la propiedad 'ejemplo' de su registro.
+  function cargarEjemplo(raiz) {
+    if (!raiz) return;
+    const def = REGISTRO[raiz.dataset.calculadora];
+    if (!def || !def.ejemplo) return;
+    def.ejemplo(raiz);
+    // Disparar eventos input para que el cálculo en vivo se active
+    raiz.querySelectorAll('input[type="number"], select').forEach(input => {
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    if (def.calcular) def.calcular(raiz);
+  }
+
+  function inyectarBotonEjemplo(raiz) {
+    if (!raiz) return;
+    const def = REGISTRO[raiz.dataset.calculadora];
+    if (!def || !def.ejemplo) return;
+    const instruccion = raiz.querySelector('.instruccion-tab');
+    if (!instruccion) return;
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn-ejemplo';
+    boton.dataset.action = 'cargar-ejemplo';
+    boton.innerHTML = '<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Probar con este ejemplo';
+    instruccion.insertAdjacentElement('afterend', boton);
+  }
 
   // BARRA DE PESTAÑAS DESLIZABLE: muestra flechas y degradados en los
   // bordes solo cuando quedan pestañas fuera de la vista.
@@ -908,7 +942,8 @@ window.CF = (function () {
     graficoAnillo,
     graficoBarras,
     graficoApilada,
-    pintarTablaGenerica
+    pintarTablaGenerica,
+    cargarEjemplo
   };
 
 })();

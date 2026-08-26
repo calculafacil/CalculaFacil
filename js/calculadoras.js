@@ -12,6 +12,24 @@
     id: 'nota-necesaria',
     historialClave: 'historial_necesaria',
 
+    ejemplo(raiz) {
+      const cont = raiz.querySelector('#contenedor-examenes-previos');
+      if (!cont) return;
+      cont.querySelectorAll('.fila-dinamica').forEach(f => f.remove());
+      this.agregarFila(raiz);
+      this.agregarFila(raiz);
+      const notas = cont.querySelectorAll('.ex-nota');
+      const pesos = cont.querySelectorAll('.ex-peso');
+      if (notas[0]) notas[0].value = '7.5';
+      if (pesos[0]) pesos[0].value = '30';
+      if (notas[1]) notas[1].value = '6.8';
+      if (pesos[1]) pesos[1].value = '25';
+      const pp = raiz.querySelector('#pesoPendiente');
+      const no = raiz.querySelector('#notaObjetivoMultiples');
+      if (pp) pp.value = '45';
+      if (no) no.value = '7';
+    },
+
     actualizarBarra(raiz) {
       const pesosPrevios = Array.from(raiz.querySelectorAll('#contenedor-examenes-previos .ex-peso'))
         .reduce((suma, input) => suma + (parseFloat(input.value) || 0), 0);
@@ -137,6 +155,23 @@
   CF.registrar({
     id: 'media-ponderada',
     historialClave: 'historial_ponderada',
+
+    ejemplo(raiz) {
+      const cont = raiz.querySelector('#contenedor-filas-ponderada');
+      if (!cont) return;
+      cont.querySelectorAll('.fila-dinamica').forEach(f => f.remove());
+      this.agregarFila(raiz);
+      this.agregarFila(raiz);
+      this.agregarFila(raiz);
+      const notas = cont.querySelectorAll('.p-nota');
+      const pesos = cont.querySelectorAll('.p-peso');
+      if (notas[0]) notas[0].value = '8.5';
+      if (pesos[0]) pesos[0].value = '30';
+      if (notas[1]) notas[1].value = '7.0';
+      if (pesos[1]) pesos[1].value = '40';
+      if (notas[2]) notas[2].value = '9.2';
+      if (pesos[2]) pesos[2].value = '30';
+    },
 
     actualizarBarra(raiz) {
       const total = Array.from(raiz.querySelectorAll('#contenedor-filas-ponderada .p-peso'))
@@ -277,6 +312,24 @@
     id: 'admision-ebau-pau',
     historialClave: 'historial_ebau',
 
+    ejemplo(raiz) {
+      const cont = raiz.querySelector('#contenedor-especificas-ebau');
+      if (!cont) return;
+      cont.querySelectorAll('.fila-dinamica').forEach(f => f.remove());
+      this.agregarFila(raiz);
+      this.agregarFila(raiz);
+      const nB = raiz.querySelector('#notaBachillerato');
+      const nF = raiz.querySelector('#notaFaseGeneral');
+      if (nB) nB.value = '8.2';
+      if (nF) nF.value = '7.5';
+      const notas = cont.querySelectorAll('.ebau-nota');
+      const pond = cont.querySelectorAll('.ebau-ponderacion');
+      if (notas[0]) notas[0].value = '8.8';
+      if (pond[0]) pond[0].value = '0.2';
+      if (notas[1]) notas[1].value = '7.5';
+      if (pond[1]) pond[1].value = '0.1';
+    },
+
     agregarFila(raiz) {
       const cont = raiz.querySelector('#contenedor-especificas-ebau');
       if (!cont) return;
@@ -356,6 +409,15 @@
   CF.registrar({
     id: 'asistencias-faltas',
     historialClave: 'historial_asistencia',
+
+    ejemplo(raiz) {
+      const t = raiz.querySelector('#totalClases');
+      const p = raiz.querySelector('#porcentajeMinimo');
+      const f = raiz.querySelector('#faltasActuales');
+      if (t) t.value = '180';
+      if (p) p.value = '80';
+      if (f) f.value = '12';
+    },
 
     // Anillo con el % de asistencia real y marca ámbar en el mínimo
     // exigido: verde si cumples, rojo si te pasas.
@@ -453,6 +515,13 @@
     id: 'descuentos',
     historialClave: 'historial_descuentos',
 
+    ejemplo(raiz) {
+      const c = raiz.querySelector('#cantidad');
+      const p = raiz.querySelector('#porcentaje');
+      if (c) c.value = '79.99';
+      if (p) p.value = '25';
+    },
+
     calcular(raiz) {
       const cantidad = parseFloat(raiz.querySelector('#cantidad')?.value);
       const porcentaje = parseFloat(raiz.querySelector('#porcentaje')?.value);
@@ -504,6 +573,15 @@
   CF.registrar({
     id: 'iva',
     historialClave: 'historial_iva',
+
+    ejemplo(raiz) {
+      const i = raiz.querySelector('#importeIva');
+      const t = raiz.querySelector('#porcentajeIva');
+      const m = raiz.querySelector('#modoIva');
+      if (i) i.value = '150';
+      if (t) t.value = '21';
+      if (m) m.value = 'anadir';
+    },
 
     calcular(raiz) {
       const modo = raiz.querySelector('#modoIva')?.value;
@@ -557,6 +635,13 @@
   CF.registrar({
     id: 'sueldo-neto',
     historialClave: 'historial_sueldo',
+
+    ejemplo(raiz) {
+      const b = raiz.querySelector('#brutoAnual');
+      const p = raiz.querySelector('#numPagas');
+      if (b) b.value = '28000';
+      if (p) p.value = '14';
+    },
 
     // Barra apilada con el reparto del bruto: neto, IRPF y Seguridad Social.
     pintarGrafico(raiz, bruto, irpf, ss) {
@@ -649,6 +734,13 @@
     id: 'nota-de-corte',
     historialClave: 'historial_corte',
 
+    ejemplo(raiz) {
+      const a = raiz.querySelector('#notaAdmisionCorte');
+      const c = raiz.querySelector('#notaCorteGrado');
+      if (a) a.value = '9.850';
+      if (c) c.value = '9.200';
+    },
+
     calcular(raiz) {
       const admision = parseFloat(raiz.querySelector('#notaAdmisionCorte')?.value);
       const corte = parseFloat(raiz.querySelector('#notaCorteGrado')?.value);
@@ -706,6 +798,17 @@
   CF.registrar({
     id: 'interes-compuesto',
     historialClave: 'historial_interes',
+
+    ejemplo(raiz) {
+      const c = raiz.querySelector('#capitalInicial');
+      const m = raiz.querySelector('#aportacionMensual');
+      const r = raiz.querySelector('#rentabilidadAnual');
+      const p = raiz.querySelector('#plazoAnios');
+      if (c) c.value = '5000';
+      if (m) m.value = '200';
+      if (r) r.value = '7';
+      if (p) p.value = '10';
+    },
 
     calcular(raiz) {
       const capital = parseFloat(raiz.querySelector('#capitalInicial')?.value);
@@ -928,6 +1031,13 @@
     id: 'porcentajes',
     historialClave: 'historial_porcentajes',
 
+    ejemplo(raiz) {
+      const c = raiz.querySelector('#cantidadBase');
+      const p = raiz.querySelector('#porcentajeSacar');
+      if (c) c.value = '250';
+      if (p) p.value = '15';
+    },
+
     // Muestra solo los campos del modo activo y actualiza la etiqueta del LCD
     alternarModo(raiz) {
       const modo = raiz.querySelector('#modoPorcentaje')?.value;
@@ -1074,6 +1184,15 @@
   CF.registrar({
     id: 'interes-simple',
     historialClave: 'historial_interes_simple',
+
+    ejemplo(raiz) {
+      const c = raiz.querySelector('#capitalSimple');
+      const t = raiz.querySelector('#tasaSimple');
+      const p = raiz.querySelector('#plazoSimple');
+      if (c) c.value = '5000';
+      if (t) t.value = '5';
+      if (p) p.value = '3';
+    },
 
     calcular(raiz) {
       const capital = parseFloat(raiz.querySelector('#capitalSimple')?.value);
@@ -1255,6 +1374,15 @@
   CF.registrar({
     id: 'cuota-prestamo',
     historialClave: 'historial_prestamo',
+
+    ejemplo(raiz) {
+      const im = raiz.querySelector('#importePrestamo');
+      const ti = raiz.querySelector('#interesPrestamo');
+      const pl = raiz.querySelector('#plazoPrestamo');
+      if (im) im.value = '150000';
+      if (ti) ti.value = '3.5';
+      if (pl) pl.value = '30';
+    },
 
     calcular(raiz) {
       const importe = parseFloat(raiz.querySelector('#importePrestamo')?.value);
