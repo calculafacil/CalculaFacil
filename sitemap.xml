@@ -97,6 +97,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://calculafacil.github.io/CalculaFacil/guias/calcular-nota-ebau/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
   <url>
     <loc>https://calculafacil.github.io/CalculaFacil/privacidad/</loc>
