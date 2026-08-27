@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v18';
+const VERSION = 'v19';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -34,7 +34,8 @@ const PRECACHE = [
   'privacidad/',
   'sobre-mi/',
   'glosario/',
-  'guias/neto-20000-euros-brutos/'
+  'guias/neto-20000-euros-brutos/',
+  'guias/interes-simple-vs-compuesto/'
 ];
 
 self.addEventListener('install', evento => {
