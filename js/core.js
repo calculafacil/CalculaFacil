@@ -358,10 +358,12 @@ window.CF = (function () {
     const anioActual = String(new Date().getFullYear());
     document.querySelectorAll('[data-anio]').forEach(el => { el.textContent = anioActual; });
 
-    // COMPARTIR POR WHATSAPP: genera el enlace con la URL y título actuales
-    document.querySelectorAll('a[data-share-whatsapp]').forEach(enlace => {
-      const mensaje = `${document.title} - ${window.location.href}`;
-      enlace.href = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+    // COMPARTIR POR WHATSAPP: abre WhatsApp al hacer clic (sin enlace indexable)
+    document.querySelectorAll('[data-share-whatsapp]').forEach(enlace => {
+      enlace.addEventListener('click', () => {
+        const mensaje = `${document.title} - ${window.location.href}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+      });
     });
 
     // COMPARTIR NATIVO: usa el menú del sistema y, si no existe, copia el enlace
@@ -603,29 +605,54 @@ window.CF = (function () {
   function construirCabecera(prefijo) {
     const cabecera = document.querySelector('header.banner-principal[data-titulo]');
     if (!cabecera) return;
+
+    // La cabecera ya viene escrita en el HTML (h1 estático, clave para el SEO):
+    // solo completamos el selector de tema si falta, para no duplicar contenido.
     const titulo = cabecera.getAttribute('data-titulo') || '';
-    cabecera.innerHTML =
-      '<div class="contenido-banner">' +
-        '<div class="banner-marca">' +
-          '<a href="' + prefijo + '" class="banner-enlace">' +
-            '<img src="' + prefijo + 'logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">' +
-            '<div class="banner-texto">' +
-              '<h1 id="titulo-header"></h1>' +
-              '<p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>' +
-            '</div>' +
-          '</a>' +
-        '</div>' +
-        '<div class="selector-tema-container">' +
+    const h1 = cabecera.querySelector('h1#titulo-header');
+    if (!h1 || !h1.textContent.trim()) {
+      cabecera.innerHTML =
+        '<div class="contenido-banner">' +
+          '<div class="banner-marca">' +
+            '<a href="' + prefijo + '" class="banner-enlace">' +
+              '<img src="' + prefijo + 'logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">' +
+              '<div class="banner-texto">' +
+                '<h1 id="titulo-header"></h1>' +
+                '<p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>' +
+              '</div>' +
+            '</a>' +
+          '</div>' +
+          '<div class="selector-tema-container">' +
+            '<label for="selectTema" class="etiqueta-tema">' + ICONO_TEMA + 'Estilo:</label>' +
+            '<select id="selectTema" aria-label="Seleccionar tema de carcasa">' +
+              '<option value="classic">Gris Clásico</option>' +
+              '<option value="cyberpunk">Cyberpunk (Neón)</option>' +
+              '<option value="retro">Beige Retro 80s</option>' +
+            '</select>' +
+          '</div>' +
+        '</div>';
+      const h1Nuevo = cabecera.querySelector('h1');
+      if (h1Nuevo) h1Nuevo.textContent = titulo;
+      return;
+    }
+
+    // La cabecera es estática: garantizar el selector de tema si no existe.
+    const h1Final = cabecera.querySelector('h1#titulo-header');
+    if (h1Final && h1Final.textContent.trim()) {
+      if (!document.getElementById('selectTema')) {
+        const contenedor = cabecera.querySelector('.contenido-banner') || cabecera;
+        const selector = document.createElement('div');
+        selector.className = 'selector-tema-container';
+        selector.innerHTML =
           '<label for="selectTema" class="etiqueta-tema">' + ICONO_TEMA + 'Estilo:</label>' +
           '<select id="selectTema" aria-label="Seleccionar tema de carcasa">' +
             '<option value="classic">Gris Clásico</option>' +
             '<option value="cyberpunk">Cyberpunk (Neón)</option>' +
             '<option value="retro">Beige Retro 80s</option>' +
-          '</select>' +
-        '</div>' +
-      '</div>';
-    const h1 = cabecera.querySelector('h1');
-    if (h1) h1.textContent = titulo;
+          '</select>';
+        contenedor.appendChild(selector);
+      }
+    }
   }
 
   // PESTAÑAS: <div class="pestanas-envoltorio" data-pestanas="estudios|dinero">
