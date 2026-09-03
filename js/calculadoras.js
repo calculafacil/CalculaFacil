@@ -1608,6 +1608,338 @@
     }
   });
 
+  // ==========================================================
+  // IMC (ÍNDICE DE MASA CORPORAL)
+  // ==========================================================
+  const CATEGORIAS_IMC = [
+    { minimo: 40, nombre: 'Obesidad mórbida (grado III)', color: '#be123c' },
+    { minimo: 35, nombre: 'Obesidad grado II', color: '#e11d48' },
+    { minimo: 30, nombre: 'Obesidad grado I', color: '#f59e0b' },
+    { minimo: 25, nombre: 'Sobrepeso', color: '#fbbf24' },
+    { minimo: 18.5, nombre: 'Peso normal', color: '#10b981' },
+    { minimo: 0, nombre: 'Bajo peso', color: '#38bdf8' }
+  ];
+
+  CF.registrar({
+    id: 'imc',
+    historialClave: 'historial_imc',
+
+    formula: '<code>IMC = peso (kg) ÷ altura (m)<sup>2</sup></code><br><small>Clasificación OMS: &lt;18,5 bajo peso · 18,5–24,9 normal · 25–29,9 sobrepeso · ≥30 obesidad.</small>',
+
+    ejemplo(raiz) {
+      const p = raiz.querySelector('#pesoImc');
+      const a = raiz.querySelector('#alturaImc');
+      if (p) p.value = '70';
+      if (a) a.value = '175';
+    },
+
+    // Barra de categorías según el IMC calculado.
+    pintarGrafico(raiz, imc) {
+      const caja = raiz.querySelector('#graficoImc');
+      const canvas = raiz.querySelector('#canvasImc');
+      if (!caja || !canvas || !canvas.getContext) return;
+      if (isNaN(imc)) {
+        CF.reiniciarGrafico(caja);
+        return;
+      }
+      this._ultimoImc = imc;
+      const cat = CATEGORIAS_IMC.find(c => imc >= c.minimo);
+      CF.graficoBarras(canvas, [{
+        etiqueta: 'Tu IMC',
+        valor: Math.min(Math.max(imc, 0), 45),
+        maximo: 45,
+        texto: 'IMC ' + CF.formatearNumero(imc, 1),
+        color: cat.color
+      }]);
+      if (!this._redrawListo) {
+        this._redrawListo = true;
+        CF.alRedimensionar('imc', () => {
+          const viva = document.querySelector('[data-calculadora="imc"]');
+          if (!viva || viva.querySelector('#graficoImc').style.display === 'none') return;
+          this.pintarGrafico(viva, this._ultimoImc);
+        });
+      }
+    },
+
+    calcular(raiz) {
+      const peso = parseFloat(raiz.querySelector('#pesoImc')?.value);
+      const altura = parseFloat(raiz.querySelector('#alturaImc')?.value);
+      const resDiv = raiz.querySelector('#resultadoImc');
+
+      CF.prepararLCD(resDiv);
+
+      if (!isNaN(peso) && (peso <= 0 || peso > 500)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El peso debe estar entre 1 y 500 kg');
+        return;
+      }
+      if (!isNaN(altura) && (altura < 50 || altura > 250)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: La altura debe estar entre 50 y 250 cm');
+        return;
+      }
+      if (isNaN(peso) || isNaN(altura)) {
+        if (resDiv) resDiv.innerText = 'Introduce peso y altura';
+        return;
+      }
+
+      const alturaMetros = altura / 100;
+      const imc = peso / (alturaMetros * alturaMetros);
+      const categoria = CATEGORIAS_IMC.find(c => imc >= c.minimo);
+
+      CF.pintarResultLCD(resDiv, CF.formatearNumero(imc, 1),
+        categoria.nombre + ' · Peso ' + CF.formatearNumero(peso) + ' kg / ' + CF.formatearNumero(altura) + ' cm');
+
+      this.pintarGrafico(raiz, imc);
+
+      CF.historialGuardar(
+        this.historialClave,
+        `IMC ${CF.formatearNumero(imc, 1)} (${categoria.nombre}) · ${peso} kg / ${altura} cm`,
+        raiz
+      );
+    },
+
+    limpiar(raiz) {
+      const p = raiz.querySelector('#pesoImc');
+      const a = raiz.querySelector('#alturaImc');
+      const res = raiz.querySelector('#resultadoImc');
+      if (p) p.value = '';
+      if (a) a.value = '';
+      CF.limpiarMarcasError(raiz);
+      CF.prepararLCD(res);
+      if (res) res.innerText = '--';
+      CF.reiniciarGrafico(raiz.querySelector('#graficoImc'));
+    }
+  });
+
+  // ==========================================================
+  // HIPOTECA (precio + entrada + interés + plazo)
+  // ==========================================================
+  CF.registrar({
+    id: 'hipoteca',
+    historialClave: 'historial_hipoteca',
+
+    formula: '<code>Financiación = Precio × (1 − Entrada÷100)</code><br><code>Cuota = P × [r(1+r)<sup>n</sup>] ÷ [(1+r)<sup>n</sup> − 1]</code><br><small>Amortización francesa, la usada por los bancos españoles. La cuota es constante: interés + amortización.</small>',
+
+    ejemplo(raiz) {
+      const p = raiz.querySelector('#precioVivienda');
+      const e = raiz.querySelector('#entradaHipoteca');
+      const i = raiz.querySelector('#interesHipoteca');
+      const pl = raiz.querySelector('#plazoHipoteca');
+      if (p) p.value = '200000';
+      if (e) e.value = '20';
+      if (i) i.value = '3.2';
+      if (pl) pl.value = '30';
+    },
+
+    calcular(raiz) {
+      const precio = parseFloat(raiz.querySelector('#precioVivienda')?.value);
+      const entrada = parseFloat(raiz.querySelector('#entradaHipoteca')?.value);
+      const interes = parseFloat(raiz.querySelector('#interesHipoteca')?.value);
+      const anios = parseFloat(raiz.querySelector('#plazoHipoteca')?.value);
+      const resDiv = raiz.querySelector('#resultadoHipoteca');
+
+      CF.prepararLCD(resDiv);
+
+      if (!isNaN(precio) && precio <= 0) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El precio debe ser mayor que 0');
+        return;
+      }
+      if (!isNaN(entrada) && (entrada < 0 || entrada > 90)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: La entrada debe estar entre 0% y 90%');
+        return;
+      }
+      if (!isNaN(interes) && (interes < 0 || interes > 20)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El interés debe estar entre 0% y 20%');
+        return;
+      }
+      if (!isNaN(anios) && (anios < 1 || anios > 40)) {
+        CF.mostrarErrorLCD(resDiv, 'ERROR: El plazo debe estar entre 1 y 40 años');
+        return;
+      }
+      if (isNaN(precio) || isNaN(entrada) || isNaN(interes) || isNaN(anios)) {
+        if (resDiv) resDiv.innerText = 'Introduce precio, entrada, interés y plazo';
+        return;
+      }
+
+      const financiado = precio * (1 - entrada / 100);
+      const meses = Math.round(anios * 12);
+      const iMensual = interes / 100 / 12;
+      const cuota = iMensual === 0
+        ? financiado / meses
+        : financiado * iMensual / (1 - Math.pow(1 + iMensual, -meses));
+
+      let pendiente = financiado;
+      let interesesAcum = 0;
+      let interesAnual = 0;
+      let amortizadoAnual = 0;
+      const filasAnuales = [];
+      for (let m = 1; m <= meses; m++) {
+        const interesMes = pendiente * iMensual;
+        const amortizadoMes = cuota - interesMes;
+        pendiente -= amortizadoMes;
+        interesAnual += interesMes;
+        amortizadoAnual += amortizadoMes;
+        interesesAcum += interesMes;
+        if (m % 12 === 0 || m === meses) {
+          filasAnuales.push({
+            anio: Math.ceil(m / 12),
+            interesAnual,
+            amortizadoAnual,
+            pendiente: Math.max(pendiente, 0),
+            interesesAcum
+          });
+          interesAnual = 0;
+          amortizadoAnual = 0;
+        }
+      }
+
+      const totalPagado = cuota * meses;
+      const totalIntereses = totalPagado - financiado;
+      const entradaEuros = precio - financiado;
+
+      CF.pintarResultLCD(resDiv, CF.formatearEuros(cuota) + '/mes',
+        `Financiación: ${CF.formatearEuros(financiado)} · Total a pagar: ${CF.formatearEuros(totalPagado)} · Intereses: ${CF.formatearEuros(totalIntereses)}`);
+
+      this.pintarTabla(raiz, filasAnuales, financiado);
+
+      const serieAnios = [0];
+      const seriePendiente = [financiado];
+      const serieIntereses = [0];
+      filasAnuales.forEach(fila => {
+        serieAnios.push(fila.anio);
+        seriePendiente.push(fila.pendiente);
+        serieIntereses.push(fila.interesesAcum);
+      });
+      this.pintarGrafico(raiz, { anios: serieAnios, pendiente: seriePendiente, intereses: serieIntereses });
+
+      CF.historialGuardar(
+        this.historialClave,
+        `${CF.formatearEuros(precio)} (entrada ${CF.formatearNumero(entrada)}%) al ${interes}% x ${anios} años -> ${CF.formatearEuros(cuota)}/mes`,
+        raiz
+      );
+    },
+
+    pintarTabla(raiz, filas, financiado) {
+      CF.pintarTablaGenerica(raiz, 'cajaTablaHipoteca', 'tablaVaciaHipoteca', 'cuerpoTablaHipoteca', filas,
+        fila =>
+          '<tr><td>' + fila.anio + '</td>' +
+          '<td>' + CF.formatearEuros(fila.interesAnual) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.amortizadoAnual) + '</td>' +
+          '<td>' + CF.formatearEuros(fila.pendiente) + '</td></tr>');
+    },
+
+    iniciar(raiz) {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.get('demo')) return;
+      const p = raiz.querySelector('#precioVivienda');
+      const e = raiz.querySelector('#entradaHipoteca');
+      const i = raiz.querySelector('#interesHipoteca');
+      const pl = raiz.querySelector('#plazoHipoteca');
+      if (p) p.value = '200000';
+      if (e) e.value = '20';
+      if (i) i.value = '3.2';
+      if (pl) pl.value = '30';
+      this.calcular(raiz);
+    },
+
+    pintarGrafico(raiz, serie) {
+      const caja = raiz.querySelector('#graficoHipoteca');
+      const canvas = raiz.querySelector('#canvasHipoteca');
+      const mensaje = raiz.querySelector('#graficoVacioHipoteca');
+      if (!caja || !canvas || !canvas.getContext) return;
+
+      this._serieHipoteca = serie;
+
+      if (!serie) {
+        caja.style.display = '';
+        canvas.style.display = 'none';
+        if (mensaje) mensaje.style.display = '';
+        return;
+      }
+      caja.style.display = '';
+      canvas.style.display = 'block';
+      if (mensaje) mensaje.style.display = 'none';
+
+      if (!this._resizeListo) {
+        this._resizeListo = true;
+        let temporizador = null;
+        window.addEventListener('resize', () => {
+          clearTimeout(temporizador);
+          temporizador = setTimeout(() => {
+            const raizViva = document.querySelector('[data-calculadora="hipoteca"]');
+            if (raizViva && this._serieHipoteca) this.pintarGrafico(raizViva, this._serieHipoteca);
+          }, 200);
+        });
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+      const anchoCss = Math.max(caja.clientWidth - 24, 120);
+      const altoCss = anchoCss > 700 ? 380 : 320;
+      canvas.width = Math.round(anchoCss * dpr);
+      canvas.height = Math.round(altoCss * dpr);
+      canvas.style.width = anchoCss + 'px';
+      canvas.style.height = altoCss + 'px';
+
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, anchoCss, altoCss);
+
+      const padIzq = 58;
+      const padDer = 14;
+      const padSup = 16;
+      const padInf = 30;
+      const wGraf = anchoCss - padIzq - padDer;
+      const hGraf = altoCss - padSup - padInf;
+
+      const maxAnios = serie.anios[serie.anios.length - 1];
+      const maxValor = Math.max.apply(null, serie.pendiente.concat(serie.intereses)) * 1.05 || 1;
+
+      const xDe = anio => padIzq + (anio / maxAnios) * wGraf;
+      const yDe = valor => padSup + hGraf - (valor / maxValor) * hGraf;
+
+      ctx.font = 'bold 12px "Courier New", monospace';
+      ctx.lineWidth = 1;
+      for (let k = 0; k <= 4; k++) {
+        const v = (maxValor / 4) * k;
+        const y = yDe(v);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+        ctx.beginPath();
+        ctx.moveTo(padIzq, y);
+        ctx.lineTo(padIzq + wGraf, y);
+        ctx.stroke();
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(formatearEje(v), padIzq - 6, y);
+      }
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const pasoMarca = Math.max(1, Math.round(maxAnios / 5));
+      for (let anio = 0; anio <= maxAnios; anio += pasoMarca) {
+        ctx.fillText(anio === 0 ? 'hoy' : anio + 'a', xDe(anio), padSup + hGraf + 8);
+      }
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.pendiente.map(yDe), padSup + hGraf,
+        'rgba(56, 189, 248, 0.15)', '#38bdf8');
+
+      dibujarSerieGrafico(ctx, serie.anios.map(xDe), serie.intereses.map(yDe), padSup + hGraf,
+        'rgba(16, 185, 129, 0.22)', '#10b981');
+    },
+
+    limpiar(raiz) {
+      ['precioVivienda', 'entradaHipoteca', 'interesHipoteca', 'plazoHipoteca'].forEach(id => {
+        const input = raiz.querySelector('#' + id);
+        if (input) input.value = '';
+      });
+      const res = raiz.querySelector('#resultadoHipoteca');
+      CF.limpiarMarcasError(raiz);
+      CF.prepararLCD(res);
+      if (res) res.innerText = '0.00 €';
+      this.pintarGrafico(raiz, null);
+      this.pintarTabla(raiz, [], 0);
+    }
+  });
+
 })();
 
 // ==========================================================

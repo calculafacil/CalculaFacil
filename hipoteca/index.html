@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO BÁSICO PARA GOOGLE -->
+  <title>Calculadora de Hipoteca: Cuota Mensual y Total | CalculaFácil</title>
+  <meta name="description" content="Calcula la cuota mensual de tu hipoteca según el precio de la vivienda, la entrada, el interés y el plazo. Descubre cuánto pagarás en total y cuánto te costará el préstamo. Gratis.">
+  <meta name="keywords" content="calculadora hipoteca, calcular cuota hipoteca mensual, hipoteca vivienda, tipo interes hipotecario, entrada hipoteca, simulador hipoteca">
+  <link rel="canonical" href="https://calculafacil.github.io/CalculaFacil/hipoteca/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="apple-touch-icon" href="../iconos/icon-192.png">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" sizes="48x48" href="../iconos/icon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../iconos/icon-192.png">
+  <link rel="shortcut icon" href="../iconos/icon-48.png">
+  <link rel="icon" type="image/svg+xml" href="../logo.svg">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Calculadora de Hipoteca: Cuota Mensual y Total | CalculaFácil">
+  <meta property="og:description" content="Calcula la cuota mensual de tu hipoteca según el precio, la entrada, el interés y el plazo. Gratis y sin registro.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calculafacil.github.io/CalculaFacil/hipoteca/">
+  <meta property="og:image" content="https://calculafacil.github.io/CalculaFacil/og-share-v2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculadora de Hipoteca: Cuota Mensual y Total | CalculaFácil">
+  <meta name="twitter:description" content="Calcula la cuota mensual de tu hipoteca según el precio, la entrada, el interés y el plazo.">
+  <meta name="twitter:image" content="https://calculafacil.github.io/CalculaFacil/og-share-v2.jpg">
+
+  <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CalculaFácil - Calculadora de Hipoteca",
+    "url": "https://calculafacil.github.io/CalculaFacil/hipoteca/",
+    "description": "Calculadora online gratuita de hipoteca para conocer la cuota mensual, el total a pagar y los intereses según el precio de la vivienda, la entrada, el tipo y el plazo.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../estilos.css">
+  <script defer src="../js/core.js"></script>
+  <script defer src="../js/calculadoras.js"></script>
+</head>
+<body data-tema="classic">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- BANNER PRINCIPAL -->
+  <header class="banner-principal" data-titulo="Calculadora de Hipoteca">
+    <div class="contenido-banner">
+      <div class="banner-marca">
+        <a href="../" class="banner-enlace">
+          <img src="../logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
+          <div class="banner-texto">
+            <h1 id="titulo-header">Calculadora de Hipoteca</h1>
+            <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="contenedor-app">
+    <main class="pantalla activa">
+      <a class="btn-volver" href="../" aria-label="Volver al menú"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>Volver al Menú</a>
+
+      <div class="carcasa-calculadora ambiente-compras">
+        <div class="marca-calc">CALCULAFÁCIL <span>MÓDULO HIPOTECA</span></div>
+        <div class="descripcion-retro">
+          <h3>&gt; MÓDULO_HIPOTECA</h3>
+          <p>Calcula cuánto pagarás cada mes por tu hipoteca y el coste total del préstamo.</p>
+        </div>
+
+        <!-- NAVEGACIÓN ENTRE CALCULADORAS -->
+        <div class="pestanas-envoltorio" data-pestanas="dinero"></div>
+
+        <!-- CALCULADORA DE HIPOTECA -->
+        <section data-calculadora="hipoteca">
+          <h2 class="titulo-tab">¿Cuál será tu cuota hipotecaria mensual?</h2>
+          <p class="instruccion-tab">Introduce el precio de la vivienda, la entrada, el interés y el plazo:</p>
+
+          <div class="campo">
+            <label for="precioVivienda">Precio de la vivienda (€):</label>
+            <input type="number" inputmode="numeric" id="precioVivienda" step="1000" min="0" placeholder="Ej: 200000">
+          </div>
+
+          <div class="campo">
+            <label for="entradaHipoteca">Entrada (%) (normalmente 20%):</label>
+            <input type="number" inputmode="decimal" id="entradaHipoteca" step="0.5" min="0" max="90" placeholder="Ej: 20">
+          </div>
+
+          <div class="campo">
+            <label for="interesHipoteca">Tipo de interés anual (%):</label>
+            <input type="number" inputmode="decimal" id="interesHipoteca" step="0.01" min="0" max="20" placeholder="Ej: 3.2">
+          </div>
+
+          <div class="campo">
+            <label for="plazoHipoteca">Plazo (años):</label>
+            <input type="number" inputmode="numeric" id="plazoHipoteca" step="1" min="1" max="40" placeholder="Ej: 30">
+          </div>
+
+          <div class="pantalla-lcd">
+            <span class="etiqueta-lcd">CUOTA MENSUAL</span>
+            <div id="resultadoHipoteca" class="texto-lcd">0.00 €</div>
+          </div>
+
+          <button type="button" class="btn-copiar" data-action="copiar" data-copy-target="resultadoHipoteca"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar resultado</button>
+
+          <!-- GRÁFICO DE EVOLUCIÓN DE LA HIPOTECA -->
+          <div class="grafico-caja" id="graficoHipoteca">
+            <div class="grafico-leyenda">
+              <span class="leyenda-item"><span class="punto-leyenda punto-aportado"></span>Capital pendiente</span>
+              <span class="leyenda-item"><span class="punto-leyenda punto-total"></span>Intereses acumulados</span>
+            </div>
+            <canvas id="canvasHipoteca" style="display:none" aria-label="Gráfico de la evolución del capital pendiente y los intereses año a año" role="img"></canvas>
+            <p class="grafico-vacio" id="graficoVacioHipoteca">Rellena los datos para ver tu gráfico</p>
+          </div>
+
+          <!-- TABLA DE AMORTIZACIÓN AÑO A AÑO -->
+          <p class="grafico-vacio" id="tablaVaciaHipoteca">Rellena los datos para ver la tabla de amortización</p>
+          <div class="tabla-amortizacion-envoltorio" id="cajaTablaHipoteca" hidden>
+            <table class="tabla-amortizacion">
+              <thead>
+                <tr><th>Año</th><th>Intereses pagados</th><th>Capital amortizado</th><th>Debes aún</th></tr>
+              </thead>
+              <tbody id="cuerpoTablaHipoteca"></tbody>
+            </table>
+          </div>
+
+          <p class="aviso-historial">El resultado se actualiza mientras escribes. Pulsa CALCULAR para guardarlo en tu historial.</p>
+          <div class="teclado-tactil">
+            <button class="btn-3d btn-calcular" type="button" data-action="calcular">CALCULAR</button>
+            <button class="btn-3d btn-limpiar" type="button" data-action="limpiar">BORRAR</button>
+          </div>
+
+          <div class="caja-historial">
+            <span class="titulo-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>HISTORIAL - HIPOTECA</span>
+            <ul class="lista-historial" data-historial-clave="historial_hipoteca">
+              <li>No hay operaciones recientes</li>
+            </ul>
+            <div class="fila-compartir">
+              <button type="button" class="btn-secundario" data-share-whatsapp aria-label="Compartir esta calculadora por WhatsApp"><svg class="icono" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Compartir por WhatsApp</button>
+              <button class="btn-secundario" type="button" data-share-nativo aria-label="Compartir esta calculadora con otras apps"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button>
+            </div>
+            <button class="btn-secundario" type="button" data-action="vaciar-historial"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14"/></svg>Vaciar historial</button>
+          </div>
+        </section>
+
+        <!-- BLOQUE SEO ENRIQUECIDO - HIPOTECA -->
+        <section class="seo-info-box">
+          <h3>Planifica tu hipoteca antes de entrar al banco</h3>
+          <p>Con esta <strong>calculadora de hipotecas</strong> sabrás en segundos lo que pagarás cada mes, cuánto acabarás pagando en total y cuántos intereses genera tu préstamo. El cálculo usa el <strong>sistema de amortización francés</strong>, el mismo que emplean los bancos españoles: una cuota constante donde cada mes pagas una parte de intereses y otra de capital.</p>
+          <ul>
+            <li><strong>Entrada realista:</strong> en España los bancos suelen financiar el 80% de la tasación, así que necesitarás una entrada de al menos el 20% más los gastos.</li>
+            <li><strong>Compara escenarios:</strong> cambia el plazo y el interés para ver cómo afectan a tu cuota mensual.</li>
+            <li><strong>Conoce el coste total:</strong> a mayor plazo, menor cuota, pero pagas muchos más intereses al final.</li>
+          </ul>
+        </section>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="faq-seccion">
+          <h3><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Preguntas frecuentes sobre las hipotecas</h3>
+          <details class="faq-item">
+            <summary>¿Cuánta entrada necesito para una hipoteca en España?</summary>
+            <p>En general los bancos financian como máximo el 80% del valor de la vivienda (hasta el 90% en primera vivienda con condiciones). Esto significa que necesitas una entrada mínima del 20%, a la que debes sumar gastos como impuestos, notaría y registro (un 10-12% adicional del precio).</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo se calcula la cuota de la hipoteca?</summary>
+            <p>Con la fórmula francesa: Cuota = Capital × [r(1+r)^n] ÷ [(1+r)^n − 1], donde r es el interés mensual (anual ÷ 12 ÷ 100) y n el número de meses. Por ejemplo, 160.000 € a 30 años con un 3% de interés dan una cuota aproximada de 674 €.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué diferencia hay entre hipoteca a tipo fijo y variable?</summary>
+            <p>En la fija pagas siempre el mismo interés, lo que da seguridad, pero suele empezar más caro. En la variable, el interés depende del Euríbor más un diferencial, así que tu cuota puede subir o bajar. Elige según tu aversión al riesgo y tu previsión de tipos.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuánto interés pago si amplío el plazo?</summary>
+            <p>Ampliar el plazo reduce la cuota mensual pero aumenta los intereses totales. Por ejemplo, una hipoteca de 150.000 € al 3%: a 20 años pagas unos 52.000 € de intereses; a 30 años, unos 77.000 €. Retrasar el plazo puede encarecer mucho el préstamo a largo plazo.</p>
+          </details>
+        </section>
+
+        <!-- CALCULADORAS RELACIONADAS -->
+        <section class="relacionadas-seccion">
+          <h3>
+<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+Otras calculadoras que te pueden servir</h3>
+          <div class="relacionadas-lista" data-relacionadas></div>
+        </section>
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánta entrada necesito para una hipoteca en España?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En general los bancos financian como máximo el 80% del valor de la vivienda. Esto significa que necesitas una entrada mínima del 20%, a la que debes sumar gastos como impuestos, notaría y registro (un 10-12% adicional)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo se calcula la cuota de la hipoteca?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Con la fórmula francesa: Cuota = Capital × [r(1+r)^n] ÷ [(1+r)^n − 1], donde r es el interés mensual (anual ÷ 12 ÷ 100) y n el número de meses."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué diferencia hay entre hipoteca a tipo fijo y variable?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En la fija pagas siempre el mismo interés, dando seguridad. En la variable, el interés depende del Euríbor más un diferencial, por lo que la cuota puede subir o bajar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto interés pago si amplío el plazo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ampliar el plazo reduce la cuota mensual pero aumenta los intereses totales. A mayor plazo, más cara resulta la hipoteca en el conjunto total del préstamo."
+              }
+            }
+          ]
+        }
+        </script>
+      </div>
+    </main>
+  </div>
+  <!-- FOOTER (se genera automaticamente desde js/core.js) -->
+  <footer class="footer-sitio"></footer>
+
+</body>
+</html>

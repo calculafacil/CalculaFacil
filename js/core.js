@@ -582,13 +582,33 @@ window.CF = (function () {
     { id: 'sueldo-neto',        nombre: 'Sueldo Neto',         grupo: 'dinero' },
     { id: 'interes-compuesto',  nombre: 'Interés Compuesto',   grupo: 'dinero' },
     { id: 'interes-simple',     nombre: 'Interés Simple',      grupo: 'dinero' },
-    { id: 'cuota-prestamo',     nombre: 'Cuota Préstamo',      grupo: 'dinero' }
+    { id: 'cuota-prestamo',     nombre: 'Cuota Préstamo',      grupo: 'dinero' },
+    { id: 'hipoteca',           nombre: 'Hipoteca',            grupo: 'dinero' },
+    { id: 'imc',                nombre: 'IMC (Índice de Masa)', grupo: 'salud' }
   ]);
 
   const ETIQUETA_GRUPO = {
     estudios: 'Calculadoras académicas',
-    dinero: 'Calculadoras financieras'
+    dinero: 'Calculadoras financieras',
+    salud: 'Calculadoras de salud'
   };
+
+  const TITULO_GRUPO = {
+    estudios: 'Para tus estudios',
+    dinero: 'Para tu dinero',
+    salud: 'Para tu salud'
+  };
+
+  // GUIAS: datos compartidos por la columna del footer y por el bloque
+  // "Guías relacionadas" que se pinta en cada página de calculadora.
+  // `tema` indica la calculadora principal a la que enlaza cada guía.
+  const GUIAS = Object.freeze([
+    { id: 'calcular-nota-ebau',        nombre: 'Calcular la nota de EBAU',        tema: 'admision-ebau-pau' },
+    { id: 'interes-simple-vs-compuesto', nombre: 'Interés simple vs compuesto',   tema: 'interes-compuesto' },
+    { id: 'neto-20000-euros-brutos',   nombre: 'Neto de 20.000 € brutos',         tema: 'sueldo-neto' },
+    { id: 'como-calcular-el-iva',      nombre: 'Cómo calcular el IVA',            tema: 'iva' },
+    { id: 'como-calcular-porcentajes', nombre: 'Cómo calcular porcentajes',       tema: 'porcentajes' }
+  ]);
 
   const ICONO_TEMA = '<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>';
 
@@ -683,6 +703,57 @@ window.CF = (function () {
     });
   }
 
+  // GUIAS RELACIONADAS: cada calculadora y cada guía muestran un bloque
+  // de guías afines para repartir autoridad y mejorar el interlinking.
+  // `guias` son las guías que enlaza cada calculadora; `calculadoras`
+  // las calculadoras que enlaza cada guía (además de su tema principal).
+  const GUIAS_POR_CALCULADORA = Object.freeze({
+    'admision-ebau-pau':  ['calcular-nota-ebau'],
+    'nota-de-corte':      ['calcular-nota-ebau'],
+    'interes-simple':     ['interes-simple-vs-compuesto'],
+    'interes-compuesto':  ['interes-simple-vs-compuesto'],
+    'sueldo-neto':        ['neto-20000-euros-brutos'],
+    'iva':                ['como-calcular-el-iva'],
+    'porcentajes':        ['como-calcular-porcentajes'],
+    'descuentos':         ['como-calcular-porcentajes', 'como-calcular-el-iva']
+  });
+
+  // Guías afines entre sí (para enlazar unas guías con otras).
+  const GUIAS_RELACIONADAS = Object.freeze({
+    'calcular-nota-ebau': ['como-calcular-porcentajes'],
+    'como-calcular-porcentajes': ['como-calcular-el-iva'],
+    'como-calcular-el-iva': ['como-calcular-porcentajes'],
+    'neto-20000-euros-brutos': ['como-calcular-el-iva', 'como-calcular-porcentajes'],
+    'interes-simple-vs-compuesto': ['como-calcular-porcentajes']
+  });
+
+  function construirGuiasRelacionadas(prefijo, paginaActual) {
+    const envoltorio = document.querySelector('[data-relacionadas-guias]');
+    if (!envoltorio) return;
+
+    const ids = GUIAS_POR_CALCULADORA[paginaActual] || GUIAS_RELACIONADAS[paginaActual] || [];
+    const guias = ids
+      .map(id => GUIAS.find(g => g.id === id))
+      .filter(Boolean);
+
+    if (!guias.length) {
+      envoltorio.style.display = 'none';
+      return;
+    }
+
+    const items = guias
+      .map(g => '<a class="tab-btn" href="' + prefijo + 'guias/' + g.id + '/">' + g.nombre + '</a>')
+      .join('');
+
+    envoltorio.innerHTML =
+      '<section class="relacionadas-seccion guias-relacionadas">' +
+        '<h3><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Guías relacionadas</h3>' +
+        '<p class="subtitulo-menu">Aprende el método con una guía paso a paso antes de calcular.</p>' +
+        '<div class="relacionadas-lista">' + items + '</div>' +
+      '</section>';
+    envoltorio.style.display = '';
+  }
+
   // FOOTER: se rellena solo si la página lo dejó vacío, así una
   // página puede traer un footer propio distinto si algún día hace falta.
   function construirFooter(prefijo) {
@@ -690,9 +761,14 @@ window.CF = (function () {
     if (!footer || footer.innerHTML.trim() !== '') return;
     const columna = grupo =>
       '<nav class="footer-nav" aria-label="' + ETIQUETA_GRUPO[grupo] + '">' +
-        '<p class="footer-titulo">' + (grupo === 'estudios' ? 'Para tus estudios' : 'Para tu dinero') + '</p>' +
+        '<p class="footer-titulo">' + TITULO_GRUPO[grupo] + '</p>' +
         CALCULADORAS.filter(c => c.grupo === grupo)
           .map(c => '<a href="' + prefijo + c.id + '/">' + c.nombre + '</a>').join('') +
+      '</nav>';
+    const columnaGuias =
+      '<nav class="footer-nav" aria-label="Guías">' +
+        '<p class="footer-titulo">Guías</p>' +
+        GUIAS.map(g => '<a href="' + prefijo + 'guias/' + g.id + '/">' + g.nombre + '</a>').join('') +
       '</nav>';
     footer.innerHTML =
       '<div class="footer-caja">' +
@@ -704,6 +780,8 @@ window.CF = (function () {
           '</div>' +
           columna('estudios') +
           columna('dinero') +
+          columna('salud') +
+          columnaGuias +
         '</div>' +
         '<p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. ' +
         '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a> · <a href="' + prefijo + 'glosario/">Glosario</a></p>' +
@@ -726,6 +804,7 @@ window.CF = (function () {
     construirCabecera(prefijo);
     construirPestanas(prefijo, paginaActual);
     construirRelacionadas(prefijo, paginaActual);
+    construirGuiasRelacionadas(prefijo, paginaActual);
     construirFooter(prefijo);
     actualizarContadores();
   }
