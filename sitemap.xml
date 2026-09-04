@@ -116,6 +116,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://calculafacil.github.io/CalculaFacil/guias/como-calcular-faltas-asistencia/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://calculafacil.github.io/CalculaFacil/guias/como-calcular-media-ponderada/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://calculafacil.github.io/CalculaFacil/imc/</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>

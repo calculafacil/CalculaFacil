@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v25';
+const VERSION = 'v27';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -39,6 +39,8 @@ const PRECACHE = [
   'guias/calcular-nota-ebau/',
   'guias/como-calcular-el-iva/',
   'guias/como-calcular-porcentajes/',
+  'guias/como-calcular-faltas-asistencia/',
+  'guias/como-calcular-media-ponderada/',
   'imc/',
   'hipoteca/'
 ];

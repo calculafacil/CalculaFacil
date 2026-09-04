@@ -607,7 +607,9 @@ window.CF = (function () {
     { id: 'interes-simple-vs-compuesto', nombre: 'Interés simple vs compuesto',   tema: 'interes-compuesto' },
     { id: 'neto-20000-euros-brutos',   nombre: 'Neto de 20.000 € brutos',         tema: 'sueldo-neto' },
     { id: 'como-calcular-el-iva',      nombre: 'Cómo calcular el IVA',            tema: 'iva' },
-    { id: 'como-calcular-porcentajes', nombre: 'Cómo calcular porcentajes',       tema: 'porcentajes' }
+    { id: 'como-calcular-porcentajes', nombre: 'Cómo calcular porcentajes',       tema: 'porcentajes' },
+    { id: 'como-calcular-faltas-asistencia', nombre: 'Calcular las faltas de asistencia', tema: 'asistencias-faltas' },
+    { id: 'como-calcular-media-ponderada', nombre: 'Calcular la media ponderada',      tema: 'media-ponderada' }
   ]);
 
   const ICONO_TEMA = '<svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.6-1.4-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.7C21.4 5.8 17.1 2 12 2Z"/><path d="M6.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg>';
@@ -715,7 +717,9 @@ window.CF = (function () {
     'sueldo-neto':        ['neto-20000-euros-brutos'],
     'iva':                ['como-calcular-el-iva'],
     'porcentajes':        ['como-calcular-porcentajes'],
-    'descuentos':         ['como-calcular-porcentajes', 'como-calcular-el-iva']
+    'descuentos':         ['como-calcular-porcentajes', 'como-calcular-el-iva'],
+    'asistencias-faltas': ['como-calcular-faltas-asistencia'],
+    'media-ponderada':    ['como-calcular-media-ponderada']
   });
 
   // Guías afines entre sí (para enlazar unas guías con otras).
@@ -724,7 +728,9 @@ window.CF = (function () {
     'como-calcular-porcentajes': ['como-calcular-el-iva'],
     'como-calcular-el-iva': ['como-calcular-porcentajes'],
     'neto-20000-euros-brutos': ['como-calcular-el-iva', 'como-calcular-porcentajes'],
-    'interes-simple-vs-compuesto': ['como-calcular-porcentajes']
+    'interes-simple-vs-compuesto': ['como-calcular-porcentajes'],
+    'como-calcular-faltas-asistencia': ['como-calcular-porcentajes', 'calcular-nota-ebau'],
+    'como-calcular-media-ponderada': ['como-calcular-porcentajes', 'calcular-nota-ebau']
   });
 
   function construirGuiasRelacionadas(prefijo, paginaActual) {
