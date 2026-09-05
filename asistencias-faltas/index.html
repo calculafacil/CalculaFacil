@@ -101,7 +101,7 @@
 
         <!-- CALCULADORA DE ASISTENCIA Y FALTAS -->
         <section data-calculadora="asistencias-faltas">
-          <p class="instruccion-tab">Calcula cuántas clases puedes faltar sin perder la evaluación continua:</p>
+          <p class="instruccion-tab">Calcula cuántas clases puedes faltar sin perder la evaluación continua y descubre el porcentaje de asistencia que llevas:</p>
 
           <div class="campo">
             <label for="totalClases">Total de clases/horas de la asignatura:</label>
@@ -118,10 +118,12 @@
             <input type="number" inputmode="numeric" id="faltasActuales" placeholder="Ej: 2" value="0" min="0">
           </div>
 
-          <div class="pantalla-lcd">
+<div class="pantalla-lcd">
             <span class="etiqueta-lcd">MARGEN DE FALTAS PERMITIDAS</span>
             <div id="resultadoAsistencia" class="texto-lcd">Te quedan: 0 faltas</div>
           </div>
+
+          <p class="aviso-historial" id="resultadoAsistenciaActual" role="status">Introduce el total de clases y tus faltas para ver tu porcentaje de asistencia actual.</p>
 
           <button type="button" class="btn-copiar" data-action="copiar" data-copy-target="resultadoAsistencia"><svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar resultado</button>
 
@@ -204,6 +206,18 @@
             <p>El 20% de las clases se calcula multiplicando el total por 0,20: de 50 clases son 10 faltas, de 60 son 12, de 75 son 15 y de 100 son 20. Suele coincidir con exigir un 80% de asistencia mínima.</p>
           </details>
           <details class="faq-item">
+            <summary>¿Cuántas faltas son el 25% de las clases?</summary>
+            <p>El 25% de las clases es 1 de cada 4: de 40 clases son 10 faltas, de 60 son 15, de 80 son 20 y de 100 son 25. Suele coincidir con exigir un 75% de asistencia mínima, el requisito más habitual en institutos y centros de FP.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Si he faltado 5 clases de 60, ¿qué porcentaje de asistencia llevo?</summary>
+            <p>Restas las faltas del total y divides entre el total: (60 − 5) ÷ 60 × 100 = <strong>91,7% de asistencia</strong>. Sobre 60 clases, cada falta baja tu asistencia un 1,67%. La calculadora te muestra tu porcentaje actual en el indicador de arriba para que sepas si estás cerca del mínimo.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuántas faltas puedo tener este trimestre?</summary>
+            <p>Depende de las clases que acumule la asignatura en el trimestre: si exigen un 80% de asistencia y la asignatura tiene 45 clases, puedes faltar 9 (45 × 0,20). Ojo: muchos centros calculan el porcentaje sobre el total anual, así que revisa tu normativa antes de gastar todas tus faltas al principio.</p>
+          </details>
+          <details class="faq-item">
             <summary>¿Qué pasa si pierdo la evaluación continua por faltas?</summary>
             <p>Depende de cada centro: lo más habitual es que pierdas el derecho a la evaluación continua y tengas que ir directamente al examen final ordinario (y en algunos casos a una prueba de recuperación extraordinaria). No pierdes la asignatura automáticamente, pero te juegas la nota en un único examen. Revisa tu normativa antes de llegar al límite.</p>
           </details>
@@ -276,6 +290,30 @@ Otras calculadoras que te pueden servir</h3>
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "El 20% de las clases se calcula multiplicando el total por 0,20: de 50 clases son 10 faltas, de 60 son 12, de 75 son 15 y de 100 son 20. Suele coincidir con exigir un 80% de asistencia mínima."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuántas faltas son el 25% de las clases?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El 25% de las clases es 1 de cada 4: de 40 clases son 10 faltas, de 60 son 15, de 80 son 20 y de 100 son 25. Suele coincidir con exigir un 75% de asistencia mínima, el requisito más habitual en institutos y centros de FP."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Si he faltado 5 clases de 60, ¿qué porcentaje de asistencia llevo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Restas las faltas del total y divides entre el total: (60 − 5) ÷ 60 × 100 = 91,7% de asistencia. Sobre 60 clases, cada falta baja tu asistencia un 1,67%. La calculadora te muestra tu porcentaje actual en el indicador para que sepas si estás cerca del mínimo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuántas faltas puedo tener este trimestre?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Depende de las clases que acumule la asignatura en el trimestre: si exigen un 80% de asistencia y la asignatura tiene 45 clases, puedes faltar 9 (45 × 0,20). Muchos centros calculan el porcentaje sobre el total anual, así que revisa tu normativa antes de gastar todas tus faltas al principio."
               }
             },
             {

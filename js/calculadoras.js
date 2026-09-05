@@ -460,8 +460,12 @@
       const minPorcentaje = parseFloat(raiz.querySelector('#porcentajeMinimo')?.value);
       const faltas = parseFloat(raiz.querySelector('#faltasActuales')?.value) || 0;
       const resDiv = raiz.querySelector('#resultadoAsistencia');
+      const mensajeAsistencia = raiz.querySelector('#resultadoAsistenciaActual');
 
       CF.prepararLCD(resDiv);
+      if (mensajeAsistencia) {
+        mensajeAsistencia.textContent = 'Introduce el total de clases y tus faltas para ver tu porcentaje de asistencia actual.';
+      }
 
       if (!CF.validarNumero(raiz.querySelector('#porcentajeMinimo'), CF.RANGO_PORCENTAJE)) {
         CF.mostrarErrorLCD(resDiv, 'ERROR: La asistencia mínima debe estar entre 0% y 100%');
@@ -480,6 +484,12 @@
       const faltasRestantes = maxFaltasPermitidas - faltas;
 
       this.pintarGrafico(raiz, ((total - faltas) / total) * 100, minPorcentaje);
+
+      const asistenciaActual = ((total - faltas) / total) * 100;
+      if (mensajeAsistencia) {
+        mensajeAsistencia.textContent =
+          `Asistencia actual: ${CF.formatearNumero(asistenciaActual)}% (mínimo exigido: ${CF.formatearNumero(minPorcentaje)}%).`;
+      }
 
       if (resDiv) {
         if (faltasRestantes < 0) {
@@ -506,12 +516,16 @@
       const p = raiz.querySelector('#porcentajeMinimo');
       const f = raiz.querySelector('#faltasActuales');
       const res = raiz.querySelector('#resultadoAsistencia');
+      const mensajeAsistencia = raiz.querySelector('#resultadoAsistenciaActual');
       if (t) t.value = '';
       if (p) p.value = '80';
       if (f) f.value = '0';
       CF.limpiarMarcasError(raiz);
       CF.prepararLCD(res);
       if (res) res.innerText = 'Te quedan: 0 faltas';
+      if (mensajeAsistencia) {
+        mensajeAsistencia.textContent = 'Introduce el total de clases y tus faltas para ver tu porcentaje de asistencia actual.';
+      }
       CF.reiniciarGrafico(raiz.querySelector('#graficoAsistencia'));
     }
   });

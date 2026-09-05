@@ -719,7 +719,8 @@ window.CF = (function () {
     'porcentajes':        ['como-calcular-porcentajes'],
     'descuentos':         ['como-calcular-porcentajes', 'como-calcular-el-iva'],
     'asistencias-faltas': ['como-calcular-faltas-asistencia'],
-    'media-ponderada':    ['como-calcular-media-ponderada']
+    'media-ponderada':    ['como-calcular-media-ponderada'],
+    'nota-necesaria':     ['calcular-nota-ebau', 'como-calcular-media-ponderada']
   });
 
   // Guías afines entre sí (para enlazar unas guías con otras).
