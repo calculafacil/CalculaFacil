@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://calculafacil.github.io/CalculaFacil/sitemap.xml
+Sitemap: https://calculafacil.app/sitemap.xml
