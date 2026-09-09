@@ -1,6 +1,14 @@
 window.CF = (function () {
   'use strict';
 
+  // REDIRECCIÓN: host antiguo (github.io) -> dominio propio.
+  // GitHub Pages sirve la web en ambos hosts; consolidamos en
+  // calculafacil.app para evitar contenido duplicado e indexación dividida.
+  if (window.location.hostname === 'calculafacil.github.io') {
+    var rutaApp = window.location.pathname.replace(/^\/CalculaFacil/, '');
+    window.location.replace('https://calculafacil.app' + (rutaApp || '/'));
+  }
+
   // ==========================================================
   // NÚCLEO COMPARTIDO - CalculaFácil
   // Cómo añadir una nueva calculadora:

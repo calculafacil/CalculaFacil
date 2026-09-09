@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>
+    // REDIRECCIÓN: host antiguo (github.io) -> dominio propio.
+    // Evita que los 404 del host viejo entren en el índice de Google.
+    if (window.location.hostname === 'calculafacil.github.io') {
+      var rutaApp404 = window.location.pathname.replace(/^\/CalculaFacil/, '');
+      window.location.replace('https://calculafacil.app' + (rutaApp404 || '/'));
+    }
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
