@@ -1007,6 +1007,82 @@ body[data-tema="cyberpunk"] .texto-lcd.texto-error {
 }
 
 /* ==========================================
+   RECOMENDADO (ENLACE DE AFILIADO)
+   ========================================== */
+
+.recomendado {
+  margin-top: 25px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 2px dashed rgba(245, 158, 11, 0.55);
+  border-radius: 12px;
+  color: var(--texto-carcasa);
+}
+
+.recomendado h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+.recomendado p {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.recomendado-listado {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recomendado-item {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.recomendado-item h5 {
+  margin: 0 0 4px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+.recomendado-item p {
+  margin: 0 0 8px;
+}
+
+.recomendado-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #b45309;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.82rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.recomendado-enlace:hover {
+  filter: brightness(1.15);
+}
+
+.recomendado-aviso {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  opacity: 0.65;
+}
+
+/* ==========================================
    ICONOS SVG (HEREDAN COLOR ACTUAL)
    ========================================== */
 
