@@ -336,10 +336,14 @@ window.CF = (function () {
   }
 
   function configurarConsentimientoCookies() {
-    if (document.getElementById('aviso-cookies')) return;
     try {
-      if (localStorage.getItem(CLAVE_CONSENTIMIENTO)) return;
+      // Ya hubo consentimiento en una visita anterior: activamos la medición (GA4).
+      if (localStorage.getItem(CLAVE_CONSENTIMIENTO)) {
+        if (window.gtag) gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+        return;
+      }
     } catch (err) { /* almacenamiento bloqueado: mostramos el aviso igual */ }
+    if (document.getElementById('aviso-cookies')) return;
 
     const aviso = document.createElement('div');
     aviso.id = 'aviso-cookies';
@@ -361,6 +365,10 @@ window.CF = (function () {
       try { localStorage.setItem(CLAVE_CONSENTIMIENTO, 'aceptada'); } catch (err) {}
       aviso.remove();
       if (window.dataLayer) window.dataLayer.push({ 'event': 'aceptar_cookies' });
+      if (window.gtag) {
+        gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+        gtag('event', 'aceptar_cookies');
+      }
     });
 
     aviso.appendChild(texto);
@@ -413,6 +421,7 @@ window.CF = (function () {
       enlace.addEventListener('click', () => {
         const mensaje = `${document.title} - ${window.location.href}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+        if (window.gtag) gtag('event', 'compartir_whatsapp', { 'pagina': detectarPaginaActual() });
       });
     });
 
@@ -422,11 +431,13 @@ window.CF = (function () {
         if (navigator.share) {
           try {
             await navigator.share({ title: document.title, text: document.title, url: window.location.href });
+            if (window.gtag) gtag('event', 'compartir_nativo', { 'pagina': detectarPaginaActual() });
           } catch (err) { /* El usuario canceló el diálogo */ }
           return;
         }
         try {
           await navigator.clipboard.writeText(window.location.href);
+          if (window.gtag) gtag('event', 'copiar_enlace', { 'pagina': detectarPaginaActual() });
           const original = boton.innerHTML;
           boton.innerHTML = '¡Enlace copiado!';
           boton.disabled = true;
@@ -436,6 +447,16 @@ window.CF = (function () {
           }, 1600);
         } catch (err) {}
       });
+    });
+
+    // CLIC EN ENLACES DE AFILIADO (Amazon): se mide con GA4 para saber
+    // qué caja de recomendación funciona mejor en cada página.
+    document.addEventListener('click', evento => {
+      const enlace = evento.target.closest && evento.target.closest('a[rel~="sponsored"]');
+      if (!enlace) return;
+      const url = enlace.getAttribute('href') || '';
+      if (!/tag=calculafacil-21/.test(url)) return;
+      if (window.gtag) gtag('event', 'clic_afiliado', { 'pagina': detectarPaginaActual() });
     });
 
     document.addEventListener('input', evento => {
@@ -519,6 +540,7 @@ window.CF = (function () {
       if (window.dataLayer) {
         window.dataLayer.push({ 'event': 'vista_calculadora', 'ruta': def.id });
       }
+      if (window.gtag) gtag('event', 'vista_calculadora', { 'pagina': def.id });
     });
 
     // Centra la pestaña activa si la barra es desplazable
