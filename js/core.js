@@ -326,6 +326,48 @@ window.CF = (function () {
     }
   }
 
+  // CONSENTIMIENTO DE COOKIES: aviso fijo inferior con enlace a la
+  // política de privacidad. Google AdSense y la analítica usan cookies;
+  // al Aceptar se guarda la decisión en localStorage y se avisa a GTM.
+  const CLAVE_CONSENTIMIENTO = 'cf_consentimiento_cookies';
+
+  function prefijarRuta() {
+    return document.getElementById('pantalla-menu') ? './' : calcularPrefijoRelativo();
+  }
+
+  function configurarConsentimientoCookies() {
+    if (document.getElementById('aviso-cookies')) return;
+    try {
+      if (localStorage.getItem(CLAVE_CONSENTIMIENTO)) return;
+    } catch (err) { /* almacenamiento bloqueado: mostramos el aviso igual */ }
+
+    const aviso = document.createElement('div');
+    aviso.id = 'aviso-cookies';
+    aviso.className = 'aviso-cookies';
+    aviso.setAttribute('role', 'region');
+    aviso.setAttribute('aria-label', 'Aviso de cookies');
+
+    const texto = document.createElement('p');
+    texto.innerHTML =
+      'CalculaFácil usa cookies de Google (analítica) y anuncios de AdSense para mantenerse gratuito. ' +
+      'Al pulsar «Aceptar» confirmas que lo entiendes. ' +
+      '<a href="' + prefijarRuta() + 'privacidad/">Más información</a>';
+
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn-aceptar-cookies';
+    boton.textContent = 'Aceptar';
+    boton.addEventListener('click', () => {
+      try { localStorage.setItem(CLAVE_CONSENTIMIENTO, 'aceptada'); } catch (err) {}
+      aviso.remove();
+      if (window.dataLayer) window.dataLayer.push({ 'event': 'aceptar_cookies' });
+    });
+
+    aviso.appendChild(texto);
+    aviso.appendChild(boton);
+    document.body.appendChild(aviso);
+  }
+
   // ANIMACIÓN DEL LCD: destello luminoso en el MARCO de la pantalla.
   // El texto nunca cambia de tamaño, así que no pueden aparecer scrollbars.
   function dispararAnimacionLCD(lcd) {
@@ -490,6 +532,8 @@ window.CF = (function () {
     redirigirHashAntiguo();
 
     configurarPWA();
+
+    configurarConsentimientoCookies();
   }
 
   document.addEventListener('DOMContentLoaded', arranque);
