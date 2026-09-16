@@ -3218,7 +3218,14 @@ body.pagina-precio .pasos-lista li::before {
 
 .pagina-lead .hero-lead {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
+  padding: 34px 20px 28px;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 160% at 50% 0%, rgba(16, 185, 129, 0.14), transparent 60%),
+    var(--fondo-caja, #ffffff);
+  border: 2px solid var(--borde-carcasa);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
 }
 
 .pagina-lead .hero-lead h2 {
@@ -3240,9 +3247,10 @@ body.pagina-precio .pasos-lista li::before {
 
 .lead-formulario {
   max-width: 420px;
-  margin: 0 auto 28px;
+  margin: 0 auto 32px;
   display: grid;
-  gap: 12px;
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
 
 .lead-formulario input[type="email"] {
@@ -3269,14 +3277,14 @@ body.pagina-precio .pasos-lista li::before {
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 800;
-  padding: 13px 20px;
+  padding: 14px 22px;
   border: none;
   border-radius: 12px;
-  background: #10b981;
+  background: linear-gradient(180deg, #34d399 0%, #10b981 55%, #059669 100%);
   color: #ffffff;
   cursor: pointer;
-  box-shadow: 0 4px 0 #047857;
-  transition: transform 0.1s, filter 0.15s;
+  box-shadow: 0 4px 0 #047857, inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.1s, filter 0.15s, box-shadow 0.15s;
 }
 
 .lead-formulario button:hover:not(:disabled) {
