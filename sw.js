@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v33';
+const VERSION = 'v34';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -46,10 +46,10 @@ const PRECACHE = [
   'hipoteca/',
   'organizador-estudios/',
   'organizador-estudios/gracias.html',
-  'organizador-estudios/img/preview-dashboard.svg',
-  'organizador-estudios/img/preview-notas.svg',
-  'organizador-estudios/img/preview-asistencia.svg',
-  'organizador-estudios/img/preview-guia.svg',
+  'organizador-estudios/img/1.png',
+  'organizador-estudios/img/2.png',
+  'organizador-estudios/img/3.png',
+  'organizador-estudios/img/4.png',
   'descarga-gratuita/',
   'descarga-gratuita/Control-Notas-2026-2027.xlsx'
 ];
