@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /descarga-gratuita/Control-Notas-2026-2027.xlsx
 
 Sitemap: https://calculafacil.app/sitemap.xml

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-label="Guía PDF del Organizador de Estudios">
+  <rect x="1" y="1" width="478" height="358" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M1 11 a10 10 0 0 1 10 -10 h458 a10 10 0 0 1 10 10 v20 h-478 z" fill="#eef2f7"/>
+  <circle cx="19" cy="16" r="5" fill="#f87171"/>
+  <circle cx="35" cy="16" r="5" fill="#fbbf24"/>
+  <circle cx="51" cy="16" r="5" fill="#34d399"/>
+  <text x="342" y="21" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="11" fill="#64748b">CalculaFácil · Guía de uso 2026/2027.pdf</text>
+  <rect x="1" y="32" width="478" height="27" fill="#f8fafc"/>
+  <text x="20" y="50" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">MI CURSO</text>
+  <text x="132" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">NOTAS</text>
+  <text x="228" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">ASISTENCIA</text>
+  <rect x="344" y="56" width="80" height="3" fill="#14b8a6"/>
+  <rect x="344" y="35" width="80" height="24" fill="#ffffff"/>
+  <text x="348" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700" fill="#0f172a">GUÍA</text>
+  <rect x="52" y="70" width="376" height="236" rx="8" fill="#fdfbf5" stroke="#e7e2d5"/>
+  <rect x="52" y="70" width="376" height="42" rx="8" fill="#0d9488"/>
+  <path d="M52 104 v8 a8 8 0 0 0 8 -8 z" fill="#0d9488"/>
+  <text x="240" y="92" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="900" letter-spacing="2" fill="#ffffff">CALCULAFÁCIL</text>
+  <text x="240" y="130" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="800" fill="#1f2937">Guía de uso</text>
+  <text x="240" y="150" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="11" fill="#64748b">Tu cuaderno digital del curso</text>
+  <g font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10.5" fill="#374151">
+    <text x="84" y="184">Qué es y qué incluye</text><text x="386" y="184" text-anchor="end" fill="#94a3b8">pág. 3</text>
+    <text x="84" y="202">Antes de empezar</text><text x="386" y="202" text-anchor="end" fill="#94a3b8">pág. 4</text>
+    <text x="84" y="220">Hoja ASISTENCIA paso a paso</text><text x="386" y="220" text-anchor="end" fill="#94a3b8">pág. 5</text>
+    <text x="84" y="238">Hoja NOTAS paso a paso</text><text x="386" y="238" text-anchor="end" fill="#94a3b8">pág. 6</text>
+    <text x="84" y="256">MI CURSO: tu cuadro de mandos</text><text x="386" y="256" text-anchor="end" fill="#94a3b8">pág. 8</text>
+    <text x="84" y="274">Preguntas frecuentes</text><text x="386" y="274" text-anchor="end" fill="#94a3b8">pág. 10</text>
+  </g>
+  <path d="M84 183 h302 M84 201 h302 M84 219 h302 M84 237 h302 M84 255 h302" stroke="#e2dccb" stroke-width="1" stroke-dasharray="2 4"/>
+  <text x="240" y="296" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" fill="#94a3b8">5 minutos a tu día a día · calculafacil.app</text>
+  <rect x="16" y="318" width="448" height="28" rx="7" fill="rgba(20,184,166,0.10)" stroke="rgba(13,148,136,0.35)"/>
+  <text x="30" y="336" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700" fill="#0d9488">El método paso a paso, dentro del propio archivo.</text>
+</svg>

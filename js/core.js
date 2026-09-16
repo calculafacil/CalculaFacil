@@ -27,6 +27,12 @@ window.CF = (function () {
   // Bandera interna: durante el cálculo en vivo NO se escribe historial
   let modoVivo = false;
 
+  // FEEDBACK DE USUARIOS (👍/👎): envía las sugerencias a Formspree.
+  // Crea un formulario gratis en https://formspree.io y sustituye el ID.
+  // Si la URL no está configurada, al enviar se muestra el email de soporte.
+  const URL_FORMULARIO_FEEDBACK = 'https://formspree.io/f/mkjndvlq';
+  const EMAIL_SOPORTE = 'calculafacil.web@gmail.com';
+
   function registrar(definicion) {
     if (!definicion || !definicion.id) return;
     REGISTRO[definicion.id] = definicion;
@@ -376,6 +382,125 @@ window.CF = (function () {
     document.body.appendChild(aviso);
   }
 
+  // FEEDBACK (👍/👎): aparece bajo cada calculadora y donde un HTML lo
+  // declare con data-feedback-pagina. Se muestra una sola vez por página.
+  const CLAVE_FEEDBACK_VOTADO = 'cf_feedback_';
+
+  function feedbackVotado(pagina) {
+    try { return localStorage.getItem(CLAVE_FEEDBACK_VOTADO + pagina) === '1'; } catch (err) { return false; }
+  }
+
+  function marcarFeedbackVotado(pagina) {
+    try { localStorage.setItem(CLAVE_FEEDBACK_VOTADO + pagina, '1'); } catch (err) {}
+  }
+
+  function crearFeedbackHTML(pagina) {
+    return '' +
+      '<div class="feedback-widget" data-feedback="' + pagina + '">' +
+        '<p class="feedback-pregunta">¿Te ha servido esta página?</p>' +
+        '<div class="feedback-botones">' +
+          '<button type="button" class="feedback-voto" data-voto="1">👍 Sí</button>' +
+          '<button type="button" class="feedback-voto" data-voto="0">👎 No</button>' +
+        '</div>' +
+        '<p class="feedback-gracias" hidden>¡Gracias! Lo usamos para seguir mejorando.</p>' +
+        '<form class="feedback-formulario" hidden>' +
+          '<label class="feedback-etiqueta" for="feedback-texto-' + pagina + '">¿Qué podríamos mejorar?</label>' +
+          '<textarea id="feedback-texto-' + pagina + '" name="sugerencia" rows="3" maxlength="600" placeholder="Cuéntanos brevemente qué te ha fallado o qué añadirías…"></textarea>' +
+          '<input type="text" name="_gotcha" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+          '<button type="submit" class="feedback-enviar">Enviar sugerencia</button>' +
+          '<p class="feedback-estado" hidden role="status"></p>' +
+        '</form>' +
+      '</div>';
+  }
+
+  function enviarFeedbackFormspree(pagina, voto, sugerencia) {
+    if (URL_FORMULARIO_FEEDBACK.indexOf('https://formspree.io/f/') !== 0 ||
+        URL_FORMULARIO_FEEDBACK.indexOf('REEMPLAZA') !== -1) {
+      return Promise.resolve(false);
+    }
+    return fetch(URL_FORMULARIO_FEEDBACK, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pagina: pagina, voto: voto, sugerencia: sugerencia })
+    })
+      .then(function (respuesta) { return respuesta.ok; })
+      .catch(function () { return false; });
+  }
+
+  function conectarFeedback(pagina) {
+    const widget = document.querySelector('[data-feedback="' + pagina + '"]');
+    if (!widget) return;
+
+    const botones = widget.querySelectorAll('.feedback-voto');
+    const gracias = widget.querySelector('.feedback-gracias');
+    const formulario = widget.querySelector('.feedback-formulario');
+    const estado = widget.querySelector('.feedback-estado');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        const esPositivo = boton.dataset.voto === '1';
+        const voto = esPositivo ? 'positivo' : 'negativo';
+        marcarFeedbackVotado(pagina);
+        botones.forEach(b => { b.hidden = true; });
+        if (esPositivo) {
+          enviarFeedbackFormspree(pagina, voto, '').then(() => {
+            gracias.hidden = false;
+          });
+        } else {
+          formulario.hidden = false;
+        }
+        if (window.gtag) gtag('event', 'feedback_calculadora', { 'pagina': pagina, 'voto': voto });
+      });
+    });
+
+    formulario.addEventListener('submit', evento => {
+      evento.preventDefault();
+      const botonEnviar = formulario.querySelector('.feedback-enviar');
+      const textarea = formulario.querySelector('textarea');
+      const sugerencia = textarea.value.trim();
+      if (!sugerencia) {
+        textarea.focus();
+        return;
+      }
+      botonEnviar.disabled = true;
+
+      const finalizar = (exito) => {
+        marcarFeedbackVotado(pagina);
+        botonEnviar.hidden = true;
+        textarea.hidden = true;
+        estado.hidden = false;
+        if (exito) {
+          estado.textContent = '¡Enviado! Gracias por tu aportación.';
+        } else {
+          estado.innerHTML = 'No se ha podido enviar. Escríbenos a <a href="mailto:' + EMAIL_SOPORTE +
+            '?subject=' + encodeURIComponent('Sugerencia para CalculaFácil') +
+            '&body=' + encodeURIComponent('Página: ' + pagina + '\n\n' + sugerencia) + '">' +
+            EMAIL_SOPORTE + '</a>.';
+        }
+        if (window.gtag) gtag('event', 'feedback_sugerencia', { 'pagina': pagina, 'enviado': exito });
+      };
+
+      enviarFeedbackFormspree(pagina, 'negativo', sugerencia).then(finalizar);
+    });
+  }
+
+  function construirFeedback() {
+    document.querySelectorAll('[data-calculadora]').forEach(raiz => {
+      const historial = raiz.querySelector('.caja-historial');
+      const pagina = raiz.dataset.calculadora;
+      if (!historial || !pagina || feedbackVotado(pagina)) return;
+      historial.insertAdjacentHTML('afterend', crearFeedbackHTML(pagina));
+      conectarFeedback(pagina);
+    });
+
+    document.querySelectorAll('[data-feedback-pagina]').forEach(contenedor => {
+      const pagina = contenedor.getAttribute('data-feedback-pagina');
+      if (!pagina || feedbackVotado(pagina)) return;
+      contenedor.insertAdjacentHTML('beforeend', crearFeedbackHTML(pagina));
+      conectarFeedback(pagina);
+    });
+  }
+
   // ANIMACIÓN DEL LCD: destello luminoso en el MARCO de la pantalla.
   // El texto nunca cambia de tamaño, así que no pueden aparecer scrollbars.
   function dispararAnimacionLCD(lcd) {
@@ -401,6 +526,8 @@ window.CF = (function () {
   // ARRANQUE: CONECTA CADA CALCULADORA PRESENTE EN LA PÁGINA
   function arranque() {
     construirPlantillas();
+
+    construirFeedback();
 
     cargarTemaGuardado();
 
@@ -457,6 +584,21 @@ window.CF = (function () {
       const url = enlace.getAttribute('href') || '';
       if (!/tag=calculafacil-21/.test(url)) return;
       if (window.gtag) gtag('event', 'clic_afiliado', { 'pagina': detectarPaginaActual() });
+    });
+
+    // CLIC EN CTAs DEL PRODUCTO (botón de compra + cajas del organizador):
+    // la KPI del experimento de ventas. Se mide en GA4.
+    document.addEventListener('click', evento => {
+      const enlace = evento.target.closest && evento.target.closest('.boton-comprar, .caja-producto-enlace');
+      if (!enlace) return;
+      if (window.gtag) gtag('event', 'clic_producto', { 'pagina': detectarPaginaActual(), 'destino': 'organizador-estudios' });
+    });
+
+    // CLIC EN LA TARJETA DEL DESCARGABLE GRATUITO (lead magnet)
+    document.addEventListener('click', evento => {
+      const enlace = evento.target.closest && evento.target.closest('.tarjeta-lead-magnet');
+      if (!enlace) return;
+      if (window.gtag) gtag('event', 'clic_lead_magnet', { 'pagina': detectarPaginaActual(), 'destino': 'descarga-gratuita' });
     });
 
     document.addEventListener('input', evento => {
@@ -851,6 +993,13 @@ window.CF = (function () {
         '<p class="footer-titulo">Guías</p>' +
         GUIAS.map(g => '<a href="' + prefijo + 'guias/' + g.id + '/">' + g.nombre + '</a>').join('') +
       '</nav>';
+    const columnaProducto =
+      '<nav class="footer-nav" aria-label="Organizador">' +
+        '<p class="footer-titulo">Organizador</p>' +
+        '<a href="' + prefijo + 'descarga-gratuita/"><strong>Plantilla gratuita de notas</strong></a>' +
+        '<a href="' + prefijo + 'organizador-estudios/">Planificador 2026-2027</a>' +
+        '<a href="' + prefijo + 'organizador-estudios/">Notas, faltas y medias en Excel</a>' +
+      '</nav>';
     footer.innerHTML =
       '<div class="footer-caja">' +
         '<div class="footer-columnas">' +
@@ -863,9 +1012,10 @@ window.CF = (function () {
           columna('dinero') +
           columna('salud') +
           columnaGuias +
+          columnaProducto +
         '</div>' +
         '<p class="footer-legal">© <span data-anio>2026</span> CalculaFácil · Calculadoras gratuitas, sin registro y sin instalar nada. ' +
-        '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a> · <a href="' + prefijo + 'glosario/">Glosario</a></p>' +
+        '<a href="' + prefijo + 'privacidad/">Privacidad</a> · <a href="' + prefijo + 'sobre-mi/">Sobre mí</a> · <a href="' + prefijo + 'glosario/">Glosario</a> · <a href="' + prefijo + 'organizador-estudios/">Organizador</a></p>' +
       '</div>';
   }
 

@@ -3,7 +3,7 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v28';
+const VERSION = 'v33';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -17,6 +17,7 @@ const PRECACHE = [
   'manifest.json',
   'iconos/academico.svg',
   'iconos/finanzas.svg',
+  'iconos/salud.svg',
   'iconos/icon-192.png',
   'iconos/icon-512.png',
   'nota-necesaria/',
@@ -42,7 +43,15 @@ const PRECACHE = [
   'guias/como-calcular-faltas-asistencia/',
   'guias/como-calcular-media-ponderada/',
   'imc/',
-  'hipoteca/'
+  'hipoteca/',
+  'organizador-estudios/',
+  'organizador-estudios/gracias.html',
+  'organizador-estudios/img/preview-dashboard.svg',
+  'organizador-estudios/img/preview-notas.svg',
+  'organizador-estudios/img/preview-asistencia.svg',
+  'organizador-estudios/img/preview-guia.svg',
+  'descarga-gratuita/',
+  'descarga-gratuita/Control-Notas-2026-2027.xlsx'
 ];
 
 self.addEventListener('install', evento => {

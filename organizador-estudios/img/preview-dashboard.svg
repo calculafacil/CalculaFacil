@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-label="Hoja MI CURSO del Organizador de Estudios">
+  <rect x="1" y="1" width="478" height="358" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M1 11 a10 10 0 0 1 10 -10 h458 a10 10 0 0 1 10 10 v20 h-478 z" fill="#eef2f7"/>
+  <circle cx="19" cy="16" r="5" fill="#f87171"/>
+  <circle cx="35" cy="16" r="5" fill="#fbbf24"/>
+  <circle cx="51" cy="16" r="5" fill="#34d399"/>
+  <text x="342" y="21" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="11" fill="#64748b">CalculaFácil_2026-2027 · MI CURSO</text>
+  <rect x="1" y="32" width="478" height="27" fill="#f8fafc"/>
+  <rect x="16" y="56" width="104" height="3" fill="#14b8a6"/>
+  <rect x="16" y="35" width="104" height="24" fill="#ffffff"/>
+  <text x="20" y="50" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700" fill="#0f172a">MI CURSO</text>
+  <text x="132" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">PORTADA</text>
+  <text x="210" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">NOTAS</text>
+  <text x="288" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">ASISTENCIA</text>
+  <text x="392" y="48" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" fill="#94a3b8">GUÍA</text>
+  <rect x="16" y="66" width="132" height="58" rx="7" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="30" y="81" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" fill="#64748b">MEDIA SIMPLE</text>
+  <text x="30" y="114" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="800" fill="#0f172a">7,06</text>
+  <rect x="162" y="66" width="132" height="58" rx="7" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="176" y="81" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" fill="#64748b">NOTA FINAL</text>
+  <text x="176" y="114" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="800" fill="#0f172a">6,78</text>
+  <rect x="308" y="66" width="156" height="58" rx="7" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="322" y="81" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" fill="#64748b">ASISTENCIA GLOBAL</text>
+  <text x="322" y="114" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="800" fill="#059669">96,2 %</text>
+  <rect x="16" y="136" width="448" height="22" rx="4" fill="#1e293b"/>
+  <text x="30" y="151" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" font-weight="700" fill="#94a3b8">ASIGNATURA</text>
+  <text x="150" y="151" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" font-weight="700" fill="#94a3b8">CLASES</text>
+  <text x="232" y="151" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" font-weight="700" fill="#94a3b8">FALTAS</text>
+  <text x="298" y="151" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" font-weight="700" fill="#94a3b8">%</text>
+  <text x="330" y="151" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9" font-weight="700" fill="#94a3b8">ESTADO</text>
+  <g font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="9.5" fill="#1f2937">
+    <rect x="16" y="158" width="448" height="24" fill="#ffffff"/>
+    <rect x="16" y="182" width="448" height="24" fill="#f8fafc"/>
+    <rect x="16" y="206" width="448" height="24" fill="#ffffff"/>
+    <rect x="16" y="230" width="448" height="24" fill="#f8fafc"/>
+    <rect x="16" y="254" width="448" height="24" fill="#ffffff"/>
+    <text x="30" y="174">Matemáticas</text><text x="150" y="174">55</text><text x="232" y="174">1</text><text x="298" y="174">98,2 %</text>
+    <text x="30" y="198">Historia</text><text x="150" y="198">55</text><text x="232" y="198">0</text><text x="298" y="198">100 %</text>
+    <text x="30" y="222">Lengua</text><text x="150" y="222">55</text><text x="232" y="222">10</text><text x="298" y="222">80,0 %</text>
+    <text x="30" y="246">Inglés</text><text x="150" y="246">55</text><text x="232" y="246">2</text><text x="298" y="246">96,4 %</text>
+    <text x="30" y="270">Física</text><text x="150" y="270">50</text><text x="232" y="270">13</text><text x="298" y="270">74,0 %</text>
+  </g>
+  <rect x="330" y="161" width="72" height="18" rx="9" fill="#10b981"/><text x="366" y="173" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="8" font-weight="700" fill="#ffffff">A SALVO</text>
+  <rect x="330" y="185" width="72" height="18" rx="9" fill="#10b981"/><text x="366" y="197" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="8" font-weight="700" fill="#ffffff">A SALVO</text>
+  <rect x="330" y="209" width="72" height="18" rx="9" fill="#f59e0b"/><text x="366" y="221" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="8" font-weight="700" fill="#ffffff">ATENCIÓN</text>
+  <rect x="330" y="233" width="72" height="18" rx="9" fill="#10b981"/><text x="366" y="245" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="8" font-weight="700" fill="#ffffff">A SALVO</text>
+  <rect x="330" y="257" width="72" height="18" rx="9" fill="#ef4444"/><text x="366" y="269" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="8" font-weight="700" fill="#ffffff">PELIGRO</text>
+  <rect x="16" y="290" width="448" height="30" rx="7" fill="#f0fdfa" stroke="#99f6e4"/>
+  <text x="30" y="309" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="700" fill="#0d9488">Apuntas cada nota o falta una sola vez y todo se recalcula solo.</text>
+  <rect x="356" y="304" width="18" height="11" rx="2" fill="#0d9488"/>
+  <path d="M360 312 h10 M365 305 v14 M360 308 l5 -3 5 3" stroke="#ffffff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

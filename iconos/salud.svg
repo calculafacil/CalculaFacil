@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Corazón -->
+  <path d="M32 8 C47 14 56 22 56 33 c0 13 -11 23 -24 23 S8 46 8 33 C8 22 17 14 32 8 Z" fill="#10b981"/>
+  <!-- Corazón interior -->
+  <path d="M32 15 C43 20 49 26 49 33 c0 9 -8 16 -17 16 S15 42 15 33 C15 26 21 20 32 15 Z" fill="#047857"/>
+  <!-- Línea de pulso -->
+  <path d="M15 33 h9 l4 -8 l6 15 l4 -8 h11" fill="none" stroke="#ecfdf5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
