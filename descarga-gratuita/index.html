@@ -103,9 +103,9 @@
 
         <!-- FORMULARIO DE EMAIL -->
         <form class="lead-formulario" id="leadFormulario" novalidate>
-          <input type="email" name="email" id="leadEmail" placeholder="Tu email (te enviamos el enlace)" required>
+          <input type="email" name="email" id="leadEmail" placeholder="Tu email (opcional) - te contamos novedades" autocomplete="email">
           <input type="text" name="_gotcha" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" id="leadBoton">Enviarme la plantilla gratis →</button>
+          <button type="submit" id="leadBoton">Descargar plantilla gratis →</button>
         </form>
         <div class="lead-resultado" id="leadResultado" hidden role="status"></div>
 
@@ -158,6 +158,16 @@
       var resultado = document.getElementById('leadResultado');
       var URL_LEAD = window.URL_LEAD_FORMSPREE || 'https://formspree.io/f/REEMPLAZA_LEAD';
       var EMAIL_SOPORTE = 'calculafacil.web@gmail.com';
+      var NOMBRE_ARCHIVO = 'Control-Notas-2026-2027.xlsx';
+
+      function descargar() {
+        var enlace = document.createElement('a');
+        enlace.href = NOMBRE_ARCHIVO;
+        enlace.download = NOMBRE_ARCHIVO;
+        document.body.appendChild(enlace);
+        enlace.click();
+        document.body.removeChild(enlace);
+      }
 
       function mostrar(exito, mensaje) {
         resultado.hidden = false;
@@ -167,54 +177,43 @@
 
       form.addEventListener('submit', function (evento) {
         evento.preventDefault();
+
         var email = input.value.trim();
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (email && !emailValido) {
           input.focus();
-          mostrar(false, 'Revisa que el email esté bien escrito.');
+          mostrar(false, 'Ese email no parece correcto. Revísalo (o déjalo en blanco y descarga igualmente).');
           return;
         }
 
-        boton.disabled = true;
-        var textoBoton = boton.textContent;
-        boton.textContent = 'Enviando…';
+        // 1) Descarga inmediata: la plantilla se entrega al instante, sin esperar a nadie.
+        descargar();
 
-        var finalizar = function (exito) {
-          boton.disabled = false;
-          boton.textContent = textoBoton;
-          if (window.gtag) gtag('event', 'lead_descarga', { 'enviado': exito });
-        };
+        if (window.gtag) gtag('event', 'lead_descarga', { 'enviado': true });
 
-        // URL sin configurar: respaldo por email para no perder el lead.
-        if (URL_LEAD.indexOf('REEMPLAZA') !== -1 || URL_LEAD.indexOf('https://formspree.io/f/') !== 0) {
-          mostrar(false,
-            'Hoy el formulario está en mantenimiento. Escríbenos a <a href="mailto:' + EMAIL_SOPORTE +
-            '?subject=Quiero la plantilla gratis de notas&body=Hola, me gustaría recibir la plantilla gratuita de notas de curso.' +
-            '">' + EMAIL_SOPORTE + '</a> y te la enviamos en un momento.');
-          finalizar(false);
-          return;
+        // 2) Si dejó email, lo apuntamos (solo si el receptor está configurado).
+        var receptorListo =
+          URL_LEAD.indexOf('REEMPLAZA') === -1 &&
+          (URL_LEAD.indexOf('https://formspree.io/f/') === 0 || URL_LEAD.indexOf('https://formsubmit.co/') === 0);
+
+        if (email && receptorListo) {
+          var cuerpo = new FormData();
+          cuerpo.append('email', email);
+          cuerpo.append('plantilla', NOMBRE_ARCHIVO);
+          cuerpo.append('pagina', 'descarga-gratuita');
+          cuerpo.append('origen', 'lead-magnet-plantilla-notas');
+          fetch(URL_LEAD, { method: 'POST', body: cuerpo, headers: { 'Accept': 'application/json' } }).catch(function () {});
         }
 
-        fetch(URL_LEAD, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, pagina: 'descarga-gratuita', origen: 'lead-magnet-plantilla-notas' })
-        })
-          .then(function (respuesta) {
-            if (!respuesta.ok) throw new Error('Formspree no respondió');
-            mostrar(true,
-              '¡Todo listo! Aquí tienes tu descarga directa:<br><br>' +
-              '<a href="Control-Notas-2026-2027.xlsx" download style="display:inline-block; background:#10b981; color:#ffffff; font-weight:800; padding:12px 22px; border-radius:12px; text-decoration:none; border-bottom:4px solid #047857;">Descargar plantilla gratis</a>' +
-              '<br><br><span style="font-size:0.82rem; opacity:0.8;">También te hemos apuntado para enviarte consejos y las novedades del curso. Si prefieres no recibir más correos, puedes darte de baja en cualquier momento.</span>');
-            form.hidden = true;
-            finalizar(true);
-          })
-          .catch(function () {
-            mostrar(false,
-              'No se ha podido enviar. Escríbenos a <a href="mailto:' + EMAIL_SOPORTE +
-              '?subject=Quiero la plantilla gratis de notas&body=Hola, me gustaría recibir la plantilla gratuita de notas de curso.' +
-              '">' + EMAIL_SOPORTE + '</a> y te la enviamos en un momento.');
-            finalizar(false);
-          });
+        resultado.hidden = false;
+        resultado.className = 'lead-resultado exito';
+        resultado.innerHTML =
+          '¡Listo! Tu plantilla se está descargando. Revísala en tu carpeta de Descargas.<br>' +
+          '<span style="font-size:0.8rem; opacity:0.8;">¿No ha llegado? <a href="' + NOMBRE_ARCHIVO + '" download>Pulsa aquí</a> para descargarla otra vez.</span>' +
+          (email
+            ? '<span style="display:block; font-size:0.78rem; opacity:0.8; margin-top:8px;">Te apuntamos para las plantillas del curso y novedades (solo lo que sirva, sin spam).</span>'
+            : '');
       });
     })();
   </script>
