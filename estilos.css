@@ -2143,6 +2143,33 @@ body.pagina-precio .pasos-lista li::before {
   color: var(--texto-carcasa);
 }
 
+.aviso-lanzamiento {
+  margin: 22px 0 0;
+  background: linear-gradient(90deg, rgba(234, 88, 12, 0.14), rgba(234, 88, 12, 0.04));
+  color: var(--texto-carcasa);
+  border: 2px solid rgba(234, 88, 12, 0.55);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.aviso-lanzamiento a {
+  color: var(--color-acento);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.boton-comprar.desactivado {
+  background: #94a3b8;
+  box-shadow: 0 6px 0 #64748b;
+  cursor: not-allowed;
+}
+
+.boton-comprar.desactivado:hover {
+  filter: none;
+}
+
 .garantia-linea {
   margin: 10px 0 0;
   font-size: 0.74rem;
