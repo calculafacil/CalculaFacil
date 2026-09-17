@@ -104,8 +104,8 @@
 
   <!-- LemonSqueezy: checkout overlay configurado con la URL real de la tienda -->
   <script>
-    window.CF_CHECKOUT_URL = 'https://calculafacil.lemonsqueezy.com/checkout/buy/10251a6d-9dfc-4c0c-bc28-25aa80b0f3df?embed=1';
-    window.CF_PAGOS_ACTIVADOS = false; // PASAR A true cuando la tienda esté activada y la URL sea de live
+    window.CF_CHECKOUT_URL = 'https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1';
+    window.CF_PAGOS_ACTIVADOS = true;
   </script>
   <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 </head>
@@ -137,14 +137,6 @@
       </button>
 
       <section class="carcasa-calculadora">
-
-        <!-- AVISO TEMPORAL HASTA ACTIVAR LA TIENDA -->
-        <div class="aviso-lanzamiento" id="aviso-pago" role="status">
-          <strong>Estamos activando el pago seguro (1-3 días):</strong> puedes ver ya el organizador por
-          dentro, pero las ventas se abren en cuanto el procesador de pagos lo apruebe. ¿Quieres que te
-          avisemos en cuanto esté listo? Escríbenos a
-          <a href="mailto:calculafacil.web@gmail.com?subject=Avisadme cuando el Organizador de Estudios esté a la venta">calculafacil.web@gmail.com</a>.
-        </div>
 
         <div class="hero-producto">
           <span class="sello-nuevo">Nuevo · Curso 2026-2027</span>
@@ -344,7 +336,7 @@
           <p class="oferta-fecha">Hasta el 15 de octubre · después 7,99 €</p>
 
           <!-- Botón de compra conectado al checkout real de LemonSqueezy (overlay) -->
-          <a class="boton-comprar lemonsqueezy-button" id="boton-comprar-producto" href="https://calculafacil.lemonsqueezy.com/checkout/buy/10251a6d-9dfc-4c0c-bc28-25aa80b0f3df?embed=1" rel="noopener">Comprar ahora · descarga inmediata</a>
+          <a class="boton-comprar lemonsqueezy-button" id="boton-comprar-producto" href="https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1" rel="noopener">Comprar ahora · descarga inmediata</a>
           <p class="boton-comprar-info">Recibes los 3 archivos al instante por email</p>
           <p class="garantia-linea">🔒 Pago seguro y cifrado (Stripe) · Garantía de devolución de 14 días · Descarga inmediata · Pago único</p>
           <a class="enlace-faq" href="#faq">¿Aún dudas? Lee las preguntas frecuentes</a>
@@ -528,21 +520,9 @@
 
     var botonProducto = document.getElementById('boton-comprar-producto');
     if (botonProducto) {
-      if (window.CF_PAGOS_ACTIVADOS === true && window.CF_CHECKOUT_URL) {
+      if (window.CF_CHECKOUT_URL) {
         botonProducto.href = window.CF_CHECKOUT_URL;
         botonProducto.classList.add('lemonsqueezy-button');
-      } else {
-        botonProducto.removeAttribute('href');
-        botonProducto.classList.remove('lemonsqueezy-button');
-        botonProducto.classList.add('desactivado');
-        botonProducto.setAttribute('role', 'button');
-        botonProducto.setAttribute('aria-disabled', 'true');
-        botonProducto.textContent = 'Ventas abiertas en 1-3 días';
-        botonProducto.addEventListener('click', function (e) {
-          e.preventDefault();
-          var aviso = document.getElementById('aviso-pago');
-          if (aviso) aviso.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
       }
     }
   </script>
@@ -568,7 +548,7 @@
           '<h3>¿Te lo estás pensando?</h3>' +
           '<p>El organizador de estudios cuesta menos que un café de 3 días y te ahorra el mes a mes de notas y faltas. <strong>Oferta de lanzamiento: 5,99 €</strong> (antes 7,99 €).</p>' +
           '<div class="popup-salida-botones">' +
-            '<a class="popup-salida-btn popup-salida-btn-primario lemonsqueezy-button" href="' + (window.CF_CHECKOUT_URL || 'https://calculafacil.lemonsqueezy.com/checkout/buy/10251a6d-9dfc-4c0c-bc28-25aa80b0f3df?embed=1') + '" rel="noopener">Comprar ahora · 5,99 €</a>' +
+            '<a class="popup-salida-btn popup-salida-btn-primario lemonsqueezy-button" href="' + (window.CF_CHECKOUT_URL || 'https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1') + '" rel="noopener">Comprar ahora · 5,99 €</a>' +
             '<button type="button" class="popup-salida-btn popup-salida-btn-secundario" data-popup-cerrar>Ahorro, ya vuelvo</button>' +
           '</div>' +
           '<p class="popup-salida-nota">Garantía de 14 días · Descarga inmediata · Pago único · Pago seguro cifrado</p>' +
