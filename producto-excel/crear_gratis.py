@@ -105,6 +105,13 @@ r = put_line(PORT, r, "2. En PESO (%) pon lo que vale cada asignatura en tu cent
 r = put_line(PORT, r, "3. Mira NOTA FINAL PONDERADA: tu media con los pesos, calculada sola.")
 
 r = r + 1
+r = section(PORT, r, "CÓMO ABRIRLO (si no tienes Excel, sin problema)")
+r = put_line(PORT, r, "1. Con Microsoft Excel (Windows/Mac): doble clic en el archivo y listo.")
+r = put_line(PORT, r, "2. Sin Excel, con Google Sheets (gratis y sin instalar): entra en drive.google.com → Nuevo → Subir archivo → elige este archivo .xlsx → doble clic sobre el archivo subido y se abrirá solo en Google Sheets.")
+r = put_line(PORT, r, "3. O instala LibreOffice (gratis): tras instalarlo, doble clic en el archivo y se abre igual.")
+r = put_line(PORT, r, "¿Solo te ofrece el Bloc de notas? Botón derecho sobre el archivo → Abrir con → elige Excel, Google Sheets o LibreOffice.")
+
+r = r + 1
 r = section(PORT, r, "DIFERENCIA CON LA VERSIÓN DE PAGO")
 r = put_line(PORT, r, "Este archivo gratuito solo controla NOTAS. El Organizador de Estudios 2026-2027 completo (calculafacil.app/organizador-estudios/) además incluye: asistencia día a día con semáforo verde/ámbar/rojo, registro de faltas, retrasos y justificadas, tabla por asignatura automática y tu cuadro de mandos con objetivo de nota.")
 
@@ -122,19 +129,25 @@ for idx, w in enumerate(W, start=1):
 NOTAS.sheet_view.showGridLines = False
 NOTAS.freeze_panes = "A5"
 
-NOTAS.merge_cells("B1:I1")
-t1 = NOTAS["B1"]
+NOTAS.merge_cells("A1:I1")
+t1 = NOTAS["A1"]
 t1.value = "CONTROL RÁPIDO DE NOTAS 2026/2027"
-t1.font = Font(bold=True, size=17, color=WHITE)
+t1.font = Font(bold=True, size=20, color=WHITE)
 t1.fill = FILL_NAVY
 t1.alignment = Alignment(horizontal="center", vertical="center")
-NOTAS.row_dimensions[1].height = 40
-NOTAS.merge_cells("B2:I2")
-t2 = NOTAS["B2"]
+NOTAS.row_dimensions[1].height = 46
+NOTAS.merge_cells("A2:I2")
+t2 = NOTAS["A2"]
 t2.value = "Hasta 5 notas por asignatura · PESO (%) · la NOTA FINAL se calcula sola"
 t2.font = Font(italic=True, size=11, color=GRAY)
 t2.alignment = Alignment(horizontal="center", vertical="center")
 NOTAS.row_dimensions[2].height = 23
+NOTAS.merge_cells("A3:I3")
+t3 = NOTAS["A3"]
+t3.value = "CALCULAFÁCIL · calculafacil.app · versión gratuita"
+t3.font = Font(bold=True, size=10, color="1F4E79")
+t3.alignment = Alignment(horizontal="center", vertical="center")
+NOTAS.row_dimensions[3].height = 20
 
 headers = ["ASIGNATURA", "NOTA 1", "NOTA 2", "NOTA 3", "NOTA 4", "NOTA 5", "MEDIA", "PESO (%)"]
 for col, h in enumerate(headers, start=2):

@@ -116,8 +116,20 @@
             <div class="lead-feature"><span class="emoji">📗</span><span>Un Excel de una hoja (NOTAS) con hueco para 12 asignaturas y 5 notas por asignatura.</span></div>
             <div class="lead-feature"><span class="emoji">🧮</span><span>La MEDIA de cada asignatura y la NOTA FINAL PONDERADA, calculadas solas.</span></div>
             <div class="lead-feature"><span class="emoji">⚖️</span><span>Pesos (%) configurables: el total se pone verde cuando suman 100 y rojo si no.</span></div>
-            <div class="lead-feature"><span class="emoji">🖨️</span><span>Lista para imprimir en A4 y funciones en LibreOffice (gratis) y Excel 2016+.</span></div>
+            <div class="lead-feature"><span class="emoji">🖨️</span><span>Lista para imprimir en A4. Funciona en Google Sheets (gratis), LibreOffice y Excel 2016+.</span></div>
           </div>
+        </section>
+
+        <!-- CÓMO ABRIRLO -->
+        <section class="seccion-producto">
+          <h2>¿Cómo lo abro?</h2>
+          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets.</p>
+          <ol class="pasos-lista">
+            <li><div><b>En Excel (Windows o Mac)</b><span>Haz doble clic sobre el archivo descargado y se abre directamente. La plantilla está hecha para Excel 2016 o superior.</span></div></li>
+            <li><div><b>Sin Excel: Google Sheets (gratis y sin instalar)</b><span>Entra en <a href="https://drive.google.com" rel="noopener" target="_blank">drive.google.com</a> → Nuevo → Subir archivo → elige el .xlsx descargado → doble clic sobre el archivo subido y se abrirá solo en Google Sheets.</span></div></li>
+            <li><div><b>Alternativa gratis para el ordenador</b><span>LibreOffice también lo abre (gratis y sin coste de licencia). Tras instalarlo, haz doble clic sobre el archivo.</span></div></li>
+            <li><div><b>¿Solo te sale el Bloc de notas?</b><span>Haz clic derecho sobre el archivo → Abrir con → elige Excel, Google Sheets o LibreOffice. Si no lo tienes instalado, usa el paso 2 con Google Sheets.</span></div></li>
+          </ol>
         </section>
 
         <!-- UPSELL -->
@@ -211,6 +223,7 @@
         resultado.innerHTML =
           '¡Listo! Tu plantilla se está descargando. Revísala en tu carpeta de Descargas.<br>' +
           '<span style="font-size:0.8rem; opacity:0.8;">¿No ha llegado? <a href="' + NOMBRE_ARCHIVO + '" download>Pulsa aquí</a> para descargarla otra vez.</span>' +
+          '<span style="display:block; font-size:0.78rem; opacity:0.8; margin-top:8px;">Tip: ¿solo te sale el Bloc de notas? Sin problema, en Google Sheets se abre igual y gratis: mira el apartado «¿Cómo lo abro?» de arriba.</span>' +
           (email
             ? '<span style="display:block; font-size:0.78rem; opacity:0.8; margin-top:8px;">Te apuntamos para las plantillas del curso y novedades (solo lo que sirva, sin spam).</span>'
             : '');
