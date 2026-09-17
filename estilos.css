@@ -3229,11 +3229,14 @@ body.pagina-precio .pasos-lista li::before {
 }
 
 .pagina-lead .hero-lead h2 {
-  font-size: 1.4rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  margin: 0 0 8px;
-  color: var(--texto-pagina);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--texto-pagina, #0f172a);
+  margin: 10px 0 12px;
 }
+
 
 .pagina-lead .hero-lead p {
   font-size: 0.92rem;
