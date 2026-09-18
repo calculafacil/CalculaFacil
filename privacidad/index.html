@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-T4SBFHTJ');</script>
-  <!-- End Google Tag Manager -->
 
 <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6932333347460999" crossorigin="anonymous"></script>
@@ -17,7 +10,9 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
+    gtag('consent', 'default', { 'ad_storage': 'denied', 'analytics_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied', 'functionality_storage': 'granted', 'personalization_storage': 'denied', 'security_storage': 'granted' });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
     gtag('js', new Date());
     gtag('config', 'G-1N854MKMT2', { 'send_page_view': true });
   </script>
@@ -58,6 +53,7 @@
 
   <link rel="stylesheet" href="../estilos.css">
   <script defer src="../js/core.js"></script>
+  <script defer src="../js/consent.js"></script>
 
   <script type="application/ld+json">
   {
@@ -69,9 +65,6 @@
   </script>
 </head>
 <body data-tema="classic">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4SBFHTJ"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- BANNER PRINCIPAL -->
   <header class="banner-principal" data-titulo="CalculaFácil - Herramientas Académicas y Finanzas">
@@ -119,8 +112,8 @@
 
         <section class="seo-info-box">
           <h3>Análisis y cookies publicitarias</h3>
-          <p>Usamos Google Analytics (a través de Google Tag Manager) para conocer, de forma agregada y anónima, cuántas personas visitan la web y qué calculadoras son más útiles. Además, este sitio incluye anuncios de Google AdSense, que utilizan cookies para seleccionar y medir la publicidad mostrada. Estas cookies no nos permiten identificarte personalmente.</p>
-          <p>Al visitar cualquier página de CalculaFácil verás un aviso inferior que te permite aceptar o no el uso de estas cookies. Si no aceptas, se bloquean las cookies publicitarias y analíticas; las calculadoras seguirán funcionando igual. Puedes revisar o retirar tu consentimiento en cualquier momento desde la configuración de cookies de tu navegador o con extensiones de bloqueo.</p>
+          <p>Usamos Google Analytics para conocer, de forma agregada y anónima, cuántas personas visitan la web y qué calculadoras son más útiles. Además, este sitio incluye anuncios de Google AdSense, que utilizan cookies para seleccionar y medir la publicidad mostrada. Estas cookies no nos permiten identificarte personalmente.</p>
+          <p>Al visitar cualquier página de CalculaFácil verás un aviso inferior que te permite aceptar o no el uso de estas cookies. Si no aceptas, se bloquean las cookies publicitarias y analíticas; las calculadoras seguirán funcionando igual. Puedes revisar o retirar tu consentimiento en cualquier momento desde la configuración de cookies de tu navegador o con extensiones de bloqueo. Cuando aceptas, Google recibe datos de consentimiento a través del Consent Mode (modo de consentimiento) para personalizar y medir anuncios.</p>
         </section>
 
         <section class="seo-info-box">
