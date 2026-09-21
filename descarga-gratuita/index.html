@@ -114,8 +114,8 @@
 
         <!-- PANTALLA DE ÉXITO: aparece al volver de formsubmit (?enviado=1) -->
         <div class="lead-resultado exito" id="leadEnviado" hidden role="status">
-          ¡Listo! Revisa tu correo (y la carpeta de spam): la plantilla va de camino.
-          <span class="lead-enviado-sub">¿No te llega en 2 minutos? <a href="Control-Notas-2026-2027.xlsx" download>Descárgala aquí directamente</a>.</span>
+          ¡Listo! La plantilla se descargó sola en tu navegador y te la acabamos de enviar también por email (revisa la carpeta de spam por si acaso).
+          <span class="lead-enviado-sub">¿No la ves? <a href="Control-Notas-2026-2027.xlsx" download>Descárgala aquí directamente</a>.</span>
           <span class="lead-enviado-sub">Consejo: si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
         </div>
 
@@ -133,9 +133,9 @@
 <!-- CÓMO ABRIRLO -->
         <section class="seccion-producto">
           <h2>¿Cómo lo abro?</h2>
-          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets. La recibes por email (revisa también el spam) y, si en 2 minutos no está, usa el enlace directo de la pantalla de «¡Listo!».</p>
+          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets. Al enviar, se descarga sola en tu navegador y también te la enviamos por email (revisa también el spam). Si no la ves, usa el enlace directo de la pantalla de «¡Listo!».</p>
           <ol class="pasos-lista">
-            <li><div><b>En Excel (Windows o Mac)</b><span>Cuando recibas el email, pulsa el enlace de descarga o guarda el archivo adjunto y haz doble clic sobre él. La plantilla está hecha para Excel 2016 o superior.</span></div></li>
+            <li><div><b>En Excel (Windows o Mac)</b><span>La plantilla se descarga sola al enviar el formulario (y también te llega por email). Búscala en tu carpeta de Descargas y haz doble clic sobre ella. Está hecha para Excel 2016 o superior.</span></div></li>
             <li><div><b>Sin Excel: Google Sheets (gratis y sin instalar)</b><span>Entra en <a href="https://drive.google.com" rel="noopener" target="_blank">drive.google.com</a> → Nuevo → Subir archivo → elige el .xlsx descargado → doble clic sobre el archivo subido y se abrirá solo en Google Sheets.</span></div></li>
             <li><div><b>Alternativa gratis para el ordenador</b><span>LibreOffice también lo abre (gratis y sin coste de licencia). Tras instalarlo, haz doble clic sobre el archivo.</span></div></li>
             <li><div><b>¿Solo te sale el Bloc de notas?</b><span>Haz clic derecho sobre el archivo → Abrir con → elige Excel, Google Sheets o LibreOffice. Si no lo tienes instalado, usa el paso 2 con Google Sheets.</span></div></li>
@@ -235,7 +235,18 @@
         if (window.gtag) gtag('event', 'lead_enviado', { 'origen': 'descarga-gratuita' });
 
         boton.disabled = true;
-        boton.textContent = 'Enviando… revisa tu correo';
+        boton.textContent = 'Enviando… tu plantilla ya se está descargando';
+
+        // Garantía de entrega: el Excel se descarga al instante además del envío
+        // por email. Así nadie se queda sin plantilla aunque el correo tarde o
+        // aterrice en spam (los dos caminos conviven).
+        var descarga = document.createElement('a');
+        descarga.href = 'Control-Notas-2026-2027.xlsx';
+        descarga.download = '';
+        document.body.appendChild(descarga);
+        descarga.click();
+        document.body.removeChild(descarga);
+
         form.submit();
       });
     })();
