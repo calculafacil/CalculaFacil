@@ -53,8 +53,11 @@
   <script src="../js/core.js" defer></script>
   <script defer src="../js/consent.js"></script>
 
-  <!-- FORMSPREE: crea tu formulario gratis en https://formspree.io y sustituye el ID.
-       Si la URL no está configurada, se muestra un email de respaldo. -->
+<!-- FORMSPREE: crea tu formulario gratis en https://formspree.io y sustituye el ID.
+       Si la URL no está configurada, se muestra un email de respaldo.
+       Entrega por correo: la acción del formulario es formsubmit.co con _autoresponse
+       (el usuario recibe la plantilla en su email) y un enlace directo de respaldo.
+       La autorespuesta requiere que la reCAPTCHA de formsubmit esté activada (por defecto). -->
   <script>window.URL_LEAD_FORMSPREE = 'https://formsubmit.co/calculafacil.web@gmail.com';</script>
 </head>
 <body data-tema="classic" class="pagina-producto pagina-lead">
@@ -84,7 +87,7 @@
       <section class="carcasa-calculadora">
 
         <div class="hero-lead">
-          <span class="sello-nuevo">PLANTILLA GRATUITA · CURSO 2026-2027 · SIN REGISTRO</span>
+          <span class="sello-nuevo">PLANTILLA GRATUITA · CURSO 2026-2027 · TE LA ENVIAMOS A TU EMAIL</span>
           <h2>Controla tus notas este curso <br><span class="texto-destacado">con una plantilla gratis</span></h2>
           <p>Apuntas cada nota una sola vez y la plantilla calcula tu media y tu nota final según los pesos de tu centro. Sin fórmulas que aprender: funciona solo.</p>
         </div>
@@ -94,13 +97,27 @@
           <img class="lead-preview-img" src="../organizador-estudios/img/4.png" alt="Vista previa de la plantilla gratuita de Control Rápido de Notas">
         </div>
 
-        <!-- FORMULARIO DE EMAIL -->
-        <form class="lead-formulario" id="leadFormulario" novalidate>
-          <input type="email" name="email" id="leadEmail" placeholder="Tu email (opcional) - te contamos novedades" autocomplete="email">
-          <input type="text" name="_gotcha" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" id="leadBoton">Descargar plantilla gratis →</button>
+<!-- FORMULARIO DE EMAIL (obligatorio: la plantilla se entrega por correo) -->
+        <form class="lead-formulario" id="leadFormulario" action="https://formsubmit.co/calculafacil.web@gmail.com" method="POST" novalidate>
+          <input type="email" name="email" id="leadEmail" placeholder="Tu email para recibir la plantilla" autocomplete="email" required>
+          <input type="text" name="_honey" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_subject" value="📥 Plantilla gratuita de notas (CalculaFácil)" readonly>
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_replyto" id="leadReplyto" readonly>
+          <input type="hidden" name="_next" value="https://calculafacil.app/descarga-gratuita/?enviado=1">
+          <input type="hidden" name="_autoresponse" value="¡Hola! 👋 Aquí tienes tu plantilla gratuita de notas (curso 2026/27). Descárgala aquí: https://calculafacil.app/descarga-gratuita/Control-Notas-2026-2027.xlsx · Si se abre en el Bloc de notas, súbela a Google Sheets (drive.google.com → Nuevo → Subir archivo) y se abrirá sola. Un saludo, CalculaFácil · calculafacil.app" readonly>
+          <input type="hidden" name="origen" id="leadOrigen" value="descarga-gratuita">
+          <input type="hidden" name="plantilla" value="Control-Notas-2026-2027.xlsx">
+          <button type="submit" id="leadBoton">Enviar la plantilla a mi email →</button>
         </form>
         <div class="lead-resultado" id="leadResultado" hidden role="status"></div>
+
+        <!-- PANTALLA DE ÉXITO: aparece al volver de formsubmit (?enviado=1) -->
+        <div class="lead-resultado exito" id="leadEnviado" hidden role="status">
+          ¡Listo! Revisa tu correo (y la carpeta de spam): la plantilla va de camino.
+          <span class="lead-enviado-sub">¿No te llega en 2 minutos? <a href="Control-Notas-2026-2027.xlsx" download>Descárgala aquí directamente</a>.</span>
+          <span class="lead-enviado-sub">Consejo: si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
+        </div>
 
         <!-- QUÉ INCLUYE -->
         <section class="seccion-producto">
@@ -113,12 +130,12 @@
           </div>
         </section>
 
-        <!-- CÓMO ABRIRLO -->
+<!-- CÓMO ABRIRLO -->
         <section class="seccion-producto">
           <h2>¿Cómo lo abro?</h2>
-          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets.</p>
+          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets. La recibes por email (revisa también el spam) y, si en 2 minutos no está, usa el enlace directo de la pantalla de «¡Listo!».</p>
           <ol class="pasos-lista">
-            <li><div><b>En Excel (Windows o Mac)</b><span>Haz doble clic sobre el archivo descargado y se abre directamente. La plantilla está hecha para Excel 2016 o superior.</span></div></li>
+            <li><div><b>En Excel (Windows o Mac)</b><span>Cuando recibas el email, pulsa el enlace de descarga o guarda el archivo adjunto y haz doble clic sobre él. La plantilla está hecha para Excel 2016 o superior.</span></div></li>
             <li><div><b>Sin Excel: Google Sheets (gratis y sin instalar)</b><span>Entra en <a href="https://drive.google.com" rel="noopener" target="_blank">drive.google.com</a> → Nuevo → Subir archivo → elige el .xlsx descargado → doble clic sobre el archivo subido y se abrirá solo en Google Sheets.</span></div></li>
             <li><div><b>Alternativa gratis para el ordenador</b><span>LibreOffice también lo abre (gratis y sin coste de licencia). Tras instalarlo, haz doble clic sobre el archivo.</span></div></li>
             <li><div><b>¿Solo te sale el Bloc de notas?</b><span>Haz clic derecho sobre el archivo → Abrir con → elige Excel, Google Sheets o LibreOffice. Si no lo tienes instalado, usa el paso 2 con Google Sheets.</span></div></li>
@@ -155,29 +172,42 @@
     }
   </script>
 
-  <script>
+<script>
     (function () {
       var form = document.getElementById('leadFormulario');
       var input = document.getElementById('leadEmail');
       var boton = document.getElementById('leadBoton');
       var resultado = document.getElementById('leadResultado');
-      var URL_LEAD = window.URL_LEAD_FORMSPREE || 'https://formspree.io/f/REEMPLAZA_LEAD';
-      var EMAIL_SOPORTE = 'calculafacil.web@gmail.com';
-      var NOMBRE_ARCHIVO = 'Control-Notas-2026-2027.xlsx';
+      var enviado = document.getElementById('leadEnviado');
 
-      function descargar() {
-        var enlace = document.createElement('a');
-        enlace.href = NOMBRE_ARCHIVO;
-        enlace.download = NOMBRE_ARCHIVO;
-        document.body.appendChild(enlace);
-        enlace.click();
-        document.body.removeChild(enlace);
+      function mostrar(mensaje, clase) {
+        resultado.hidden = false;
+        resultado.className = 'lead-resultado ' + (clase || '');
+        resultado.innerHTML = mensaje;
       }
 
-      function mostrar(exito, mensaje) {
-        resultado.hidden = false;
-        resultado.className = 'lead-resultado ' + (exito ? 'exito' : 'error');
-        resultado.innerHTML = mensaje;
+      // Si la persona vuelve de formsubmit (?enviado=1): pantalla de éxito.
+      var hayExito = false;
+      try {
+        hayExito = new URLSearchParams(window.location.search).get('enviado') === '1';
+      } catch (err) {}
+
+      // De dónde viene la visita (p. ej. ?origen=asistencias-faltas): se apunta
+      // en el campo oculto para formsubmit y se mide en GA4.
+      var origen = 'descarga-gratuita';
+      try {
+        origen = new URLSearchParams(window.location.search).get('origen') || origen;
+      } catch (err) {}
+      var campoOrigen = document.getElementById('leadOrigen');
+      if (campoOrigen) campoOrigen.value = origen;
+      if (window.gtag && origen !== 'descarga-gratuita') {
+        gtag('event', 'lead_visita_con_origen', { 'origen': origen });
+      }
+
+      if (hayExito) {
+        if (form) form.hidden = true;
+        if (enviado) enviado.hidden = false;
+        if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': 'descarga-gratuita' });
       }
 
       form.addEventListener('submit', function (evento) {
@@ -186,47 +216,34 @@
         var email = input.value.trim();
         var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-        if (email && !emailValido) {
+        if (!email) {
           input.focus();
-          mostrar(false, 'Ese email no parece correcto. Revísalo (o déjalo en blanco y descarga igualmente).');
+          mostrar('Necesitamos tu email para enviarte la plantilla. Solo lo usamos para esto (y para avisarte de las plantillas del curso, sin spam).');
+          return;
+        }
+        if (!emailValido) {
+          input.focus();
+          mostrar('Ese email no parece correcto. Revísalo, por favor.');
           return;
         }
 
-        // 1) Descarga inmediata: la plantilla se entrega al instante, sin esperar a nadie.
-        descargar();
+        // La plantilla se entrega por correo (autorespuesta de formsubmit.co) con
+        // enlace directo de respaldo en la pantalla de éxito y en el propio email.
+        var replyto = document.getElementById('leadReplyto');
+        if (replyto) replyto.value = email;
 
-        if (window.gtag) gtag('event', 'lead_descarga', { 'enviado': true });
+        if (window.gtag) gtag('event', 'lead_enviado', { 'origen': 'descarga-gratuita' });
 
-        // 2) Si dejó email, lo apuntamos (solo si el receptor está configurado).
-        var receptorListo =
-          URL_LEAD.indexOf('REEMPLAZA') === -1 &&
-          (URL_LEAD.indexOf('https://formspree.io/f/') === 0 || URL_LEAD.indexOf('https://formsubmit.co/') === 0);
-
-        if (email && receptorListo) {
-          var cuerpo = new FormData();
-          cuerpo.append('email', email);
-          cuerpo.append('plantilla', NOMBRE_ARCHIVO);
-          cuerpo.append('pagina', 'descarga-gratuita');
-          cuerpo.append('origen', 'lead-magnet-plantilla-notas');
-          fetch(URL_LEAD, { method: 'POST', body: cuerpo, headers: { 'Accept': 'application/json' } }).catch(function () {});
-        }
-
-        resultado.hidden = false;
-        resultado.className = 'lead-resultado exito';
-        resultado.innerHTML =
-          '¡Listo! Tu plantilla se está descargando. Revísala en tu carpeta de Descargas.<br>' +
-          '<span style="font-size:0.8rem; opacity:0.8;">¿No ha llegado? <a href="' + NOMBRE_ARCHIVO + '" download>Pulsa aquí</a> para descargarla otra vez.</span>' +
-          '<span style="display:block; font-size:0.78rem; opacity:0.8; margin-top:8px;">Tip: ¿solo te sale el Bloc de notas? Sin problema, en Google Sheets se abre igual y gratis: mira el apartado «¿Cómo lo abro?» de arriba.</span>' +
-          (email
-            ? '<span style="display:block; font-size:0.78rem; opacity:0.8; margin-top:8px;">Te apuntamos para las plantillas del curso y novedades (solo lo que sirva, sin spam).</span>'
-            : '');
+        boton.disabled = true;
+        boton.textContent = 'Enviando… revisa tu correo';
+        form.submit();
       });
     })();
   </script>
 
   <noscript>
-    <p style="text-align:center; padding:20px;">Para descargar la plantilla escribe a
-    <a href="mailto:calculafacil.web@gmail.com">calculafacil.web@gmail.com</a> y te la enviamos.</p>
+    <p style="text-align:center; padding:20px;">Para recibir la plantilla por email escribe a
+    <a href="mailto:calculafacil.web@gmail.com">calculafacil.web@gmail.com</a> y te la enviamos al momento.</p>
   </noscript>
 </body>
 </html>

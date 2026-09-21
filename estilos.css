@@ -3223,7 +3223,7 @@ body.pagina-precio .pasos-lista li::before {
   border-radius: 20px;
   background:
     radial-gradient(120% 160% at 50% 0%, rgba(16, 185, 129, 0.14), transparent 60%),
-    var(--fondo-caja, #ffffff);
+    var(--bg-pagina);
   border: 2px solid var(--borde-carcasa);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
 }
@@ -3248,6 +3248,21 @@ body.pagina-precio .pasos-lista li::before {
   margin-right: auto;
 }
 
+.pagina-lead .hero-lead .sello-nuevo {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
 .lead-formulario {
   max-width: 420px;
   margin: 0 auto 32px;
@@ -3262,7 +3277,7 @@ body.pagina-precio .pasos-lista li::before {
   padding: 13px 16px;
   border: 2px solid rgba(148, 163, 184, 0.4);
   border-radius: 12px;
-  background: var(--bg-control);
+  background: var(--bg-input);
   color: var(--texto-input);
   outline: none;
   transition: border-color 0.2s;
@@ -3520,4 +3535,124 @@ body.pagina-precio .pasos-lista li::before {
   .anuncio-ad {
     min-height: 100px;
   }
+}
+
+/* ==========================================
+   BLOQUE EXCEL ARRIBA (calculadoras)
+   Gratis + Organizador, visibles sin hacer scroll
+   ========================================== */
+.bloque-excel-arriba {
+  margin: 16px 0 22px;
+}
+
+.bloque-excel-titulo {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--texto-pagina);
+  opacity: 0.92;
+}
+
+.bloque-excel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tarjeta-excel-top {
+  margin-bottom: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Variante del Organizador: acento ámbar en vez del verde gratuito */
+.tarjeta-lead-magnet.variante-pago {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(217, 119, 6, 0.05));
+}
+
+.tarjeta-lead-magnet.variante-pago:hover {
+  border-color: rgba(245, 158, 11, 0.8);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.22);
+}
+
+.tarjeta-lead-magnet.variante-pago .lead-cta {
+  background: #f59e0b;
+  box-shadow: 0 4px 0 #b45309;
+}
+
+.tarjeta-lead-magnet.variante-pago .etiqueta-pago {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.22);
+  color: #f59e0b;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+@media (max-width: 560px) {
+  .bloque-excel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   OFERTA NO PIERDAS EL RITMO (calculadoras)
+   Gratis + pago, al acabar de calcular
+   ========================================== */
+.seguimiento {
+  margin-top: 18px;
+  padding: 14px;
+  border: 2px dashed var(--borde-carcasa);
+  border-radius: 14px;
+  background: var(--bg-pagina);
+  color: var(--texto-pagina);
+}
+
+.seguimiento-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  color: var(--texto-pagina);
+}
+
+/* ==========================================
+   ENTREGA POR EMAIL (descarga gratuita)
+   ========================================== */
+.lead-enviado-sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+#leadEnviado a,
+.lead-fallback a {
+  color: inherit;
+  font-weight: 800;
+}
+
+.lead-fallback {
+  max-width: 420px;
+  margin: -18px auto 0;
+  text-align: center;
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.lead-fallback a {
+  color: #10b981;
 }

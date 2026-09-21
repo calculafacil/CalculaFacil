@@ -589,14 +589,14 @@ window.CF = (function () {
     // CLIC EN CTAs DEL PRODUCTO (botón de compra + cajas del organizador):
     // la KPI del experimento de ventas. Se mide en GA4.
     document.addEventListener('click', evento => {
-      const enlace = evento.target.closest && evento.target.closest('.boton-comprar, .caja-producto-enlace');
+      const enlace = evento.target.closest && evento.target.closest('.boton-comprar, .caja-producto-enlace, .tarjeta-lead-magnet.variante-pago');
       if (!enlace) return;
       if (window.gtag) gtag('event', 'clic_producto', { 'pagina': detectarPaginaActual(), 'destino': 'organizador-estudios' });
     });
 
     // CLIC EN LA TARJETA DEL DESCARGABLE GRATUITO (lead magnet)
     document.addEventListener('click', evento => {
-      const enlace = evento.target.closest && evento.target.closest('.tarjeta-lead-magnet');
+      const enlace = evento.target.closest && evento.target.closest('.tarjeta-lead-magnet:not(.variante-pago)');
       if (!enlace) return;
       if (window.gtag) gtag('event', 'clic_lead_magnet', { 'pagina': detectarPaginaActual(), 'destino': 'descarga-gratuita' });
     });
