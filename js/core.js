@@ -333,8 +333,11 @@ window.CF = (function () {
   }
 
   // CONSENTIMIENTO DE COOKIES: aviso fijo inferior con enlace a la
-  // política de privacidad. Google AdSense y la analítica usan cookies;
-  // al Aceptar se guarda la decisión en localStorage y se avisa a GTM.
+  // política de privacidad. Google AdSense y la analítica usan cookies.
+  // Hay dos botones (Aceptar / Rechazar) porque el RGPD art. 7.3 exige que
+  // rechazar sea tan fácil como aceptar. Rechazar deja la medición en modo
+  // denied, que es lo correcto: AdSense seguirá sirviendo anuncios no
+  // personalizados y más RPM compliant.
   const CLAVE_CONSENTIMIENTO = 'cf_consentimiento_cookies';
 
   function prefijarRuta() {
@@ -345,7 +348,9 @@ window.CF = (function () {
     try {
       // Ya hubo consentimiento en una visita anterior: activamos la medición (GA4).
       if (localStorage.getItem(CLAVE_CONSENTIMIENTO)) {
-        if (window.gtag) gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+        if (localStorage.getItem(CLAVE_CONSENTIMIENTO) === 'aceptada' && window.gtag) {
+          gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+        }
         return;
       }
     } catch (err) { /* almacenamiento bloqueado: mostramos el aviso igual */ }
@@ -360,25 +365,45 @@ window.CF = (function () {
     const texto = document.createElement('p');
     texto.innerHTML =
       'CalculaFácil usa cookies de Google (analítica) y anuncios de AdSense para mantenerse gratuito. ' +
-      'Al pulsar «Aceptar» confirmas que lo entiendes. ' +
       '<a href="' + prefijarRuta() + 'privacidad/">Más información</a>';
 
-    const boton = document.createElement('button');
-    boton.type = 'button';
-    boton.className = 'btn-aceptar-cookies';
-    boton.textContent = 'Aceptar';
-    boton.addEventListener('click', () => {
-      try { localStorage.setItem(CLAVE_CONSENTIMIENTO, 'aceptada'); } catch (err) {}
+    function registrar(decision) {
+      try { localStorage.setItem(CLAVE_CONSENTIMIENTO, decision); } catch (err) {}
       aviso.remove();
-      if (window.dataLayer) window.dataLayer.push({ 'event': 'aceptar_cookies' });
+      if (window.dataLayer) window.dataLayer.push({ 'event': 'consent_decision', decision: decision });
       if (window.gtag) {
-        gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
-        gtag('event', 'aceptar_cookies');
+        if (decision === 'aceptada') {
+          gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+          gtag('event', 'aceptar_cookies');
+        } else {
+          // Sin cambios: el 'default' ya era denied. Solo queda el evento para
+          // poder medir cuántos aceptan y cuántos rechazan.
+          gtag('event', 'rechazar_cookies');
+        }
+        gtag('event', 'consent_decision', { decision: decision });
       }
-    });
+    }
+
+    const botones = document.createElement('div');
+    botones.className = 'aviso-cookies-botones';
+
+    const botonAceptar = document.createElement('button');
+    botonAceptar.type = 'button';
+    botonAceptar.className = 'btn-aceptar-cookies';
+    botonAceptar.textContent = 'Aceptar';
+    botonAceptar.addEventListener('click', () => registrar('aceptada'));
+
+    const botonRechazar = document.createElement('button');
+    botonRechazar.type = 'button';
+    botonRechazar.className = 'btn-rechazar-cookies';
+    botonRechazar.textContent = 'Solo lo necesario';
+    botonRechazar.addEventListener('click', () => registrar('rechazada'));
+
+    botones.appendChild(botonAceptar);
+    botones.appendChild(botonRechazar);
 
     aviso.appendChild(texto);
-    aviso.appendChild(boton);
+    aviso.appendChild(botones);
     document.body.appendChild(aviso);
   }
 

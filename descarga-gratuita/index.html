@@ -69,7 +69,7 @@
         <a href="../" class="banner-enlace">
           <img src="../logo.svg" alt="Logo CalculaFácil" width="50" height="50" class="logo-header">
           <div class="banner-texto">
-            <h1 id="titulo-header">CalculaFácil - Herramientas Académicas y Finanzas</h1>
+            <h1 id="titulo-header">Plantilla Gratuita de Notas en Excel | CalculaFácil</h1>
             <p class="slogan" id="slogan-header">Tu calculadora online gratuita para exámenes, notas y finanzas.</p>
           </div>
         </a>
@@ -110,6 +110,9 @@
           <input type="hidden" name="plantilla" value="Control-Notas-2026-2027.xlsx">
           <button type="submit" id="leadBoton">Enviar la plantilla a mi email →</button>
         </form>
+        <p class="lead-respaldo" id="leadRespaldo">
+          ¿Prefieres no dejar tu email? <a href="Control-Notas-2026-2027.xlsx" download data-respaldo>Descárgala aquí directamente</a>.
+        </p>
         <div class="lead-resultado" id="leadResultado" hidden role="status"></div>
 
         <!-- PANTALLA DE ÉXITO: aparece al volver de formsubmit (?enviado=1) -->
@@ -211,6 +214,18 @@
         if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': 'descarga-gratuita' });
       }
 
+      // Respaldo sin email: cuenta como lead también, para saber cuántos se
+      // llevan la plantilla sin dejar el contacto.
+      var respaldo = document.getElementById('leadRespaldo');
+      if (respaldo) {
+        var enlaceRespaldo = respaldo.querySelector('[data-respaldo]');
+        if (enlaceRespaldo) {
+          enlaceRespaldo.addEventListener('click', function () {
+            if (window.gtag) gtag('event', 'lead_sin_email', { 'origen': origen });
+          });
+        }
+      }
+
       form.addEventListener('submit', function (evento) {
         evento.preventDefault();
 
@@ -236,19 +251,34 @@
         if (window.gtag) gtag('event', 'lead_enviado', { 'origen': 'descarga-gratuita' });
 
         boton.disabled = true;
-        boton.textContent = 'Enviando… tu plantilla ya se está descargando';
+        boton.textContent = 'Descargando tu plantilla…';
 
         // Garantía de entrega: el Excel se descarga al instante además del envío
         // por email. Así nadie se queda sin plantilla aunque el correo tarde o
         // aterrice en spam (los dos caminos conviven).
+        //
+        // Dos errores que rompían la entrega en el 64% del tráfico (móvil) y que
+        // ya no se pueden repetir:
+        //   1) No borrar el <a> en el acto. En Safari iOS y en Firefox, quitarlo
+        //      justo después de .click() cancela la descarga.
+        //   2) No enviar el formulario en el mismo instante. La navegación a
+        //      formsubmit gana la carrera y el móvil se queda sin archivo.
         var descarga = document.createElement('a');
         descarga.href = 'Control-Notas-2026-2027.xlsx';
-        descarga.download = '';
+        descarga.download = 'Control-Notas-2026-2027.xlsx';
+        descarga.rel = 'noopener';
+        descarga.style.display = 'none';
         document.body.appendChild(descarga);
         descarga.click();
-        document.body.removeChild(descarga);
+        window.setTimeout(function () {
+          if (descarga.parentNode) descarga.parentNode.removeChild(descarga);
+        }, 5000);
 
-        form.submit();
+        // El formulario se envía después: la descarga ya ha salido y el
+        // autorespuesta de formsubmit manda el email con el enlace de respaldo.
+        window.setTimeout(function () {
+          if (form) form.submit();
+        }, 1500);
       });
     })();
   </script>
