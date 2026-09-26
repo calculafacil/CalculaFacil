@@ -34,7 +34,8 @@
 
   <!-- OPEN GRAPH -->
   <meta property="og:title" content="Organizador de Estudios 2026-2027 en Excel | CalculaFácil">
-  <meta property="og:description" content="Notas, faltas de asistencia y medias bajo control todo el curso. Excel en blanco + ejemplo resuelto + guía PDF. Oferta de lanzamiento.">
+  <meta property="og:description" content="Notas, faltas de asistencia y medias bajo control todo el curso. Excel en blanco + ejemplo resuelto + guía PDF por 5,99 €.">
+
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://calculafacil.app/organizador-estudios/">
   <meta property="og:site_name" content="CalculaFácil">
@@ -46,7 +47,8 @@
   <!-- TWITTER CARDS -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Organizador de Estudios 2026-2027 en Excel | CalculaFácil">
-  <meta name="twitter:description" content="Controla notas, faltas de asistencia y medias este curso. Excel en blanco + ejemplo + guía. Oferta de lanzamiento.">
+  <meta name="twitter:description" content="Controla notas, faltas de asistencia y medias este curso. Excel en blanco + ejemplo + guía por 5,99 €.">
+
   <meta name="twitter:image" content="https://calculafacil.app/og-share-v2.jpg">
 
   <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) -->
@@ -65,7 +67,7 @@
     "name": "Organizador de Estudios 2026-2027 en Excel (CalculaFácil)",
     "description": "Conjunto para controlar las notas, las faltas de asistencia y las medias de todo el curso: Excel en blanco (LIMPIO), Excel con un curso completo resuelto de ejemplo (EJEMPLO) y guía PDF 2026-2027. Medias ponderadas, registro de asistencia con semáforo y nota final automáticas.",
     "brand": { "@type": "Brand", "name": "CalculaFácil" },
-    "image": "https://calculafacil.app/organizador-estudios/img/dashboard.png",
+    "image": "https://calculafacil.app/organizador-estudios/img/2.png",
     "url": "https://calculafacil.app/organizador-estudios/",
     "offers": {
       "@type": "Offer",
@@ -73,7 +75,6 @@
       "priceCurrency": "EUR",
       "price": "5.99",
       "availability": "https://schema.org/InStock",
-      "priceValidUntil": "2026-10-15",
       "itemCondition": "https://schema.org/NewCondition"
     }
   }
@@ -139,7 +140,19 @@
             y el organizador calcula tu <strong>media ponderada</strong>, la <strong>nota final</strong>
             y tu <strong>asistencia</strong> con avisos automáticos.
           </p>
+
+          <!-- PRECIO Y CTA EN EL HERO: sin obligar a bajar hasta el final de la pagina -->
+          <div class="hero-precio">
+            <p class="hero-precio-linea">
+              <span class="hero-precio-actual">5,99 €</span>
+              <span class="hero-precio-ahorro">Pago único</span>
+            </p>
+            <a class="boton-comprar boton-comprar-hero" data-comprar href="https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1" rel="noopener">Comprar ahora · 5,99 €</a>
+            <p class="boton-comprar-info">Recibes los 3 archivos al instante por email</p>
+            <p class="hero-precio-garantia">🔒 Pago seguro cifrado · Garantía de 14 días · Pago único</p>
+          </div>
         </div>
+
 
         <!-- VISOR INTERACTIVO DEL EXCEL QUE RECIBES -->
         <section class="visor-excel" id="visor-excel" aria-label="Vista previa interactiva del Excel del organizador">
@@ -322,14 +335,14 @@
         </section>
 
         <!-- PRECIO -->
-        <div class="tarjeta-precio carne">
-          <span class="ribbon-oferta">OFERTA DE LANZAMIENTO</span>
-          <p class="precio-antiguo">Precio normal: 7,99 €</p>
-          <p class="precio-real">5,99 € <span class="etiqueta-ahorro">Ahorras 2 €</span></p>
-          <p class="oferta-fecha">Hasta el 15 de octubre · después 7,99 €</p>
+        <div class="tarjeta-precio carne" id="precio">
+          <span class="ribbon-oferta">PRECIO ÚNICO</span>
+          <p class="precio-real">5,99 € <span class="etiqueta-ahorro">Pago único</span></p>
+          <p class="oferta-fecha">Precio único · 5,99 €</p>
 
           <!-- Botón de compra conectado al checkout real de LemonSqueezy (overlay) -->
-          <a class="boton-comprar lemonsqueezy-button" id="boton-comprar-producto" href="https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1" rel="noopener">Comprar ahora · descarga inmediata</a>
+          <a class="boton-comprar lemonsqueezy-button" id="boton-comprar-producto" data-comprar href="https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1" rel="noopener">Comprar ahora · descarga inmediata</a>
+
           <p class="boton-comprar-info">Recibes los 3 archivos al instante por email</p>
           <p class="garantia-linea">🔒 Pago seguro y cifrado (Stripe) · Garantía de devolución de 14 días · Descarga inmediata · Pago único</p>
           <a class="enlace-faq" href="#faq">¿Aún dudas? Lee las preguntas frecuentes</a>
@@ -511,14 +524,17 @@
       btnVolver.addEventListener('click', function () { window.location.href = '../'; });
     }
 
-    var botonProducto = document.getElementById('boton-comprar-producto');
-    if (botonProducto) {
+    // Todos los botones de compra (hero, tarjeta de precio y barra movil)
+    // apuntan al checkout real de LemonSqueezy. Se centraliza aqui para
+    // no repetir la URL en el HTML.
+    document.querySelectorAll('a[data-comprar]').forEach(function (boton) {
       if (window.CF_CHECKOUT_URL) {
-        botonProducto.href = window.CF_CHECKOUT_URL;
-        botonProducto.classList.add('lemonsqueezy-button');
+        boton.href = window.CF_CHECKOUT_URL;
+        boton.classList.add('lemonsqueezy-button');
       }
-    }
+    });
   </script>
+
 
   <!-- POP-UP DE SALIDA (exit intent) -->
   <script>
@@ -539,7 +555,8 @@
           '<button type="button" class="popup-salida-cerrar" aria-label="Cerrar">&times;</button>' +
           '<div class="popup-salida-emoji" aria-hidden="true">⏳</div>' +
           '<h3>¿Te lo estás pensando?</h3>' +
-          '<p>El organizador de estudios cuesta menos que un café de 3 días y te ahorra el mes a mes de notas y faltas. <strong>Oferta de lanzamiento: 5,99 €</strong> (antes 7,99 €).</p>' +
+          '<p>El organizador de estudios cuesta menos que un café de 3 días y te ahorra el mes a mes de notas y faltas. <strong>Precio único: 5,99 €</strong>, y si no te sirve te devolvemos el dinero.</p>' +
+
           '<div class="popup-salida-botones">' +
             '<a class="popup-salida-btn popup-salida-btn-primario lemonsqueezy-button" href="' + (window.CF_CHECKOUT_URL || 'https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1') + '" rel="noopener">Comprar ahora · 5,99 €</a>' +
             '<button type="button" class="popup-salida-btn popup-salida-btn-secundario" data-popup-cerrar>Ahorro, ya vuelvo</button>' +
@@ -584,6 +601,65 @@
       popup.querySelector('.popup-salida-btn-primario').addEventListener('click', function () {
         if (window.gtag) gtag('event', 'popup_salida_clic_comprar', { 'pagina': 'organizador-estudios' });
       });
+    })();
+  </script>
+
+  <!-- BARRA DE COMPRA FIJA (movil): el precio y el boton siempre a mano.
+       El texto se rellena desde la tarjeta de precio para no duplicar el
+       precio en dos sitios. -->
+  <div class="barra-cta-movil" id="barraCtaMovil" hidden aria-label="Comprar el organizador">
+    <span class="barra-cta-movil-info">
+      <span class="barra-cta-movil-precio" id="barraCtaPrecio">5,99 €</span>
+      <span class="barra-cta-movil-garantia">3 archivos · Garantía 14 días</span>
+    </span>
+    <a class="boton-comprar barra-cta-movil-boton" data-comprar href="https://calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1" rel="noopener">Comprar</a>
+  </div>
+
+  <script>
+    (function () {
+      var barra = document.getElementById('barraCtaMovil');
+      var precio = document.getElementById('barraCtaPrecio');
+      var tarjetaPrecio = document.getElementById('precio');
+      if (!barra) return;
+
+      // El precio sale de la tarjeta real: un solo sitio donde cambiarlo.
+      if (precio && tarjetaPrecio) {
+        var texto = tarjetaPrecio.querySelector('.precio-real');
+        if (texto) {
+          var soloPrecio = texto.firstChild ? texto.firstChild.textContent.trim() : '';
+          if (soloPrecio) precio.textContent = soloPrecio;
+        }
+      }
+
+      // No se muestra si el visitante todavia tiene el aviso de cookies abierto:
+      // se taparian uno a otro en la parte de abajo de la pantalla.
+      try {
+        if (!window.localStorage.getItem('calculafacil_consent')) return;
+      } catch (e) { return; }
+
+      var mostrando = false;
+      function actualizar() {
+        // Se oculta cuando la tarjeta de precio ya esta a la vista.
+        if (tarjetaPrecio && tarjetaPrecio.getBoundingClientRect().top < window.innerHeight * 0.75) {
+          barra.hidden = true;
+          mostrando = false;
+          return;
+        }
+        if (!mostrando) {
+          barra.hidden = false;
+          mostrando = true;
+          if (window.gtag) gtag('event', 'barra_cta_movil_visible', { 'pagina': 'organizador-estudios' });
+        }
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () { ticking = false; actualizar(); });
+      }, { passive: true });
+      window.addEventListener('resize', actualizar);
+      actualizar();
     })();
   </script>
 </body>

@@ -2,7 +2,22 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Google Analytics 4 (GA4). Sin esto, las compras no se registraban:
+       la pagina lanzaba un evento que no existia porque gtag no estabaDefined. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1N854MKMT2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { 'ad_storage': 'denied', 'analytics_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied', 'functionality_storage': 'granted', 'personalization_storage': 'denied', 'security_storage': 'granted' });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+    gtag('js', new Date());
+    gtag('config', 'G-1N854MKMT2', { 'send_page_view': true });
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>¡Gracias por tu compra! - CalculaFácil</title>
   <meta name="description" content="Tu pedido de CalculaFácil está completado. Recibirás los archivos al instante por email. ¿Cómo abrirlos?">
   <meta name="robots" content="noindex">
@@ -96,7 +111,46 @@
   </div>
 
   <script>
-    if (window.gtag) gtag('event', 'gracias_compra', { 'pagina': 'organizador-estudios' });
+    /* MEDICION DE LA VENTA EN GOOGLE ANALYTICS.
+       Esta pagina es la unica señal de compra en el navegador: LemonSqueezy
+       redirige aqui tras el pago. Antes no cargaba GA4, asi que el evento
+       se lanzaba contra una funcion inexistente y la venta no se registraba
+       nunca. */
+    (function () {
+      function idPedido() {
+        try {
+          var q = new URLSearchParams(window.location.search);
+          var pedido = q.get('order_id') || q.get('order-id') || q.get('checkout_id');
+          if (pedido) return pedido;
+        } catch (err) {}
+        // Sin identificador usamos la marca del ultimo clic de compra.
+        try {
+          var marca = window.localStorage.getItem('cf_intento_compra');
+          if (marca) return 'clic-' + marca;
+        } catch (err) {}
+        return 'sin-referencia';
+      }
+
+      if (!window.gtag) return;
+
+      gtag('event', 'gracias_compra', { 'pagina': 'organizador-estudios' });
+      gtag('event', 'purchase', {
+        'transaction_id': idPedido(),
+        'currency': 'EUR',
+        'value': 5.99,
+        'items': [{
+          'item_id': 'organizador-estudios-2026-2027',
+          'item_name': 'Organizador de Estudios 2026-2027',
+          'price': 5.99,
+          'quantity': 1
+        }]
+      });
+    })();
   </script>
+
+  <!-- Libro de ventas propio: un aviso por correo con cada compra, para no
+       depender solo de Analytics (que se pierde si el visitante no acepta
+       cookies). -->
+  <script src="../js/registro-compras.js" defer></script>
 </body>
 </html>

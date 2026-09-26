@@ -13,3 +13,8 @@ desktop.ini
 # Dependencias y logs (si añades herramientas Node más adelante)
 node_modules/
 *.log
+
+# PRODUCTO DE PAGO: nunca debe subirse al repositorio ni publicarse.
+# Los ficheros se entregan tras el pago a traves de LemonSqueezy.
+# Se guardan solo en local (copia de seguridad fuera de la web).
+producto-excel/

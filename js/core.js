@@ -591,6 +591,12 @@ window.CF = (function () {
     document.addEventListener('click', evento => {
       const enlace = evento.target.closest && evento.target.closest('.boton-comprar, .caja-producto-enlace, .tarjeta-lead-magnet.variante-pago');
       if (!enlace) return;
+      // Guardamos una marca para poder relacionar la compra (que se mide en
+      // la pagina de gracias) con el clic que la origino, aunque LemonSqueezy
+      // no devuelva ningun identificador en la URL de gracias.
+      try {
+        localStorage.setItem('cf_intento_compra', String(Date.now()));
+      } catch (err) {}
       if (window.gtag) gtag('event', 'clic_producto', { 'pagina': detectarPaginaActual(), 'destino': 'organizador-estudios' });
     });
 

@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
+
+# Material gratuito (impedimos que Google indexe el fichero, no el acceso)
 Disallow: /descarga-gratuita/Control-Notas-2026-2027.xlsx
+
+# Producto de pago: NUNCA se publica aqui. Se entrega tras el pago
+# a traves de LemonSqueezy. Si estas reglas existen, el problema es otro:
+# el fichero sigue en el repositorio. No lo subas.
+Disallow: /producto-excel/
 
 Sitemap: https://calculafacil.app/sitemap.xml
