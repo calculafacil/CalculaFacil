@@ -18,3 +18,4 @@ node_modules/
 # Los ficheros se entregan tras el pago a traves de LemonSqueezy.
 # Se guardan solo en local (copia de seguridad fuera de la web).
 producto-excel/
+mapa.json
