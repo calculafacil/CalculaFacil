@@ -942,11 +942,35 @@ window.CF = (function () {
     });
   }
 
-  // RELACIONADAS: todas las calculadoras menos la actual
+  // RELACIONADAS: se mantienen las 14 calculadoras (quitar enlaces
+  // reduciría rutas de rastreo) pero se ORDENAN por relevancia temática.
+  // Antes cada página enlazaba a todas por igual: porcentajes → hipoteca,
+  // imc → nota de corte. Ese ruido diluye el valor del enlace. Ahora las
+  // del mismo grupo temático van primero y el resto detrás.
+  const RELACIONADAS_PRIORIDAD = Object.freeze({
+    'nota-necesaria':     ['media-ponderada', 'nota-de-corte', 'asistencias-faltas', 'admision-ebau-pau'],
+    'media-ponderada':    ['nota-necesaria', 'nota-de-corte', 'admision-ebau-pau'],
+    'nota-de-corte':      ['nota-necesaria', 'media-ponderada', 'admision-ebau-pau', 'asistencias-faltas'],
+    'admision-ebau-pau':  ['nota-de-corte', 'nota-necesaria', 'media-ponderada'],
+    'asistencias-faltas': ['nota-necesaria', 'media-ponderada', 'nota-de-corte'],
+    'porcentajes':        ['nota-necesaria', 'media-ponderada', 'descuentos'],
+    'descuentos':         ['porcentajes', 'iva'],
+    'iva':                ['descuentos', 'porcentajes'],
+    'interes-simple':     ['interes-compuesto'],
+    'interes-compuesto':  ['interes-simple'],
+    'cuota-prestamo':     ['hipoteca', 'interes-compuesto'],
+    'hipoteca':           ['cuota-prestamo', 'interes-compuesto'],
+    'imc':                ['porcentajes']
+  });
+
   function construirRelacionadas(prefijo, paginaActual) {
+    const prioridad = RELACIONADAS_PRIORIDAD[paginaActual] || [];
+    const peso = id => { const i = prioridad.indexOf(id); return i === -1 ? 99 : i; };
     document.querySelectorAll('.relacionadas-lista[data-relacionadas]').forEach(lista => {
       lista.innerHTML = CALCULADORAS
         .filter(c => c.id !== paginaActual)
+        .slice()
+        .sort((a, b) => peso(a.id) - peso(b.id))
         .map(c => '<a class="tab-btn" href="' + prefijo + c.id + '/">' + c.nombre + '</a>')
         .join('');
     });
@@ -957,28 +981,31 @@ window.CF = (function () {
   // `guias` son las guías que enlaza cada calculadora; `calculadoras`
   // las calculadoras que enlaza cada guía (además de su tema principal).
   const GUIAS_POR_CALCULADORA = Object.freeze({
-    'admision-ebau-pau':  ['calcular-nota-ebau'],
-    'nota-de-corte':      ['calcular-nota-ebau'],
+    'admision-ebau-pau':  ['calcular-nota-ebau', 'como-calcular-media-ponderada'],
+    'nota-de-corte':      ['calcular-nota-ebau', 'como-calcular-media-ponderada', 'como-calcular-faltas-asistencia'],
     'interes-simple':     ['interes-simple-vs-compuesto'],
     'interes-compuesto':  ['interes-simple-vs-compuesto'],
     'sueldo-neto':        ['neto-20000-euros-brutos'],
     'iva':                ['como-calcular-el-iva'],
     'porcentajes':        ['como-calcular-porcentajes'],
     'descuentos':         ['como-calcular-porcentajes', 'como-calcular-el-iva'],
-    'asistencias-faltas': ['como-calcular-faltas-asistencia'],
-    'media-ponderada':    ['como-calcular-media-ponderada'],
-    'nota-necesaria':     ['calcular-nota-ebau', 'como-calcular-media-ponderada']
+    'asistencias-faltas': ['como-calcular-faltas-asistencia', 'como-calcular-media-ponderada'],
+    'media-ponderada':    ['como-calcular-media-ponderada', 'calcular-nota-ebau'],
+    'nota-necesaria':     ['como-calcular-media-ponderada', 'calcular-nota-ebau', 'como-calcular-faltas-asistencia']
   });
 
   // Guías afines entre sí (para enlazar unas guías con otras).
+  // El bloque académico (faltas, media ponderada, nota EBAU y porcentajes)
+  // queda unido en las cuatro direcciones: son el grupo que genera las
+  // visitas que acaban comprando el organizador.
   const GUIAS_RELACIONADAS = Object.freeze({
-    'calcular-nota-ebau': ['como-calcular-porcentajes'],
-    'como-calcular-porcentajes': ['como-calcular-el-iva'],
+    'calcular-nota-ebau': ['como-calcular-media-ponderada', 'como-calcular-faltas-asistencia', 'como-calcular-porcentajes'],
+    'como-calcular-porcentajes': ['calcular-nota-ebau', 'como-calcular-media-ponderada', 'como-calcular-el-iva'],
     'como-calcular-el-iva': ['como-calcular-porcentajes'],
     'neto-20000-euros-brutos': ['como-calcular-el-iva', 'como-calcular-porcentajes'],
     'interes-simple-vs-compuesto': ['como-calcular-porcentajes'],
-    'como-calcular-faltas-asistencia': ['como-calcular-porcentajes', 'calcular-nota-ebau'],
-    'como-calcular-media-ponderada': ['como-calcular-porcentajes', 'calcular-nota-ebau']
+    'como-calcular-faltas-asistencia': ['como-calcular-media-ponderada', 'calcular-nota-ebau', 'como-calcular-porcentajes'],
+    'como-calcular-media-ponderada': ['como-calcular-faltas-asistencia', 'calcular-nota-ebau', 'como-calcular-porcentajes']
   });
 
   function construirGuiasRelacionadas(prefijo, paginaActual) {

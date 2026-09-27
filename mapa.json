@@ -1,0 +1,294 @@
+{
+ "404.html": [
+  "iconos/icon-48.png",
+  "iconos/icon-192.png",
+  "logo.svg",
+  "estilos.css"
+ ],
+ "admision-ebau-pau/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "nota-de-corte/",
+  "nota-necesaria/",
+  "media-ponderada/",
+  "asistencias-faltas/",
+  "guias/calcular-nota-ebau/",
+  "organizador-estudios/"
+ ],
+ "asistencias-faltas/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "organizador-estudios/",
+  "guias/como-calcular-faltas-asistencia/",
+  "nota-necesaria/",
+  "media-ponderada/",
+  "sueldo-neto/",
+  "hipoteca/",
+  "imc/"
+ ],
+ "cuota-prestamo/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css"
+ ],
+ "descarga-gratuita/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "descarga-gratuita/Control-Notas-2026-2027.xlsx",
+  "organizador-estudios/"
+ ],
+ "descuentos/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "iva/",
+  "porcentajes/",
+  "sueldo-neto/"
+ ],
+ "glosario/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "cuota-prestamo/",
+  "interes-simple/",
+  "interes-compuesto/",
+  "sueldo-neto/"
+ ],
+ "guias/calcular-nota-ebau/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "admision-ebau-pau/",
+  "nota-de-corte/",
+  "organizador-estudios/"
+ ],
+ "guias/como-calcular-el-iva/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "iva/"
+ ],
+ "guias/como-calcular-faltas-asistencia/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "asistencias-faltas/",
+  "organizador-estudios/"
+ ],
+ "guias/como-calcular-media-ponderada/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "media-ponderada/",
+  "nota-de-corte/",
+  "admision-ebau-pau/",
+  "organizador-estudios/"
+ ],
+ "guias/como-calcular-porcentajes/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "porcentajes/"
+ ],
+ "guias/interes-simple-vs-compuesto/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "interes-compuesto/",
+  "interes-simple/"
+ ],
+ "guias/neto-20000-euros-brutos/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "sueldo-neto/"
+ ],
+ "hipoteca/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css"
+ ],
+ "imc/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css"
+ ],
+ "": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "organizador-estudios/",
+  "descarga-gratuita/",
+  "nota-necesaria/",
+  "media-ponderada/",
+  "admision-ebau-pau/",
+  "nota-de-corte/",
+  "asistencias-faltas/",
+  "porcentajes/",
+  "descuentos/",
+  "iva/",
+  "sueldo-neto/",
+  "interes-compuesto/",
+  "interes-simple/",
+  "cuota-prestamo/",
+  "hipoteca/",
+  "imc/",
+  "guias/calcular-nota-ebau/",
+  "guias/interes-simple-vs-compuesto/",
+  "guias/neto-20000-euros-brutos/",
+  "guias/como-calcular-el-iva/",
+  "guias/como-calcular-porcentajes/",
+  "guias/como-calcular-faltas-asistencia/",
+  "guias/como-calcular-media-ponderada/"
+ ],
+ "interes-compuesto/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "guias/interes-simple-vs-compuesto/",
+  "interes-simple/"
+ ],
+ "interes-simple/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "guias/interes-simple-vs-compuesto/",
+  "interes-compuesto/"
+ ],
+ "iva/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "descuentos/",
+  "porcentajes/",
+  "sueldo-neto/",
+  "interes-compuesto/",
+  "guias/como-calcular-el-iva/"
+ ],
+ "media-ponderada/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "nota-necesaria/",
+  "asistencias-faltas/",
+  "admision-ebau-pau/",
+  "organizador-estudios/"
+ ],
+ "nota-de-corte/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "admision-ebau-pau/",
+  "nota-necesaria/",
+  "media-ponderada/",
+  "guias/calcular-nota-ebau/"
+ ],
+ "nota-necesaria/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "media-ponderada/",
+  "asistencias-faltas/",
+  "admision-ebau-pau/",
+  "organizador-estudios/"
+ ],
+ "organizador-estudios/gracias.html": [
+  "iconos/icon-48.png",
+  "estilos.css",
+  "descarga-gratuita/",
+  "media-ponderada/",
+  "guias/como-calcular-media-ponderada/"
+ ],
+ "organizador-estudios/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "sobre-mi/",
+  "organizador-estudios/' + (window.CF_CHECKOUT_URL || 'https:/calculafacil.lemonsqueezy.com/checkout/buy/8e852b58-af8e-4291-8978-d426ebb2ab41?embed=1') + '"
+ ],
+ "porcentajes/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css"
+ ],
+ "privacidad/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "descarga-gratuita/"
+ ],
+ "sobre-mi/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "descarga-gratuita/",
+  "organizador-estudios/"
+ ],
+ "sueldo-neto/": [
+  "manifest.json",
+  "iconos/icon-192.png",
+  "iconos/icon-48.png",
+  "logo.svg",
+  "estilos.css",
+  "guias/neto-20000-euros-brutos/",
+  "iva/",
+  "hipoteca/",
+  "interes-compuesto/",
+  "descuentos/"
+ ]
+}
