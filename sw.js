@@ -6,7 +6,7 @@
 // Sube la VERSION en cuanto toques este archivo o cambies una página: es lo
 // único que purga las cachés viejas de los visitantes que ya tienen la web
 // abierta. Sin esto, un error cacheado se queda sirviéndose para siempre.
-const VERSION = 'v39';
+const VERSION = 'v40';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -82,6 +82,33 @@ self.addEventListener('activate', evento => {
   );
 });
 
+// AUTOREPARACIÓN.
+// Si la red falla y la copia que tenemos guardada tampoco es una página
+// válida, significa que la caché está envenenada (un 500 guardado en
+// versiones antiguas de este archivo). En ese caso el service worker se
+// desinstala solo y recarga la página: es la única forma de que un visitante
+// se recupere sin tener que buscar los ajustes del navegador, que en móvil es
+// casi imposible. En la siguiente visita js/core.js lo vuelve a registrar.
+function autoreparar() {
+  return self.registration.unregister()
+    .catch(() => {})
+    .then(() => new Response(
+      '<!doctype html><html lang="es"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Actualizando…</title><style>body{font-family:system-ui,sans-serif;' +
+      'text-align:center;padding:60px 20px;color:#0f172a;background:#f8fafc}' +
+      'a{color:#0d9488}</style></head><body>' +
+      '<p><b>Actualizando la página…</b></p>' +
+      '<p><a href="">Si no se recarga sola, pulsa aquí</a></p>' +
+      '<script>location.replace(location.pathname+location.search)</script>' +
+      '</body></html>',
+      {
+        status: 200,
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }
+      }
+    ));
+}
+
 self.addEventListener('fetch', evento => {
   const peticion = evento.request;
   if (peticion.method !== 'GET') return;
@@ -101,8 +128,13 @@ self.addEventListener('fetch', evento => {
           caches.open(CACHE).then(cache => cache.put(peticion, copia));
           return respuesta;
         })
-        // Si la red falla O devuelve un error, se sirve la copia buena.
-        .catch(() => caches.match(peticion).then(encontrada => encontrada || caches.match('./')))
+        // Si la red falla O devuelve un error, se sirve la copia local buena.
+        // Si la copia guardada tampoco es válida, la caché está envenenada y
+        // el service worker se autorepara en vez de pintar un error.
+        .catch(() => caches.match(peticion).then(encontrada => {
+          if (!encontrada) return caches.match('./') || autoreparar();
+          return encontrada.ok ? encontrada : autoreparar();
+        }))
     );
     return;
   }
