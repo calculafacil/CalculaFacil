@@ -241,10 +241,12 @@
         var nombre = form.querySelector('[name="nombre"]');
         var honeypot = form.querySelector('[name="_gotcha"]');
 
+        // Formspree rechaza este endpoint con HTTP 400 si el cuerpo llega como
+        // JSON, asi que se manda form-encoded (tambien evita el preflight CORS).
         fetch(URL_FORMSPREE, {
           method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+          headers: { 'Accept': 'application/json' },
+          body: new URLSearchParams({
             tipo: 'resena-producto',
             producto: 'Organizador de Estudios 2026-2027',
             puntuacion: puntuacion.value || 'sin puntuar',

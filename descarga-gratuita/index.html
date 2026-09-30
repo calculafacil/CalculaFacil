@@ -118,7 +118,7 @@
 
         <!-- PANTALLA DE ÉXITO: aparece al volver de formsubmit (?enviado=1) -->
         <div class="lead-resultado exito" id="leadEnviado" hidden role="status">
-          ¡Listo! Te hemos enviado la plantilla a tu email. <strong>Revisa también la carpeta de spam</strong> si no la ves en los primeros minutos.
+          <span id="leadMensajeEnviado">¡Listo! Te hemos enviado la plantilla a tu email. <strong>Revisa también la carpeta de spam</strong> si no la ves en los primeros minutos.</span>
           <span class="lead-enviado-sub">Consejo: si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
         </div>
 
@@ -187,6 +187,7 @@
       var boton = document.getElementById('leadBoton');
       var resultado = document.getElementById('leadResultado');
       var enviado = document.getElementById('leadEnviado');
+      var mensajeEnviado = document.getElementById('leadMensajeEnviado');
 
       function mostrar(mensaje, clase) {
         resultado.hidden = false;
@@ -218,6 +219,45 @@
         if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': 'descarga-gratuita' });
       }
 
+      // ENTREGA CON DOBLE DESTINO.
+      // El formulario depende por completo del correo (el email es obligatorio y
+      // ya no hay descarga directa), así que si el servicio de envío se cae se
+      // pierde el lead entero. Por eso el lead se guarda en DOS sitios:
+      //   1) Formspree: fiable, guarda el contacto en el gmail aunque todo lo
+      //      demás falle. Es lo que sostiene el negocio.
+      //   2) Formsubmit: envía el email automático con el enlace. Es un extra.
+      // Y se envía con fetch() en vez de con un POST nativo para que el
+      // visitante NUNCA aterrice en la página de error del servicio externo si
+      // está caído: se queda aquí, con su email ya guardado.
+      var URL_FORMSPREE = 'https://formspree.io/f/mkjndvlq';
+      var URL_FORMSUBMIT = 'https://formsubmit.co/calculafacil.web@gmail.com';
+
+      function datosLead() {
+        var autorespuesta = form.querySelector('[name="_autoresponse"]');
+        return {
+          email: input.value.trim(),
+          origen: origen,
+          plantilla: 'Control-Notas-2026-2027.xlsx',
+          pagina: 'descarga-gratuita',
+          autoresponse: autorespuesta ? autorespuesta.value : ''
+        };
+      }
+
+      // Se manda como application/x-www-form-urlencoded y no como JSON a
+      // propósito: el endpoint de Formspree rechaza los envíos JSON con un
+      // 400, pero acepta este formato. También evita el preflight de CORS.
+      function enviar(url, campos) {
+        return fetch(url, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new URLSearchParams(campos)
+        }).then(function (respuesta) {
+          return respuesta.status < 500;
+        }).catch(function () {
+          return false;
+        });
+      }
+
       form.addEventListener('submit', function (evento) {
         evento.preventDefault();
 
@@ -235,17 +275,54 @@
           return;
         }
 
-        // El email es obligatorio: es la única vía de entrega de la plantilla
-        // (autorespuesta de formsubmit.co). No hay descarga directa.
-        var replyto = document.getElementById('leadReplyto');
-        if (replyto) replyto.value = email;
-
         if (window.gtag) gtag('event', 'lead_enviado', { 'origen': origen });
 
         boton.disabled = true;
         boton.textContent = 'Enviando tu plantilla…';
 
-        if (form) form.submit();
+        var datos = datosLead();
+
+        // 1) El lead, siempre. Formspree es el que no puede fallar.
+        enviar(URL_FORMSPREE, {
+          email: datos.email,
+          origen: datos.origen,
+          plantilla: datos.plantilla,
+          pagina: datos.pagina
+        }).then(function (guardado) {
+          if (!guardado) {
+            // Último recurso: si ni Formspree respondió, se deja caer el
+            // formulario nativo, que va directo a formsubmit. El visitante
+            // puede acabar viendo la página de error, pero el lead sale.
+            if (form) form.submit();
+            return false;
+          }
+
+          // 2) El email automático con el enlace, en segundo plano.
+          return enviar(URL_FORMSUBMIT, {
+            email: datos.email,
+            _subject: 'Plantilla gratuita de notas (CalculaFácil)',
+            _template: 'table',
+            _replyto: datos.email,
+            _next: 'https://calculafacil.app/descarga-gratuita/?enviado=1',
+            _autoresponse: datos.autoresponse,
+            origen: datos.origen,
+            plantilla: datos.plantilla
+          });
+        }).then(function (emailEnviado) {
+          form.hidden = true;
+          enviado.hidden = false;
+          if (emailEnviado === false) {
+            // El lead está guardado pero el email automático no salió. No se
+            // promete un correo que no se ha enviado: se ofrece el contacto.
+            mensajeEnviado.innerHTML =
+              '<strong>¡Listo! Ya tenemos tu email.</strong> Estamos con un problema técnico en el envío automático ' +
+              'y por eso aún no te ha llegado. Escríbenos a ' +
+              '<a href="mailto:calculafacil.web@gmail.com">calculafacil.web@gmail.com</a> con este email y te la ' +
+              'mandamos en cuanto se arregle. Gracias por la paciencia.';
+            if (window.gtag) gtag('event', 'lead_email_fallido', { 'origen': origen });
+          }
+          if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': origen });
+        });
       });
     })();
   </script>

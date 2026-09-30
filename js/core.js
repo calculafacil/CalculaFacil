@@ -443,10 +443,12 @@ window.CF = (function () {
         URL_FORMULARIO_FEEDBACK.indexOf('REEMPLAZA') !== -1) {
       return Promise.resolve(false);
     }
+    // Formspree rechaza este endpoint con HTTP 400 si el cuerpo llega como
+    // JSON, asi que se manda form-encoded (tambien evita el preflight CORS).
     return fetch(URL_FORMULARIO_FEEDBACK, {
       method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pagina: pagina, voto: voto, sugerencia: sugerencia })
+      headers: { 'Accept': 'application/json' },
+      body: new URLSearchParams({ pagina: pagina, voto: voto, sugerencia: sugerencia })
     })
       .then(function (respuesta) { return respuesta.ok; })
       .catch(function () { return false; });
