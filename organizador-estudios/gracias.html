@@ -81,6 +81,52 @@
           <p class="gracias-nota">¿No estás convencido al final? La garantía de 14 días te cubre: pídemos una devolución y te la tramitamos sin preguntas.</p>
         </section>
 
+        <section class="bloque-gracias bloque-gracias-resena" aria-label="Dejar reseña y obtener descuento">
+          <h2>¿Te está sirviendo? Déjanos tu reseña</h2>
+          <p>CalculaFácil es un proyecto personal y <strong>las reseñas son lo único que nos hace crecer</strong>: son las que ven los estudiantes que llegan después y se convencen.</p>
+          <p>Por escribirnos tu opinión te damos un <strong>15 % de descuento</strong> para cuando salga la versión 2027-2028. Tarda 30 segundos.</p>
+
+          <form class="resena-formulario" id="resenaFormulario" novalidate>
+            <fieldset class="resena-estrellas">
+              <legend>¿Qué nota le pones?</legend>
+              <div class="resena-estrellas-botones" role="radiogroup" aria-label="Puntuación de 1 a 5 estrellas">
+                <button type="button" data-estrella="1" aria-label="1 estrella">★</button>
+                <button type="button" data-estrella="2" aria-label="2 estrellas">★</button>
+                <button type="button" data-estrella="3" aria-label="3 estrellas">★</button>
+                <button type="button" data-estrella="4" aria-label="4 estrellas">★</button>
+                <button type="button" data-estrella="5" aria-label="5 estrellas">★</button>
+              </div>
+              <input type="hidden" name="puntuacion" id="resenaPuntuacion" value="">
+            </fieldset>
+
+            <label class="resena-etiqueta" for="resenaTexto">Tu reseña</label>
+            <textarea id="resenaTexto" name="resena" rows="4" maxlength="800" required
+              placeholder="¿Qué te ha resuelto? Ecuéntalo como se lo contarías a un compañero que duda si comprarlo."></textarea>
+
+            <label class="resena-etiqueta" for="resenaNombre">Tu nombre o alias <span>(opcional)</span></label>
+            <input type="text" id="resenaNombre" name="nombre" maxlength="60" autocomplete="nickname"
+              placeholder="Cómo quieres que aparezcas">
+
+            <label class="resena-etiqueta" for="resenaEnlace">Enlace a una foto o captura <span>(opcional)</span></label>
+            <input type="url" id="resenaEnlace" name="enlace" placeholder="https://…" autocomplete="off">
+
+            <input type="text" name="_gotcha" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <button type="submit" id="resenaBoton">Enviar reseña y ver mi código →</button>
+            <p class="resena-nota">Solo se usa lo que escribas para publicar tu opinión. Nada de spam.</p>
+          </form>
+          <p class="resena-estado" id="resenaEstado" hidden role="status"></p>
+
+          <!-- RECOMPENSA: se revela al enviar la reseña. El codigo vive aqui,
+               en un solo sitio, para poder cambiarlo cuando quieras. -->
+          <div class="resena-codigo" id="resenaCodigo" hidden>
+            <p class="resena-codigo-titulo">🎁 Gracias. Este es tu código</p>
+            <p class="resena-codigo-valor" id="resenaCodigoValor">GRACIAS15</p>
+            <p class="resena-codigo-texto">15 % de descuento en la versión 2027-2028. Copia el código y guárdalo: en cuanto abramos la preventa te avisamos por email.</p>
+            <p class="resena-codigo-nota">Cópialo también en un sitio seguro, que esta página solo lo muestra una vez.</p>
+          </div>
+        </section>
+
         <section class="bloque-gracias bloque-gracias-cta" aria-label="Siguientes pasos recomendados">
           <h2>Mientras lo rellenas, te viene bien esto</h2>
           <div class="gracias-enlaces">
@@ -111,6 +157,125 @@
   </div>
 
   <script>
+    /* RESENA A CAMBIO DE CODIGO DE DESCUENTO.
+       El comprador deja su opinion y se le muestra al instante un codigo para
+       la version 2027-2028. La reseña llega al gmail por el mismo endpoint de
+       Formspree que usa el feedback de js/core.js, asi que no hay que anadir
+       ningun servicio nuevo. */
+    (function () {
+      var form = document.getElementById('resenaFormulario');
+      if (!form) return;
+
+      var CODIGO_DESCUENTO = 'GRACIAS15';
+      var URL_FORMSPREE = 'https://formspree.io/f/mkjndvlq';
+      var CLAVE_ENVIADA = 'cf_resena_organizador';
+
+      var texto = document.getElementById('resenaTexto');
+      var puntuacion = document.getElementById('resenaPuntuacion');
+      var estado = document.getElementById('resenaEstado');
+      var boton = document.getElementById('resenaBoton');
+      var cajaCodigo = document.getElementById('resenaCodigo');
+      var valorCodigo = document.getElementById('resenaCodigoValor');
+      var botonesEstrella = form.querySelectorAll('[data-estrella]');
+
+      if (valorCodigo) valorCodigo.textContent = CODIGO_DESCUENTO;
+
+      // Solo se pide una vez: si ya se envio, no se vuelve a mostrar el formulario.
+      var yaEnviada = false;
+      try { yaEnviada = window.localStorage.getItem(CLAVE_ENVIADA) === '1'; } catch (err) {}
+
+      function mostrar(mensaje, ok) {
+        estado.hidden = false;
+        estado.className = 'resena-estado' + (ok ? ' ok' : ' error');
+        estado.textContent = mensaje;
+      }
+
+      function revelarCodigo() {
+        form.hidden = true;
+        cajaCodigo.hidden = false;
+        if (window.gtag) gtag('event', 'resena_enviada', { 'producto': 'organizador-estudios' });
+        cajaCodigo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      if (yaEnviada) {
+        form.hidden = true;
+        cajaCodigo.hidden = false;
+      }
+
+      // Estrellas: pintan al pasar el raton y fijan el valor al pulsar.
+      function pintarCuantas(cuantas) {
+        botonesEstrella.forEach(function (botonEstrella) {
+          var valor = Number(botonEstrella.dataset.estrella);
+          botonEstrella.classList.toggle('activa', valor <= cuantas);
+        });
+      }
+
+      botonesEstrella.forEach(function (botonEstrella) {
+        botonEstrella.addEventListener('mouseenter', function () {
+          pintarCuantas(Number(botonEstrella.dataset.estrella));
+        });
+        botonEstrella.addEventListener('click', function () {
+          puntuacion.value = botonEstrella.dataset.estrella;
+          pintarCuantas(Number(botonEstrella.dataset.estrella));
+        });
+      });
+
+      form.addEventListener('mouseleave', function () {
+        pintarCuantas(Number(puntuacion.value || 0));
+      });
+
+      form.addEventListener('submit', function (evento) {
+        evento.preventDefault();
+
+        var resena = texto.value.trim();
+        if (resena.length < 10) {
+          texto.focus();
+          mostrar('Cuéntanos un poco más: al menos unas pocas palabras nos ayudan (mínimo 10).');
+          return;
+        }
+
+        boton.disabled = true;
+        boton.textContent = 'Enviando…';
+
+        var enlace = form.querySelector('[name="enlace"]');
+        var nombre = form.querySelector('[name="nombre"]');
+        var honeypot = form.querySelector('[name="_gotcha"]');
+
+        fetch(URL_FORMSPREE, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tipo: 'resena-producto',
+            producto: 'Organizador de Estudios 2026-2027',
+            puntuacion: puntuacion.value || 'sin puntuar',
+            resena: resena,
+            nombre: nombre ? nombre.value.trim() : '',
+            enlace: enlace ? enlace.value.trim() : '',
+            pagina: 'organizador-gracias',
+            // Honeypot: si un bot rellena esto, se marca la submission como
+            // spam en Formspree sin llegar a molestar a nadie.
+            _gotcha: honeypot ? honeypot.value : ''
+          })
+        })
+          .then(function (respuesta) {
+            try { window.localStorage.setItem(CLAVE_ENVIADA, '1'); } catch (err) {}
+            if (!respuesta.ok) throw new Error('formspree');
+            revelarCodigo();
+          })
+          .catch(function () {
+            // Si el envio falla no se pide la reseña otra vez: se entrega el
+            // codigo igualmente y se avisa para no perder la recompensa.
+            try { window.localStorage.setItem(CLAVE_ENVIADA, '1'); } catch (err) {}
+            boton.disabled = false;
+            boton.textContent = 'Enviar reseña y ver mi código →';
+            mostrar('No hemos podido guardar la reseña, pero aquí tienes tu código igualmente.', false);
+            revelarCodigo();
+          });
+      });
+    })();
+  </script>
+
+  <script>
     /* MEDICION DE LA VENTA EN GOOGLE ANALYTICS.
        Esta pagina es la unica señal de compra en el navegador: LemonSqueezy
        redirige aqui tras el pago. Antes no cargaba GA4, asi que el evento
@@ -137,11 +302,11 @@
       gtag('event', 'purchase', {
         'transaction_id': idPedido(),
         'currency': 'EUR',
-        'value': 5.99,
+        'value': 2.99,
         'items': [{
           'item_id': 'organizador-estudios-2026-2027',
           'item_name': 'Organizador de Estudios 2026-2027',
-          'price': 5.99,
+          'price': 2.99,
           'quantity': 1
         }]
       });

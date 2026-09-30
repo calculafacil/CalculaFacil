@@ -1822,6 +1822,35 @@ svg.icono {
   line-height: 1;
 }
 
+.novedad-precio-oferta {
+  display: block;
+  line-height: 1;
+}
+
+.novedad-precio-oferta .novedad-precio-real {
+  display: inline;
+}
+
+.novedad-precio-tachado {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.6;
+  color: var(--texto-subtitulo);
+}
+
+.novedad-precio-aviso {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #dc2626;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
 .novedad-cta {
   display: inline-flex;
   align-items: center;
@@ -2074,8 +2103,9 @@ body.pagina-precio .pasos-lista li::before {
 
 .ribbon-oferta {
   display: inline-block;
-  color: var(--texto-carcasa);
-  border: 1px solid rgba(107, 114, 128, 0.45);
+  color: #ffffff;
+  background: #dc2626;
+  border: 1px solid #dc2626;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.7px;
@@ -2115,6 +2145,35 @@ body.pagina-precio .pasos-lista li::before {
   font-weight: 600;
   color: var(--texto-carcasa);
   opacity: 0.75;
+}
+
+/* PRECIO EN OFERTA: precio base tachado + precio actual destacado. */
+.precio-oferta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.precio-tachado {
+  font-size: 0.55em;
+  font-weight: 700;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.6;
+  color: inherit;
+}
+
+.precio-actual {
+  font-size: 1em;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.oferta-fecha-hero {
+  margin: 0 0 14px;
+  color: #b91c1c;
+  opacity: 1;
+  font-weight: 700;
 }
 
 .boton-comprar {
@@ -3328,23 +3387,15 @@ body.pagina-precio .pasos-lista li::before {
   cursor: default;
 }
 
-/* Respaldo: descarga directa sin dejar email. Antes no existía y era la vía
-   más importante de fuga: el email es lo único que bloquea a quien no lo
-   quiere dar. Ahora está siempre visible, debajo del formulario. */
-.lead-respaldo {
+/* Aviso bajo el formulario: el email es obligatorio, así que aquí solo se
+   explica para qué se pide y qué pasa después (no hay descarga directa). */
+.lead-nota-form {
   margin: -18px auto 26px;
   max-width: 420px;
   text-align: center;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   line-height: 1.45;
-  opacity: 0.85;
-}
-
-.lead-respaldo a {
-  color: var(--color-acento);
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  opacity: 0.8;
 }
 
 .lead-resultado {
@@ -3409,6 +3460,50 @@ body.pagina-precio .pasos-lista li::before {
   font-size: 0.85rem;
   color: var(--texto-pagina);
   line-height: 1.4;
+}
+
+/* ORDER BUMP del lead magnet: razones para pasar a la versión de pago. */
+.lead-bump {
+  max-width: 480px;
+  margin: 0 auto;
+  display: grid;
+  gap: 8px;
+}
+
+.lead-bump-ganas {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--texto-pagina);
+}
+
+.lead-bump-ganas span {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.lead-bump-precio s {
+  opacity: 0.6;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.lead-bump-precio b {
+  color: #dc2626;
+  font-size: 1.15em;
+}
+
+.boton-comprar-bump {
+  font-size: 1.05rem;
+  padding: 15px 24px;
 }
 
 /* ==========================================
@@ -3497,6 +3592,185 @@ body.pagina-precio .pasos-lista li::before {
 .bloque-gracias-cta {
   padding-top: 18px;
   border-top: 1px dashed rgba(148, 163, 184, 0.4);
+}
+
+/* ==========================================
+   RESENA A CAMBIO DE CODIGO (pagina de gracias)
+   ========================================== */
+
+.bloque-gracias-resena {
+  background: rgba(16, 185, 129, 0.08);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 14px;
+}
+
+.resena-formulario {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.resena-estrellas {
+  margin: 0 0 6px;
+  padding: 0;
+  border: none;
+}
+
+.resena-estrellas legend {
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--texto-pagina);
+  margin-bottom: 6px;
+}
+
+.resena-estrellas-botones {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.resena-estrellas-botones button {
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 2px 4px;
+  border: none;
+  background: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: color 0.12s, transform 0.12s;
+}
+
+.resena-estrellas-botones button:hover {
+  transform: scale(1.12);
+}
+
+.resena-estrellas-botones button.activa {
+  color: #f59e0b;
+}
+
+.resena-etiqueta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--texto-pagina);
+}
+
+.resena-etiqueta span {
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.resena-formulario textarea,
+.resena-formulario input[type="text"],
+.resena-formulario input[type="url"] {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 11px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  border-radius: 10px;
+  background: var(--bg-input);
+  color: var(--texto-input);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.resena-formulario textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.resena-formulario textarea:focus,
+.resena-formulario input[type="text"]:focus,
+.resena-formulario input[type="url"]:focus {
+  border-color: #10b981;
+}
+
+.resena-formulario button[type="submit"] {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-top: 6px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #34d399 0%, #10b981 55%, #059669 100%);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #047857, inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.1s, filter 0.15s;
+}
+
+.resena-formulario button[type="submit"]:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.resena-formulario button[type="submit"]:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #047857;
+}
+
+.resena-formulario button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.resena-nota {
+  margin: 2px 0 0;
+  font-size: 0.74rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.resena-estado {
+  margin: 10px 0 0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.resena-estado.error { color: #b91c1c; }
+.resena-estado.ok { color: #15803d; }
+
+.resena-codigo {
+  margin-top: 16px;
+  padding: 18px 16px;
+  text-align: center;
+  background: rgba(5, 150, 105, 0.12);
+  border: 2px dashed #10b981;
+  border-radius: 14px;
+}
+
+.resena-codigo-titulo {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--texto-pagina);
+}
+
+.resena-codigo-valor {
+  margin: 8px 0 10px;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #34d399;
+  word-break: break-all;
+  user-select: all;
+}
+
+.resena-codigo-texto {
+  margin: 0 0 6px;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--texto-subtitulo);
+}
+
+.resena-codigo-nota {
+  margin: 0;
+  font-size: 0.74rem;
+  opacity: 0.7;
+  color: var(--texto-subtitulo);
 }
 
 .gracias-enlaces {

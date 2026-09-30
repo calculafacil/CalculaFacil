@@ -56,7 +56,8 @@
 <!-- FORMSPREE: crea tu formulario gratis en https://formspree.io y sustituye el ID.
        Si la URL no está configurada, se muestra un email de respaldo.
        Entrega por correo: la acción del formulario es formsubmit.co con _autoresponse
-       (el usuario recibe la plantilla en su email) y un enlace directo de respaldo.
+       (el usuario recibe la plantilla en su email). El email es OBLIGATORIO: no hay
+       descarga directa, el archivo solo se entrega a quien deja su correo.
        La autorespuesta requiere que la reCAPTCHA de formsubmit esté activada (por defecto). -->
   <script>window.URL_LEAD_FORMSPREE = 'https://formsubmit.co/calculafacil.web@gmail.com';</script>
 </head>
@@ -110,15 +111,14 @@
           <input type="hidden" name="plantilla" value="Control-Notas-2026-2027.xlsx">
           <button type="submit" id="leadBoton">Enviar la plantilla a mi email →</button>
         </form>
-        <p class="lead-respaldo" id="leadRespaldo">
-          ¿Prefieres no dejar tu email? <a href="Control-Notas-2026-2027.xlsx" download data-respaldo>Descárgala aquí directamente</a>.
+        <p class="lead-nota-form" id="leadNotaForm">
+          📧 Un email, un enlace. Sin tarjeta, sin spam y puedes darte de baja cuando quieras.
         </p>
         <div class="lead-resultado" id="leadResultado" hidden role="status"></div>
 
         <!-- PANTALLA DE ÉXITO: aparece al volver de formsubmit (?enviado=1) -->
         <div class="lead-resultado exito" id="leadEnviado" hidden role="status">
-          ¡Listo! La plantilla se descargó sola en tu navegador y te la acabamos de enviar también por email (revisa la carpeta de spam por si acaso).
-          <span class="lead-enviado-sub">¿No la ves? <a href="Control-Notas-2026-2027.xlsx" download>Descárgala aquí directamente</a>.</span>
+          ¡Listo! Te hemos enviado la plantilla a tu email. <strong>Revisa también la carpeta de spam</strong> si no la ves en los primeros minutos.
           <span class="lead-enviado-sub">Consejo: si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
         </div>
 
@@ -136,23 +136,27 @@
 <!-- CÓMO ABRIRLO -->
         <section class="seccion-producto">
           <h2>¿Cómo lo abro?</h2>
-          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets. Al enviar, se descarga sola en tu navegador y también te la enviamos por email (revisa también el spam). Si no la ves, usa el enlace directo de la pantalla de «¡Listo!».</p>
+          <p class="subtitulo-seccion">No hace falta comprar Excel: la plantilla se abre gratis en Google Sheets. Al enviar el formulario te llega por email con el enlace de descarga (revisa también el spam).</p>
           <ol class="pasos-lista">
-            <li><div><b>En Excel (Windows o Mac)</b><span>La plantilla se descarga sola al enviar el formulario (y también te llega por email). Búscala en tu carpeta de Descargas y haz doble clic sobre ella. Está hecha para Excel 2016 o superior.</span></div></li>
+            <li><div><b>En Excel (Windows o Mac)</b><span>Abre el email que te hemos enviado, descarga el archivo y haz doble clic sobre él. Está hecha para Excel 2016 o superior.</span></div></li>
             <li><div><b>Sin Excel: Google Sheets (gratis y sin instalar)</b><span>Entra en <a href="https://drive.google.com" rel="noopener" target="_blank">drive.google.com</a> → Nuevo → Subir archivo → elige el .xlsx descargado → doble clic sobre el archivo subido y se abrirá solo en Google Sheets.</span></div></li>
             <li><div><b>Alternativa gratis para el ordenador</b><span>LibreOffice también lo abre (gratis y sin coste de licencia). Tras instalarlo, haz doble clic sobre el archivo.</span></div></li>
             <li><div><b>¿Solo te sale el Bloc de notas?</b><span>Haz clic derecho sobre el archivo → Abrir con → elige Excel, Google Sheets o LibreOffice. Si no lo tienes instalado, usa el paso 2 con Google Sheets.</span></div></li>
           </ol>
         </section>
 
-        <!-- UPSELL -->
+        <!-- UPSELL / ORDER BUMP -->
         <section class="seccion-producto">
           <h2>¿Y si además no quisieras jugarte la evaluación continua?</h2>
-          <p class="subtitulo-seccion">La versión gratuita solo controla notas. El <strong>Organizador de Estudios 2026-2027</strong> (5,99 €) añade el registro de faltas con semáforo verde/ámbar/rojo, retrasos y justificadas, y un cuadro de mandos con tu objetivo de nota.</p>
+          <p class="subtitulo-seccion">La plantilla gratuita solo controla notas. El <strong>Organizador de Estudios 2026-2027</strong> le añade el registro de faltas con semáforo verde/ámbar/rojo, los retrasos y justificadas, un cuadro de mandos con tu objetivo de nota, el Excel de ejemplo resuelto y la guía PDF.</p>
+          <div class="lead-bump">
+            <p class="lead-bump-ganas"><span>✏️</span> Las faltas se anotan solas y te avisa <strong>antes</strong> de que pierdas la evaluación continua. Es el problema que más sustos da.</p>
+            <p class="lead-bump-ganas"><span>📊</span> Notas + asistencia + objetivo en un solo archivo, en vez de dos hojas sueltas que se desincronizan.</p>
+            <p class="lead-bump-ganas"><span>💶</span> Por <strong>2 € menos que un menú</strong> y sin suscripciones.</p>
+          </div>
           <div style="text-align:center; margin-top:12px;">
-            <a class="boton-comprar" href="../organizador-estudios/">Ver el Organizador completo →</a>
-            <p class="boton-comprar-info">5,99 € precio único · Garantía de 14 días</p>
-
+            <a class="boton-comprar boton-comprar-bump" href="../organizador-estudios/">Sí, quiero el Organizador completo →</a>
+            <p class="boton-comprar-info"><span class="lead-bump-precio"><s>4,99 €</s> <b>2,99 €</b></span> · Oferta hasta el 15 de octubre · Garantía de 14 días</p>
           </div>
         </section>
 
@@ -214,18 +218,6 @@
         if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': 'descarga-gratuita' });
       }
 
-      // Respaldo sin email: cuenta como lead también, para saber cuántos se
-      // llevan la plantilla sin dejar el contacto.
-      var respaldo = document.getElementById('leadRespaldo');
-      if (respaldo) {
-        var enlaceRespaldo = respaldo.querySelector('[data-respaldo]');
-        if (enlaceRespaldo) {
-          enlaceRespaldo.addEventListener('click', function () {
-            if (window.gtag) gtag('event', 'lead_sin_email', { 'origen': origen });
-          });
-        }
-      }
-
       form.addEventListener('submit', function (evento) {
         evento.preventDefault();
 
@@ -243,42 +235,17 @@
           return;
         }
 
-        // La plantilla se entrega por correo (autorespuesta de formsubmit.co) con
-        // enlace directo de respaldo en la pantalla de éxito y en el propio email.
+        // El email es obligatorio: es la única vía de entrega de la plantilla
+        // (autorespuesta de formsubmit.co). No hay descarga directa.
         var replyto = document.getElementById('leadReplyto');
         if (replyto) replyto.value = email;
 
-        if (window.gtag) gtag('event', 'lead_enviado', { 'origen': 'descarga-gratuita' });
+        if (window.gtag) gtag('event', 'lead_enviado', { 'origen': origen });
 
         boton.disabled = true;
-        boton.textContent = 'Descargando tu plantilla…';
+        boton.textContent = 'Enviando tu plantilla…';
 
-        // Garantía de entrega: el Excel se descarga al instante además del envío
-        // por email. Así nadie se queda sin plantilla aunque el correo tarde o
-        // aterrice en spam (los dos caminos conviven).
-        //
-        // Dos errores que rompían la entrega en el 64% del tráfico (móvil) y que
-        // ya no se pueden repetir:
-        //   1) No borrar el <a> en el acto. En Safari iOS y en Firefox, quitarlo
-        //      justo después de .click() cancela la descarga.
-        //   2) No enviar el formulario en el mismo instante. La navegación a
-        //      formsubmit gana la carrera y el móvil se queda sin archivo.
-        var descarga = document.createElement('a');
-        descarga.href = 'Control-Notas-2026-2027.xlsx';
-        descarga.download = 'Control-Notas-2026-2027.xlsx';
-        descarga.rel = 'noopener';
-        descarga.style.display = 'none';
-        document.body.appendChild(descarga);
-        descarga.click();
-        window.setTimeout(function () {
-          if (descarga.parentNode) descarga.parentNode.removeChild(descarga);
-        }, 5000);
-
-        // El formulario se envía después: la descarga ya ha salido y el
-        // autorespuesta de formsubmit manda el email con el enlace de respaldo.
-        window.setTimeout(function () {
-          if (form) form.submit();
-        }, 1500);
+        if (form) form.submit();
       });
     })();
   </script>

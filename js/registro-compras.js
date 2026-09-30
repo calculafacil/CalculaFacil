@@ -128,7 +128,7 @@
     avisar({
       pedido: String(pedido).slice(0, 120),
       correo: crud.email ? String(crud.email).slice(0, 200) : '',
-      precio: 5.99,
+      precio: 2.99,
       origen: crud.coupon_code ? 'cupon-' + crud.coupon_code : 'lemon-squeezy'
     });
   }
