@@ -122,6 +122,15 @@
           <span class="lead-enviado-sub">Consejo: si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
         </div>
 
+        <!-- RED DE SEGURIDAD: si el envío automático de emails está caído, el
+             lead ya está guardado en Formspree, así que se ofrece la descarga
+             directa en lugar de perder la venta. -->
+        <div class="lead-resultado exito lead-rescate" id="leadRescate" hidden role="status">
+          <span id="leadMensajeRescate"><strong>¡Listo! Ya tenemos tu email.</strong> Estamos con un problema técnico en el envío automático, así que te dejamos la plantilla aquí mismo para que no te la pierdas:</span>
+          <a class="lead-boton-descarga" id="leadDescargaDirecta" href="Control-Notas-2026-2027.xlsx" download="Control-Notas-2026-2027.xlsx">📥 Descargar la plantilla ahora (Excel)</a>
+          <span class="lead-enviado-sub">También te la enviamos por email en cuanto se arregle. Si se abre en el Bloc de notas, súbela a Google Sheets (gratis). Mira el apartado «¿Cómo lo abro?» de abajo.</span>
+        </div>
+
         <!-- QUÉ INCLUYE -->
         <section class="seccion-producto">
           <h2>Qué recibes</h2>
@@ -188,6 +197,8 @@
       var resultado = document.getElementById('leadResultado');
       var enviado = document.getElementById('leadEnviado');
       var mensajeEnviado = document.getElementById('leadMensajeEnviado');
+      var rescate = document.getElementById('leadRescate');
+      var descargaDirecta = document.getElementById('leadDescargaDirecta');
 
       function mostrar(mensaje, clase) {
         resultado.hidden = false;
@@ -310,16 +321,17 @@
           });
         }).then(function (emailEnviado) {
           form.hidden = true;
-          enviado.hidden = false;
           if (emailEnviado === false) {
-            // El lead está guardado pero el email automático no salió. No se
-            // promete un correo que no se ha enviado: se ofrece el contacto.
-            mensajeEnviado.innerHTML =
-              '<strong>¡Listo! Ya tenemos tu email.</strong> Estamos con un problema técnico en el envío automático ' +
-              'y por eso aún no te ha llegado. Escríbenos a ' +
-              '<a href="mailto:calculafacil.web@gmail.com">calculafacil.web@gmail.com</a> con este email y te la ' +
-              'mandamos en cuanto se arregle. Gracias por la paciencia.';
+            // El lead está guardado pero el email automático no salió. El
+            // enlace de descarga vive en ese correo, así que sin él la
+            // plantilla no llegaría nunca: se ofrece la descarga directa. El
+            // lead ya está en la base, así que aquí no se pierde nada.
+            enviado.hidden = true;
+            rescate.hidden = false;
             if (window.gtag) gtag('event', 'lead_email_fallido', { 'origen': origen });
+          } else {
+            rescate.hidden = true;
+            enviado.hidden = false;
           }
           if (window.gtag) gtag('event', 'lead_entrega_vista', { 'origen': origen });
         });

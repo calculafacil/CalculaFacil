@@ -6,7 +6,7 @@
 // Sube la VERSION en cuanto toques este archivo o cambies una página: es lo
 // único que purga las cachés viejas de los visitantes que ya tienen la web
 // abierta. Sin esto, un error cacheado se queda sirviéndose para siempre.
-const VERSION = 'v41';
+const VERSION = 'v42';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [

@@ -3947,6 +3947,40 @@ body.pagina-precio .pasos-lista li::before {
   font-weight: 800;
 }
 
+/* Red de seguridad: descarga directa cuando el envío por email está caído. */
+.lead-rescate {
+  text-align: center;
+}
+
+.lead-boton-descarga {
+  display: block;
+  max-width: 420px;
+  margin: 14px auto 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #10b981;
+  color: #052e1a !important;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.32);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lead-boton-descarga:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.42);
+}
+
+.lead-boton-descarga:active {
+  transform: translateY(0);
+}
+
+.lead-boton-descarga:focus-visible {
+  outline: 3px solid #052e1a;
+  outline-offset: 2px;
+}
+
 .lead-fallback {
   max-width: 420px;
   margin: -18px auto 0;
