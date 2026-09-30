@@ -3,7 +3,10 @@
 // Para actualizar la caché tras cambiar archivos: sube VERSION.
 // ==========================================================
 
-const VERSION = 'v38';
+// Sube la VERSION en cuanto toques este archivo o cambies una página: es lo
+// único que purga las cachés viejas de los visitantes que ya tienen la web
+// abierta. Sin esto, un error cacheado se queda sirviéndose para siempre.
+const VERSION = 'v39';
 const CACHE = 'calculafacil-' + VERSION;
 
 const PRECACHE = [
@@ -55,8 +58,15 @@ const PRECACHE = [
 ];
 
 self.addEventListener('install', evento => {
+  // addAll() es todo-o-nada: si un único archivo falla, TODO el install
+  // revienta y el service worker no se instala nunca. Se precachea uno a uno
+  // tolerando los que fallen, que es lo que queremos: un icono que no exista
+  // no puede dejar la web entera sin service worker.
   evento.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
+    caches.open(CACHE)
+      .then(cache => Promise.allSettled(
+        PRECACHE.map(url => cache.add(new Request(url, { cache: 'reload' })))
+      ))
       .then(() => self.skipWaiting())
   );
 });
@@ -83,10 +93,15 @@ self.addEventListener('fetch', evento => {
     evento.respondWith(
       fetch(peticion)
         .then(respuesta => {
+          // Nunca se cachea una respuesta de error. Cachear un 500 era lo que
+          // dejaba la página rota para siempre: el error se quedaba guardado
+          // y se servía aunque el servidor ya estuviera bien.
+          if (!respuesta.ok) throw new Error('http-' + respuesta.status);
           const copia = respuesta.clone();
           caches.open(CACHE).then(cache => cache.put(peticion, copia));
           return respuesta;
         })
+        // Si la red falla O devuelve un error, se sirve la copia buena.
         .catch(() => caches.match(peticion).then(encontrada => encontrada || caches.match('./')))
     );
     return;
@@ -102,7 +117,10 @@ self.addEventListener('fetch', evento => {
         }
         return respuesta;
       }).catch(() => enCache);
-      return enCache || red;
+      // Si no hay copia y la red falla hay que devolver una Response válida:
+      // devolver una promesa rechazada hace que respondWith lance y la petición
+      // muera con un error de red en lugar de degradarse sola.
+      return enCache || red.then(respuesta => respuesta || new Response('', { status: 504 }));
     })
   );
 });
