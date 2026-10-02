@@ -455,6 +455,18 @@
       }
     },
 
+    // CTA POSTERIOR AL RESULTADO: solo aparece cuando la calculadora ya
+    // ha dado un número (el cálculo en vivo lo dispara al escribir).
+    mostrarUpsell(raiz) {
+      const bloque = raiz.querySelector('#upsellResultadoAsistencia');
+      if (bloque) bloque.hidden = false;
+    },
+
+    ocultarUpsell(raiz) {
+      const bloque = raiz.querySelector('#upsellResultadoAsistencia');
+      if (bloque) bloque.hidden = true;
+    },
+
     calcular(raiz) {
       const total = parseFloat(raiz.querySelector('#totalClases')?.value);
       const minPorcentaje = parseFloat(raiz.querySelector('#porcentajeMinimo')?.value);
@@ -504,6 +516,8 @@
         }
       }
 
+      this.mostrarUpsell(raiz);
+
       CF.historialGuardar(
         this.historialClave,
         `Total max: ${maxFaltasPermitidas} faltas | Quedan: ${faltasRestantes}`,
@@ -527,6 +541,7 @@
         mensajeAsistencia.textContent = 'Introduce el total de clases y tus faltas para ver tu porcentaje de asistencia actual.';
       }
       CF.reiniciarGrafico(raiz.querySelector('#graficoAsistencia'));
+      this.ocultarUpsell(raiz);
     }
   });
 
